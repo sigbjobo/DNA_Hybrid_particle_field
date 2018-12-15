@@ -1,6 +1,8 @@
 import sys
-sys.path.append.("/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
-sys.path.append.("/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
+
+sys.path.append("home/sigbjobo/Stallo/Projects/DNA/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
+sys.path.append("/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
+
 import numpy as np
 import ana_prot as ANA
 

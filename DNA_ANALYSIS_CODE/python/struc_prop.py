@@ -1,8 +1,8 @@
 import sys
 import numpy as np
 from scipy.optimize import minimize
-sys.path.append('/home/sigbjobo/Projects/DNA/SIM/continuation/structure/ss/BI/script/')
-sys.path.append('/home/sigbjobo/Stallo/Projects/DNA/SIM/continuation/structure/ss/BI/script/')
+sys.path.append("home/sigbjobo/Stallo/Projects/DNA/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
+sys.path.append("/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
 import ana_prot as ANA
 def Parseq(r):
 # ref 6

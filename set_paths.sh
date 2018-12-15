@@ -1,4 +1,4 @@
-# sets path for scripts
+#s sets path for scripts
 A=$(pwd)
 SHELL_PATH="${A}/DNA_ANALYSIS_CODE/shell"
 PYTHON_PATH="${A}/DNA_ANALYSIS_CODE/python"

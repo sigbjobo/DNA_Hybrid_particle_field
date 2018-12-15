@@ -1,6 +1,6 @@
 import sys
-sys.path.append("home/sigbjobo/Stallo/Projects/DNA/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
-sys.path.append("/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
+sys.path.append("home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
+sys.path.append("/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python")
 import numpy as np
 import struc_prop as AXIS
 import ana_prot as ANA

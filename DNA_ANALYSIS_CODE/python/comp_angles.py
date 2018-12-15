@@ -1,7 +1,7 @@
 import numpy as np
 import sys
-sys.path.append("home/sigbjobo/Stallo/Projects/DNA/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
-sys.path.append("/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
+sys.path.append("home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python")
+sys.path.append("/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python")
 import ana_prot as ANA
 filename = sys.argv[1]
 

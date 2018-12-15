@@ -1,5 +1,5 @@
 
-PYTHON_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
+PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 py_prog="${PYTHON_PATH}/comp_bonds.py"
 echo $py_prog
 rm bp.dat

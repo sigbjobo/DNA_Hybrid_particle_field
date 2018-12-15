@@ -11,7 +11,7 @@ sed -i 's|SHELL_PATH=.*|SHELL_PATH="'"$SHELL_PATH"'"|g' ${SHELL_PATH}/*.sh
 
 #FIX PYTHON
 p=sys.path.append
-EXTRA_PATH="home/sigbjobo/Stallo/Projects/DNA/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
+EXTRA_PATH="home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
 sed -i "s|${p}.*|${p}(\"${PYTHON_PATH}\")|g" ${PYTHON_PATH}/*.py
 sed -i "1,\|${p}|{s|${p}.*|${p}(\"${EXTRA_PATH}\")|g}" ${PYTHON_PATH}/*py
 

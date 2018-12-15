@@ -3,16 +3,16 @@ dnaseq=$1
 dnaseq2=$2
 L=$3 #nm
 I=$4 #mM
-s_fold="/home/sigbjobo/Projects/DNA/SIM/continuation/structure/ss/BI/script/"
-python ${s_fold}make_fort5.py $dnaseq $L 0
+PYTHON_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
+python ${PYHTON_PATH}/make_fort5.py $dnaseq $L 0
 mv fort.5 fort_1.5
 
 
-python ${s_fold}make_fort5.py $dnaseq2 $L 1
+python ${PYHTON_PATH}/make_fort5.py $dnaseq2 $L 1
 mv fort.5 fort_2.5
 
 
-python ${s_fold}insert.py fort.5 fort_1.5 fort_2.5
+python ${PYHTON_PATH}/insert.py fort.5 fort_1.5 fort_2.5
 rm fort_2.5 fort_1.5
 
 
@@ -23,7 +23,7 @@ N_NA=$(python -c "print(int($I*6.022E23*($L*1E-9)**3+$NP))") # | awk '{print $1;
 N_CL=$(python -c "print(int($I*6.022E23*($L*1E-9)**3))") # | awk '{print $1;}'
  
 
-python ${s_fold}solvate_dna.py fort.5 fort_solv.5 $N_NA $N_CL
+python ${PYHTON_PATH}/solvate_dna.py fort.5 fort_solv.5 $N_NA $N_CL
 echo ""
 echo "Number of different bead types:"
 echo "Number of A:"

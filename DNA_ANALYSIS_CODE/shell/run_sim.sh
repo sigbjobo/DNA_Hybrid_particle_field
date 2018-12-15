@@ -16,8 +16,8 @@
 # module load python
 # module load FFTW
 n=48
-s_folder=/home/sigbjobo/Projects/DNA/SIM/continuation/structure/ss/BI/script
-
+PYTHON_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
+SHELL_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/shell"
 #bash setup_FF.sh $1
 kphi=$1
 names[1]=P-S-P-S
@@ -53,8 +53,8 @@ for i in $(seq 1 10)
 do
     #Set up first simulation
     echo ${names[$i]}, ${phi0[$i]}
-    python ${s_folder}/make_pot.py $n ${kphi} ${phi0[$i]} ${names[$i]}_pot.dat
-    python ${s_folder}/make_coef.py ${names[$i]}_pot.dat ${names[$i]} ${names[$i]}_1_pot_after.dat
+    python ${PYTHON_PATH}/make_pot.py $n ${kphi} ${phi0[$i]} ${names[$i]}_pot.dat
+    python ${PYTHON_PATH}/make_coef.py ${names[$i]}_pot.dat ${names[$i]} ${names[$i]}_1_pot_after.dat
     mv ${names[$i]}_PROP.dat FF/
 done
  
@@ -66,8 +66,8 @@ do
     do
 	./occamcg_pol
 	
-	python ${s_folder}/remove_w.py fort.8
-	python ${s_folder}/center.py
+	python ${PYTHON_PATH}/remove_w.py fort.8
+	python ${PYTHON_PATH}/center.py
 	cat fort_center.xyz>>sim.xyz    
 	cp fort.9 fort.5
     done
@@ -85,4 +85,4 @@ do
     # mv *.dat    ${i}_bond/
     # mv sim.xyz  ${i}_bond/
 done
-
+ 

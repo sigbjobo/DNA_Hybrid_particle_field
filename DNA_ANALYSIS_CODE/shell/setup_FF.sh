@@ -2,7 +2,7 @@
  
 kphi=$1
 n=48
-s_folder=/home/sigbjobo/Projects/DNA/SIM/continuation/structure/ss/BI/script
+PYTHON_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
 names[1]=P-S-P-S
 phi0[1]=-154.80
 names[2]=S-P-S-P
@@ -30,8 +30,8 @@ for i in $(seq 1 10)
 do
     #Set up first simulation
     echo ${names[$i]}, ${phi0[$i]}
-    python ${s_folder}/make_pot.py $n ${kphi} ${phi0[$i]} ${names[$i]}_pot.dat
-    python ${s_folder}/make_coef.py ${names[$i]}_pot.dat ${names[$i]} ${names[$i]}_1_pot_after.dat
+    python ${PYTHON_PATH}/make_pot.py $n ${kphi} ${phi0[$i]} ${names[$i]}_pot.dat
+    python ${PYTHON_PATH}/make_coef.py ${names[$i]}_pot.dat ${names[$i]} ${names[$i]}_1_pot_after.dat
     mv ${names[$i]}_PROP.dat FF/
 done
 rm *_pot.dat *_pot_after.dat

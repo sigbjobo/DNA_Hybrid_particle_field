@@ -1,0 +1,33 @@
+#Load new parameters
+alpha=$1
+beta=$2
+#echo "Parameters: alpha=${alpha}, beta=${beta}"
+
+#folder with scripts
+s_folder=/home/sigbjobo/Projects/DNA/SIM/continuation/structure/ss/BI/script
+
+#Make a new folder for keeping data (maximum 999 function calls!)
+
+A=$(ls -l|grep sim_| wc | awk '{print $1}' )
+A=$(python -c "print(int($A+1))")
+foldername=$( echo $A | awk '{printf ("sim_%03i", $1)}' )
+mkdir $foldername
+
+
+
+ 
+#Setup simulation
+cd $foldername
+cp -r ../start_files/* .
+bash ${s_folder}/double_ds.sh ATACAAAGGTGCGAGGTTTCTATGCTCCCACG ATACAAAGGTGCGAGGTTTCTATGCTCCCACG 15 100
+#New parameters
+sed -i "s/alpha/${alpha}/g" fort.3
+sed -i "s/beta/${beta}/g"   fort.3
+bash ${s_folder}/run_sim.sh 7.00 
+#python ../FUNC_prep.py $1 $2
+#cat opt.dat >> ../XY.dat
+cd ..
+
+
+
+

@@ -17,7 +17,7 @@ def func(x):
     start=200
 #Run simulation
  
-    os.system("%s/bash eval_fun.sh %f %f "%(x1, x2)) 
+    os.system("bash %s/eval_fun.sh %f %f "%(SHELL_PATH,x1, x2)) 
     folds = ANA.list_sim_fold()
     fp = open('%s/sim.xyz'%(folds[-1]),'r')
     

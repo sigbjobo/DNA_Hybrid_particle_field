@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 from gpflowopt.domain import ContinuousParameter
 #Setting paths                                                                                                            
 SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"

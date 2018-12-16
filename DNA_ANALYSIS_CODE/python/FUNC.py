@@ -51,7 +51,7 @@ def func(x):
         [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
     fp=open('opt.dat','w')
     z=z[start:]
-    fp.write("%f %f %f"%(x1, x2, np.mean(z))
+    fp.write("%f %f %f"%(x1, x2, np.mean(z)))
     return np.atleast_2d(np.mean(z))
 
  

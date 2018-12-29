@@ -31,8 +31,10 @@ print len(lines5[1].split())
 
 #Check if your fort.5 has velocities or not
 if(len(lines5[1].split())==3):
+    #Has velocties
     vel_prior=1    
 else:
+    #Does not have velocties
     vel_prior=0
     lines5[1]=' '.join(lines5[2].split[1:])
     lines5.insert(2,'0.0')
@@ -61,9 +63,12 @@ for l in lines5:
     if(len(ls)>7):
         ls[4:7]  = ["%f" % (0.1*ri) for ri in r_last[atom_nr]]
         if(vel_prior):
+            #replace old velocties
             ls[7:10]  = ["%f" % (0.1*vi) for vi in v[atom_nr]] 
         else:
+            #insert new velocities
             for i in range(3):
+                
                 ls.insert(7+i,"%f" % (0.1*v[atom_nr,i]))
                 atom_nr += 1
     fp_rec.write('%s\n'%(' '.join(ls)))

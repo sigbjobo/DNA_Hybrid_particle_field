@@ -191,7 +191,7 @@ def comp_rad_ang(r1, v1, r2, L):
     return [dist, calpha]
 
 
-def make_g_r(d, calpha, p, L):
+def hist_d_calpha(d, calpha, p, L):
     #makes 2d histogram form d and alpha
     max_d    = p[0]
     n_d      = p[1]

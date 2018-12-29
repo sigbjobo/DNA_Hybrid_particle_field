@@ -1,0 +1,49 @@
+import sys
+import numpy as np
+
+#Read all positions
+def read_frame(fp):
+    #reads the positions of single frame
+    r=[]
+    
+    try:
+        line = fp.readline()
+        nAtoms=int(line)
+    
+        L=np.array([float(d) for d in fp.readline().split()[1:]])
+        for i in range(nAtoms):
+            l = fp.readline().split()
+            d = [float(d) for d in l[1:]]
+            r.append(d)
+        return [fp, r, L, 1]
+    except:
+        return [fp, r, L, 0]
+
+
+#Files for storing data
+lines5 = open('fort.5', 'r').readlines()
+fp8    = open('fort.8', 'r')
+fp_rec = open('fort_recover.5', 'w')
+
+
+#Finding positions of last frame
+read = 1
+while(read):
+    [fp,r,L,read] = read_frame(fp8)
+    if(read):
+        r_last = r.copy
+
+atom_nr=0
+for l in lines5:
+    ls = l.split()
+    if(len(ls)>6):
+        ls[3:6] = ["%f"%(0.1*r[atom_nr, i]) for i in range(3)] 
+        atom_nr += 1
+    fp_rec.write('%s\n'%(' '.join(ls)))
+
+fp8.close()
+fp_rec.close()
+
+
+
+

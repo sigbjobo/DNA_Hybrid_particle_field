@@ -1,5 +1,6 @@
 import numpy as np
 import copy, glob, sys
+from scipy.spatial import distance
 
 def torsional(x1,x2,x3,x4):
     #computes torsional angle
@@ -173,3 +174,59 @@ def list_sim_fold():
     for i in range(len(numb)):
         folders[numb[i]]=folders2[i]
     return folders
+
+
+def comp_rad_ang(r1, v1, r2, L):
+    #From directionality of molecule v1, and position r1 and position r2 
+    #distances and angles beteween molecules are calculated
+    
+    d = [distance.cdist(r1[:,i][:,np.newaxis], r2[:,i][:,np.newaxis]) for i in range(len(L))]
+    d = [np.abs(d[i] - L[i]*np.around(d[i]/L[i])) for i in range(len(d))]
+
+    dist  = np.sum(d, axis=0)
+    d_dir = d/dist[np.newaxis,:,:]
+    v_dir = v1/np.linalg.norm(v1,axis=1)[:,np.newaxis]
+    
+    alpha = (np.arccos(np.sum(v_dir[np.newaxis,:,:]*d_dir.T,axis=2))*180./np.pi).T
+   
+    return [dist, alpha]
+
+def comp_rad_ang2(r1, v1, r2, L):
+    #From directionality of molecule v1, and position r1 and position r2 
+    #distances and angles beteween molecules are calculated
+
+    d     = r2[:,np.newaxis,:]-r1[:,:,np.newaxis]
+    d     = np.array([d[i] - L[i]*np.around(d[i]/L[i]) for i in range(len(d))])
+    dist  = np.linalg.norm(d, axis=0)
+    d     = d/dist[np.newaxis]
+    v_dir = v1/np.linalg.norm(v1,axis=0)
+
+    alpha = np.arccos(np.sum(v_dir[:,:,np.newaxis]*d,axis=0))*180/np.pi
+
+    return [dist, alpha]
+
+
+def make_hist(d, alpha,p,L):
+    #makes 2d histogram form d and alpha
+    
+    max_d    = p[0]
+    n_d      = p[1]
+    n_alpha  = p[2]
+
+    d=np.ravel(d)
+    alpha=np.ravel(alpha)
+    #print d, alpha
+
+    #print np.min(alpha)
+    d_edges = np.linspace(0,max_d, n_d + 1)
+    
+    alpha_edges = np.linspace(0, 180, n_alpha + 1)
+    H, d_edges, alpha_edges = np.histogram2d(d, alpha, bins=(d_edges, alpha_edges))
+    
+    #Volume per
+    
+    dv = (2.*np.pi*(-np.cos(np.pi/180.*alpha_edges[1:])+np.cos(np.pi/180.*alpha_edges[:-1]))[:,np.newaxis]/3.*(d_edges[1:]**3-d_edges[:-1]**3)).T
+    print len(d)
+    return [H/(dv*len(d)/(L[0]*L[1]*L[2])), d_edges, alpha_edges]
+    
+    

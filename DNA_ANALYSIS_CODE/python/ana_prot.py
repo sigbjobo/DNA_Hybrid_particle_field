@@ -159,7 +159,7 @@ def make_hist(fn,_):
         P[li2]   += 1 - l
         P[li2+1] += l
 
-    #Setting periodic bc                                                                                                                                        
+    #Setting periodic bc                                                                                                                             
     P[0]  = P[0] + P[-1]
     P[-1] = P[0]
 
@@ -176,22 +176,8 @@ def list_sim_fold():
     return folders
 
 
+
 def comp_rad_ang(r1, v1, r2, L):
-    #From directionality of molecule v1, and position r1 and position r2 
-    #distances and angles beteween molecules are calculated
-    
-    d = [distance.cdist(r1[:,i][:,np.newaxis], r2[:,i][:,np.newaxis]) for i in range(len(L))]
-    d = [np.abs(d[i] - L[i]*np.around(d[i]/L[i])) for i in range(len(d))]
-
-    dist  = np.sum(d, axis=0)
-    d_dir = d/dist[np.newaxis,:,:]
-    v_dir = v1/np.linalg.norm(v1,axis=1)[:,np.newaxis]
-    
-    alpha = (np.arccos(np.sum(v_dir[np.newaxis,:,:]*d_dir.T,axis=2))*180./np.pi).T
-   
-    return [dist, alpha]
-
-def comp_rad_ang2(r1, v1, r2, L):
     #From directionality of molecule v1, and position r1 and position r2 
     #distances and angles beteween molecules are calculated
 
@@ -199,34 +185,36 @@ def comp_rad_ang2(r1, v1, r2, L):
     d     = np.array([d[i] - L[i]*np.around(d[i]/L[i]) for i in range(len(d))])
     dist  = np.linalg.norm(d, axis=0)
     d     = d/dist[np.newaxis]
-    v_dir = v1/np.linalg.norm(v1,axis=0)
+    v_dir = v1/np.linalg.norm(v1, axis=0)
+    calpha = np.sum(v_dir[:,:,np.newaxis]*d,axis=0)
 
-    alpha = np.arccos(np.sum(v_dir[:,:,np.newaxis]*d,axis=0))*180/np.pi
-
-    return [dist, alpha]
+    return [dist, calpha]
 
 
-def make_hist(d, alpha,p,L):
+def make_g_r(d, calpha, p, L):
     #makes 2d histogram form d and alpha
-    
     max_d    = p[0]
     n_d      = p[1]
     n_alpha  = p[2]
 
     d=np.ravel(d)
-    alpha=np.ravel(alpha)
-    #print d, alpha
-
-    #print np.min(alpha)
+    calpha=np.ravel(calpha)
     d_edges = np.linspace(0,max_d, n_d + 1)
     
-    alpha_edges = np.linspace(0, 180, n_alpha + 1)
-    H, d_edges, alpha_edges = np.histogram2d(d, alpha, bins=(d_edges, alpha_edges))
+    calpha_edges = np.linspace(-1., 1., n_alpha + 1)
+    H, d_edges, calpha_edges = np.histogram2d(d, calpha, bins=(d_edges, calpha_edges))
     
-    #Volume per
+    #Volume per cell
     
-    dv = (2.*np.pi*(-np.cos(np.pi/180.*alpha_edges[1:])+np.cos(np.pi/180.*alpha_edges[:-1]))[:,np.newaxis]/3.*(d_edges[1:]**3-d_edges[:-1]**3)).T
-    print len(d)
-    return [H/(dv*len(d)/(L[0]*L[1]*L[2])), d_edges, alpha_edges]
+    dv = (2.*np.pi*(-calpha_edges[:-1]+calpha_edges[1:])[:,np.newaxis]/3.*(d_edges[1:]**3-d_edges[:-1]**3)).T
+ 
+    #Normalization of H 
+    #Such that each angle-distance element goes to 1 for long distances 
+    H=H/(dv*len(d)/(L[0]*L[1]*L[2]))
+
+    #To get g(r): np.mean(H,axis=1)
+    #To get density rho(r,calpha): H*rho_0
+    #Where rho_0 is the density of for which you measure the density of, for instance salt concentration.
+    return [H, d_edges, calpha_edges]
     
     

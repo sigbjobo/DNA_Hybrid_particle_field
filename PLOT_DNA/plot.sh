@@ -70,3 +70,12 @@ mv end_end.pdf ../PLOTS/
 
 rm *aux *eps *log *pdf *~ *tex
 cd ..
+
+cd benchmark
+gnuplot plot_bench.gnuplot
+
+pdflatex bench_scaling.tex
+mv bench_scaling.pdf ../PLOTS/
+
+rm *aux *eps *log *pdf *~ *tex
+cd ..

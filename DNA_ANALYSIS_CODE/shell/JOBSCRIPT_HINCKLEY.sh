@@ -1,10 +1,9 @@
 #!/bin/bash
- 
 #SBATCH --job-name=DNA_HINCKLEY
 #SBATCH --account=nn4654k
 #SBATCH --partition=singlenode
 #SBATCH --time=7-0:00:00
-#SBATCH --mem-per-cpu=3000M 
+#SBATCH --mem-per-cpu=2000M 
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
  

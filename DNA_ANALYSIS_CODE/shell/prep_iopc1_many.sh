@@ -1,8 +1,9 @@
 NCPU=$1
 NMOL=$(head  fort.5 -n 5 | tail -n 1 | awk '{print $1}')
 NATOM=$(tail fort.5 -n 1 | awk '{print $1}')
-NMOLA=1
+NMOLA=$2
 NATOMA=$(grep -nr " P \| A \| T \| C \| G \| S "  fort.5 | wc | awk '{print $1;}')
+NATOMA=$(python -c "print(int(${NATOMA}/${NMOLA}))")
 NMOLB=$(grep -nr "NA" fort.5 | wc | awk '{print $1;}')
 NATOMB=1
 NMOLC=$(grep -nr "CL" fort.5 | wc | awk '{print $1;}')

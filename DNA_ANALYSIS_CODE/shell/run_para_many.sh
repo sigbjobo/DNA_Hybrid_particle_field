@@ -1,6 +1,6 @@
 #!/bin/bash -l
 NPROC=$1
-
+NMOLA=$2
 #Setting directory to the current one
 CURRENT_DIREC=$(pwd)
 SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
@@ -28,7 +28,7 @@ cd ${CURRENT_DIREC}/
 
 #IOPC FORWARD
 cp fort.5 fort.10
-bash ${SHELL_PATH}/prep_iopc1.sh ${NPROC}
+bash ${SHELL_PATH}/prep_iopc1_many.sh ${NPROC}  ${NMOLA}
 ${OCCAM_PATH}/IOPC_input/iopc
 rm -f fort.10 fort.7
 

@@ -24,8 +24,7 @@ bash ${SHELL_PATH}/double_ds.sh ATACAAAGGTGCGAGGTTTCTATGCTCCCACG ATACAAAGGTGCGAG
 sed -i "s/alpha/${alpha}/g" fort.3
 sed -i "s/beta/${beta}/g"   fort.3
 bash ${SHELL_PATH}/run_sim.sh 7.00 
-#python ../FUNC_prep.py $1 $2
-#cat opt.dat >> ../XY.dat
+
 cd ..
 
 

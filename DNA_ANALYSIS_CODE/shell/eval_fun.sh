@@ -2,20 +2,44 @@
 alpha=$1
 beta=$2
 #echo "Parameters: alpha=${alpha}, beta=${beta}"
+function CreateFolder(){
+    A=$(ls -l|grep sim_| wc | awk '{print $1}' )
+    A=$(python -c "print(int($A+1))")
+    foldername=$( echo $A | awk '{printf ("sim_%03i", $1)}' )
+
+    {
+        mkdir $foldername
+    } || {
+        CreateFolder
+    }
+}
 
 #folder with scripts
 PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
 #Make a new folder for keeping data (maximum 999 function calls!)
 
-A=$(ls -l|grep sim_| wc | awk '{print $1}' )
-A=$(python -c "print(int($A+1))")
-foldername=$( echo $A | awk '{printf ("sim_%03i", $1)}' )
-mkdir $foldername
+ # {
+#         # command which may fail and give an error 
+#      A=$(ls -l|grep sim_| wc | awk '{print $1}' )
+#      A=$(python -c "print(int($A+1))")
+#      foldername=$( echo $A | awk '{printf ("sim_%03i", $1)}' )
+#  } || {
+#      # command which may fail and give an error 
+#      A=$(ls -l|grep sim_| wc | awk '{print $1}' )
+#      A=$(python -c "print(int($A+1))")
+#      foldername=$( echo $A | awk '{printf ("sim_%03i", $1)}' )
+#      # command which should be run instead of the above failing      command
 
-
-
+#     }
+# A=$(ls -l|grep sim_| wc | awk '{print $1}' )
+# A=$(python -c "print(int($A+1))")
+# foldername=$( echo $A | awk '{printf ("sim_%03i", $1)}' )
+# (a_command && other_command) || fallback_command
  
+
+CreateFolder
+
 #Setup simulation
 cd $foldername
 cp -r ../start_files/* .

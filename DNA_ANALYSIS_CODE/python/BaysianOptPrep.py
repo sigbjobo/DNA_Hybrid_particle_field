@@ -3,8 +3,8 @@ import sys
 import os
 from gpflowopt.domain import ContinuousParameter
 import FUNC as FUNC 
-domain = ContinuousParameter('x1', -20, 0) + \
-         ContinuousParameter('x2', 0, 30) 
+domain = ContinuousParameter('x1', 0, 30) + \
+         ContinuousParameter('x2', -30, 0) 
 
 import gpflow
 from gpflowopt.bo import BayesianOptimizer

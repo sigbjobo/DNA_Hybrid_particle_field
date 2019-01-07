@@ -6,6 +6,10 @@ CURRENT_DIREC=$(pwd)
 SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
 OCCAM_PATH="/home/sigbjobo/Projects/DNA/OCCAM_DNA_parallel"
 #NPROC=$(nproc)
+module load Python/3.6.4-intel-2018a
+module load intel/2017.01
+module load OpenMPI/2.0.1-iccifort-2017.1.132-GCC-5.4.0-2.26
+module load FFTW/3.3.2
 
 echo "Number of proccessors: ${NPROC}"
 

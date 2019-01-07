@@ -19,18 +19,23 @@ function CreateFolder(){
 
 PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-
+INPUT_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
 CreateFolder
 
 #Setup simulation
 cd $foldername
-cp -r ../start_files/* .
 
 bash ${SHELL_PATH}/double_ds.sh ATACAAAGGTGCGAGGTTTCTATGCTCCCACG ATACAAAGGTGCGAGGTTTCTATGCTCCCACG 15 100
-
+cp -r ${INPUT_PATH}/PARA/* .
 #New parameters
 sed -i "s/alpha/${alpha}/g" fort.3
 sed -i "s/beta/${beta}/g"   fort.3
+L=$(head  fort.5 -n 2 | tail -n 1 | awk '{print $1}')
+M=$(python -c "print(int($L / 0.8))")
+sed -i "s/MM/$M/g" fort.3
+#Set number of atoms                                                                                                                                                        
+N=$(tail fort.5 -n 1 | awk '{print $1}')
+sed -i "s/NATOMS/$N/g" fort.1
 bash ${SHELL_PATH}/setup_FF.sh 7.00
 
 #Run simulation in parallel

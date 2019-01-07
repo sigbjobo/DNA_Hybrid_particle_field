@@ -18,26 +18,6 @@ function CreateFolder(){
 PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
 #Make a new folder for keeping data (maximum 999 function calls!)
-
- # {
-#         # command which may fail and give an error 
-#      A=$(ls -l|grep sim_| wc | awk '{print $1}' )
-#      A=$(python -c "print(int($A+1))")
-#      foldername=$( echo $A | awk '{printf ("sim_%03i", $1)}' )
-#  } || {
-#      # command which may fail and give an error 
-#      A=$(ls -l|grep sim_| wc | awk '{print $1}' )
-#      A=$(python -c "print(int($A+1))")
-#      foldername=$( echo $A | awk '{printf ("sim_%03i", $1)}' )
-#      # command which should be run instead of the above failing      command
-
-#     }
-# A=$(ls -l|grep sim_| wc | awk '{print $1}' )
-# A=$(python -c "print(int($A+1))")
-# foldername=$( echo $A | awk '{printf ("sim_%03i", $1)}' )
-# (a_command && other_command) || fallback_command
- 
-
 CreateFolder
 
 #Setup simulation
@@ -48,7 +28,6 @@ bash ${SHELL_PATH}/double_ds.sh ATACAAAGGTGCGAGGTTTCTATGCTCCCACG ATACAAAGGTGCGAG
 sed -i "s/alpha/${alpha}/g" fort.3
 sed -i "s/beta/${beta}/g"   fort.3
 bash ${SHELL_PATH}/run_sim.sh 7.00 
-
 cd ..
 
 

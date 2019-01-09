@@ -5,6 +5,6 @@ set output "bench_scaling.tex"
 set border lw 2
 set ylabel '$t/\si{s}$'
 set xlabel '$N_{\si{proc}}$'
-set yrange [0.0001:]
+#set yrange [0.0:800]
 set logscale y
-plot "data/66666.dat"   using ($1):($2/50000) w l lw 2 notitle 
+plot "data/66666.dat"   using ($1):(25000/$2) w l lw 2 notitle 

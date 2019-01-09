@@ -2,7 +2,7 @@
 #SBATCH --account=nn4654k
 #SBATCH --job-name=DNA_PARALLEL
 #SBATCH --time=0-24:00:00
-##SBATCH --mem-per-cpu=2000M
+#SBATCH --mem-per-cpu=2000M
 ##SBATCH --partition=singlenode
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=4
@@ -10,10 +10,10 @@
 set -o errexit # exit on errors
 module load intel/2017.01
 module load OpenMPI/2.0.1-iccifort-2017.1.132-GCC-5.4.0-2.26
-module load FFTW/3.3.8-intel-2018b
-SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-OCCAM_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
-SCRATCH_DIRECTORY="/cluster/work/${SLURM_JOB_ID}"
+module load FFTW/3.3.4
+SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+OCCAM_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
+SCRATCH_DIRECTORY="/global/work/${USER}/${SLURM_JOBID}.stallo-adm.uit.no"
 mkdir ${SLURM_SUBMIT_DIR}/OUTPUT
 
 NPROC=4

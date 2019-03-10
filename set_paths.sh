@@ -19,18 +19,13 @@ sed -i 's|SHELL_PATH=.*|SHELL_PATH="'"$SHELL_PATH"'"|g' ${PYTHON_PATH}/*.py
 sed -i 's|EXTRA_PATH=.*|EXTRA_PATH="'"$EXTRA_PATH"'"|g' ${PYTHON_PATH}/*.py
 sed -i 's|OCCAM_PATH=.*|OCCAM_PATH="'"$OCCAM_PATH"'"|g' ${PYTHON_PATH}/*.py
 
-#TOGGLE 
-#sed -i 'module load FFTW*|c| module load FFTW/3.3.8-intel-2018b' ${SHELL_PATH}/*.sh
-#sed -i 's|module load FFTW*|module load FFTW/3.3.2|g' ${SHELL_PATH}/*.sh
-
-
-
 if [ $(pwd | grep cluster | wc | awk '{print $1}') -gt 0 ] 
 then
-    sed -i '/module load FFTW*/c\module load FFTW/3.3.7-intel-2018b' ${SHELL_PATH}/*.sh
+    sed -i '/module load FFTW*/c\module load FFTW/3.3.8-intel-2018b' ${SHELL_PATH}/*.sh
+    sed -i '/module load intel*/c\module load intel/2018b' ${SHELL_PATH}/*.sh
     sed -i '/\#SBATCH --mem-per-cpu=2000M/c\\#\#SBATCH --mem-per-cpu=2000M' ${SHELL_PATH}/*.sh
     sed -i '/\#SBATCH --ntasks=192/c\\#SBATCH --nodes=12 --ntasks-per-node=16' ${SHELL_PATH}/*.sh
-    SCRATCH_DIRECTORY=/cluster/work/\$\{SLURM_JOB_ID\}
+    SCRATCH_DIRECTORY=/cluster/work/jobs/\$\{SLURM_JOB_ID\} 
 else
     sed -i '/module load FFTW*/c\module load FFTW/3.3.7-intel-2018a' ${SHELL_PATH}/*.sh
     sed -i '/\#SBATCH --mem-per-cpu=2000M/c\\#SBATCH --mem-per-cpu=2000M' ${SHELL_PATH}/*.sh

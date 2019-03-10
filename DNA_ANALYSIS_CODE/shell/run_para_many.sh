@@ -2,12 +2,12 @@
 NPROC=$1
 NMOLA=$2
 #Setting directory to the current one
-module load intel/2017.01
-module load FFTW/3.3.4
+module load intel/2018b
+module load FFTW/3.3.8-intel-2018b
 module load Python/3.6.4-intel-2018a
 CURRENT_DIREC=$(pwd)
-SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-OCCAM_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
+SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+OCCAM_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
 #NPROC=$(nproc)
 
 echo "Number of proccessors: ${NPROC}"

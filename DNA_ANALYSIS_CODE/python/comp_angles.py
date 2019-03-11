@@ -15,7 +15,7 @@ fp1=open('fort.5','r')
 lines=fp1.readlines()
 names=[]
 L=10*np.array([float(li) for li in lines[1].split()[0:]])
-print L
+
 for li in lines:
     l=li.split()
     if (len(l)==13 or len(l)==16 ):
@@ -29,33 +29,42 @@ r0=[]
 bond_index=[]
 ang_index=[]
 tor_index=[]
-bonds_on=0
+bonds_on=1
 angles_on=0
 tor_on=0
 for i in lines:
     
     if(i.split()[0]=='BONDS'):
         bonds_on=1
-    if(i.split()[0]=='ANGLES'):
+        tor_on=0
+        angles_on=0
+    elif(i.split()[0]=='ANGLES'):
         angles_on=1
         bonds_on=0
-    if(i.split()[0]=='TORSIONS'):
+        tor_on=0
+    elif(i.split()[0]=='TORSIONS'):
+        
         tor_on=1
         angles_on=0
-    try:
+        bond_on=0
+
+#    try:
+    if(len(i.split())>=4): 
         if(len(i.split())==5 and bonds_on): 
             bond_index.append([int(j) for j in i.split()[1:3]])
         if(len(i.split())==6 and angles_on): 
             ang_index.append([int(j) for j in i.split()[1:4]])
-        if(tor_on and int(i.split()[4])==1): 
-            tor_index.append([int(j) for j in i.split()[:-1]])
-    except:
-        pass
+        if(tor_on):
+
+            tor_index.append([int(j) for j in i.split()[:]])
+#    except:
+#        pass
 
 fpw=open('bond_data.dat','w')
 fp       = open(filename,'r')
 lines    = fp.readlines()
 fp.close()
+
 N=int(lines[0])
 N_frames=len(lines)//(N+2)
 fac=180/np.pi

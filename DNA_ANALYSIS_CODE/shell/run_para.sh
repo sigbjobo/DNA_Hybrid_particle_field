@@ -15,13 +15,13 @@ echo "Number of proccessors: ${NPROC}"
 cd ${OCCAM_PATH}
 rm -f *.o
 rm *.mod
-bash compile_extra.sh
-make
+# bash compile_extra.sh
+# make
 cp occamcgmpi ${CURRENT_DIREC}/
 
 #Compile IOPC
 cd  ${OCCAM_PATH}/IOPC_input
-make
+#make
 cp iopc ${CURRENT_DIREC}/
 
 

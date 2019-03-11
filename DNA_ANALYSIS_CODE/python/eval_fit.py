@@ -6,4 +6,4 @@ sys.path.append(SHELL_PATH)
 sys.path.append(PYTHON_PATH)
 sys.path.append(EXTRA_PATH)
 import FUNC as F
-F.func([float(sys.argv[1]),float(sys.argv[2])])
+F.func_para([float(sys.argv[1]),float(sys.argv[2])])

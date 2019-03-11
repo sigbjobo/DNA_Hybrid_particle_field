@@ -59,7 +59,7 @@ def func_para(x):
     x = np.atleast_2d(x)
     x1 = x[:, 0]
     x2 = x[:, 1]    
-    os.system("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH,x1, x2)) 
+    os.system("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH, x1, x2)) 
     folds = ANA.list_sim_fold()
     z= ana_sim('%s/sim.xyz'%(folds[-1]),'r')
     fp=open('%s/opt.dat'%(folds[-1]),'w')

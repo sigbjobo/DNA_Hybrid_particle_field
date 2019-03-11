@@ -1,7 +1,6 @@
 #Load new parameters
 alpha=$1
 beta=$2
-NPROC=4
 
 function CreateFolder(){
     #Creates a folder with unique name one number higher than last one
@@ -25,24 +24,37 @@ CreateFolder
 #Setup simulation
 cd $foldername
 
-bash ${SHELL_PATH}/double_ds.sh ATACAAAGGTGCGAGGTTTCTATGCTCCCACG TATGTTTCCACGCTCCAAAGATACGAGGGTGC 15 100
 cp -r ${INPUT_PATH}/PARA/* .
+bash ${SHELL_PATH}/double_ds.sh ATACAAAGGTGCGAGGTTTCTATGCTCCCACG CGTGGGAGCATAGAAACCTCGCACCTTTGTAT 15 100
+
+
 #New parameters
 sed -i "s/alpha/${alpha}/g" fort.3
 sed -i "s/beta/${beta}/g"   fort.3
 L=$(head  fort.5 -n 2 | tail -n 1 | awk '{print $1}')
 M=$(python -c "print(int($L / 0.8))")
 sed -i "s/MM/$M/g" fort.3
-#Set number of atoms                                                                                                                                                        
+
+#Set number of atoms
 N=$(tail fort.5 -n 1 | awk '{print $1}')
 sed -i "s/NATOMS/$N/g" fort.1
-bash ${SHELL_PATH}/setup_FF.sh 7.00
+sed -i '/number_of_steps:/{n;s/.*/500000/}' fort.1
+sed -i '/pot_calc_freq:/{n;s/.*/1000/}' fort.1
+sed -i '/SCF_lattice_update:/{n;s/.*/10/}' fort.1
+sed -i '/trj_print:/{n;s/.*/10000/}' fort.1
+sed -i '/out_print:/{n;s/.*/10000/}' fort.1
+
+# SET STRENGTH OF TORSIONAL POTENTIAL
+bash ${SHELL_PATH}/setup_FF.sh 10.00
 
 #Run simulation in parallel
-bash run_para_many.sh ${NPROC} 2
-mv fort.8 mem_nowater.xyz
-python {PYTHON_PATH}/center.py
-mv fort_center.xyz sim.xyz
+bash ${SHELL_PATH}/run_para_many.sh ${NPROC} 2
+
+
+mv fort.8 sim.xyz
+
+#python ${PYTHON_PATH}/center.py
+#mv fort_center.xyz sim.xyz
 cd ..
 
 

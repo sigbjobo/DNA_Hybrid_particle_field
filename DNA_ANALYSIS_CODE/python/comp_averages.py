@@ -3,6 +3,8 @@ import numpy as np
 
 from scipy.stats import circmean, circvar
 fns=sorted(glob.glob("./*.txt"))
+print(fns)
+
 
 fp1=open('bonds.dat','w')
 fp2=open('bend.dat','w')

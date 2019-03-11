@@ -26,7 +26,7 @@ set xtics rotate by 60 right
 set xrange [-0.5:9.5]
 set key top left
 plot "bend_exact.dat"   using ($0-0.125):2:3:xtic(1) with boxerrorbars  lw 1 lc 'black' title '\small PDB' ,\
-     "bends/sim_6.dat"   using ($0-0.125+0.25):2:3 with boxerrorbars lw 1 lc 'red' title '\small OCCAM' 
+     "bends/sim_6.dat"   using ($0-0.125+0.25):2:3 with boxerrorbars lw 1 lc 'red' title '\small OCCAM'
 
 unset terminal
 set terminal epslatex size 5,3 font ",10" standalone header '\usepackage{siunitx}'  

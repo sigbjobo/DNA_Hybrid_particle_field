@@ -38,9 +38,9 @@ sed -i "s/MM/$M/g" fort.3
 #Set number of atoms
 N=$(tail fort.5 -n 1 | awk '{print $1}')
 sed -i "s/NATOMS/$N/g" fort.1
-sed -i '/number_of_steps:/{n;s/.*/500000/}' fort.1
+sed -i '/number_of_steps:/{n;s/.*/100000/}' fort.1
 sed -i '/pot_calc_freq:/{n;s/.*/1000/}' fort.1
-sed -i '/SCF_lattice_update:/{n;s/.*/10/}' fort.1
+sed -i '/SCF_lattice_update:/{n;s/.*/50/}' fort.1
 sed -i '/trj_print:/{n;s/.*/10000/}' fort.1
 sed -i '/out_print:/{n;s/.*/10000/}' fort.1
 

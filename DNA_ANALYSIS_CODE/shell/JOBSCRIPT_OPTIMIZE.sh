@@ -2,12 +2,12 @@
 
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
-#SBATCH --time=7-0:00:00
-#SBATCH --partition=singlenode
-#SBATCH --nodes=1 
-#SBATCH --ntasks-per-node=4
+#SBATCH --time=0-2:00:00
+#SBATCH --partition=normal
+#SBATCH --nodes=6 
+#SBATCH --ntasks-per-node=32
 ##SBATCH --mem-per-cpu=2000M
-
+export NPROC=192
 
 
 # Set up node file for namd run :

@@ -24,7 +24,7 @@ for li in lines:
 fp       = open('fort.10')
 lines    = fp.readlines()
  
-
+print(names)
 r0=[]
 bond_index=[]
 ang_index=[]
@@ -55,8 +55,7 @@ for i in lines:
         if(len(i.split())==6 and angles_on): 
             ang_index.append([int(j) for j in i.split()[1:4]])
         if(tor_on):
-
-            tor_index.append([int(j) for j in i.split()[:]])
+            tor_index.append([int(j) for j in i.split()[1:]])
 #    except:
 #        pass
 

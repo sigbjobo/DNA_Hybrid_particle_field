@@ -1,4 +1,4 @@
-import os, sys
+import os, sys,subprocess
 import numpy as np
 #Setting paths
 SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
@@ -12,7 +12,7 @@ import ana_prot as ANA
 
 def ana_sim(fn):
     fp = open(fn,'r')
-    start=200   
+    start=0   
     a=[]
     on=1
     [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
@@ -38,17 +38,19 @@ def ana_sim(fn):
         ai[2]=0.1*0.5*(np.mean(np.linalg.norm(d1))+np.mean(np.linalg.norm(d2)))
         ai[3]=0.1*0.5*(np.mean(r1)+np.mean(r2))
         
-        zi=np.mean(100*(np.abs((a_exact-ai)/a_exact)))
+        zi=np.mean(((a_exact-ai)/a_exact)**2)
         z.append(zi)
         [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
     z=z[start:]
+    
     return np.mean(z)
 
 def func(x):
     x = np.atleast_2d(x)
     x1 = x[:, 0]
     x2 = x[:, 1]    
-    os.system("bash %s/eval_fun.sh %f %f "%(SHELL_PATH, x1, x2)) 
+    #os.system("bash %s/eval_fun.sh %f %f "%(SHELL_PATH, x1, x2)) 
+    subprocess.call("bash %s/eval_fun.sh %f %f "%(SHELL_PATH, x1, x2), shell=True)
     folds = ANA.list_sim_fold()
     z = ana_sim('%s/sim.xyz'%(folds[-1]),'r')
     fp=open('opt.dat','w')
@@ -58,10 +60,18 @@ def func(x):
 def func_para(x):
     x = np.atleast_2d(x)
     x1 = x[:, 0]
-    x2 = x[:, 1]    
-    os.system("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH, x1, x2)) 
+    x2 = x[:, 1]  
+    
+    subprocess.call("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH, x1, x2), shell=True)#    os.system("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH, x1, x2)) 
     folds = ANA.list_sim_fold()
-    z= ana_sim('%s/sim.xyz'%(folds[-1]),'r')
-    fp=open('%s/opt.dat'%(folds[-1]),'w')
-    fp.write("%f %f %f"%(x1, x2, z))
-    return np.atleast_2d(z)
+
+    z = ana_sim('%s/sim.xyz'%(folds[-1]))
+    fp = open('%s/opt.dat'%(folds[-1]),'w')
+    fp.write("%f %f %f\n"%(x1, x2, z))
+    fp.close
+    fp = open('opt.dat','a')
+    fp.write("%f %f %f\n"%(x1, x2, z))
+    fp.close()
+    return z
+#    return np.atleast_2d(z)
+

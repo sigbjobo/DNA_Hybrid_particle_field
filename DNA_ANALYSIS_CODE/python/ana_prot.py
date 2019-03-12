@@ -170,9 +170,11 @@ def list_sim_fold():
     folders  = glob.glob('sim_*')
     folders2 = copy.copy(folders)
     numb    = np.array([int(fi.split('_')[1]) for fi in folders], dtype=int)
+    
     numb    = np.argsort(numb)
+  
     for i in range(len(numb)):
-        folders[numb[i]]=folders2[i]
+        folders[i]=folders2[numb[i]]
     return folders
 
 

@@ -23,11 +23,11 @@ from gpflowopt.acquisition import ExpectedImprovement
 from gpflowopt.optim import SciPyOptimizer, StagedOptimizer, MCOptimizer
 
 # Use standard Gaussian process Regression
-data=np.loadtxt("prep_sims/XY.dat")
+#data=np.loadtxt("prep_sims/XY.dat")
 
-X = data[:,:2]
+X =[]# data[:,:2]
 
-Y =  data[:,-1][:,None]
+Y =[]#  data[:,-1][:,None]
 
 model = gpflow.gpr.GPR(X, Y, gpflow.kernels.Matern52(2, ARD=True))
 model.kern.lengthscales.transform = gpflow.transforms.Log1pe(1e-3)

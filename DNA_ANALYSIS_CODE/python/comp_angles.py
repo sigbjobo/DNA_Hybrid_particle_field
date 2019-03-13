@@ -24,7 +24,7 @@ for li in lines:
 fp       = open('fort.10')
 lines    = fp.readlines()
  
-print(names)
+
 r0=[]
 bond_index=[]
 ang_index=[]

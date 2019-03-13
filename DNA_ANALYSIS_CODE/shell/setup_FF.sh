@@ -4,25 +4,25 @@ kphi=$1
 n=48
 PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 names[1]=P-S-P-S
-phi0[1]=-179.17
+phi0[1]=-154.8
 names[2]=S-P-S-P
-phi0[2]=-154.80
+phi0[2]=-179.2
 names[3]=S-P-S-A
-phi0[3]=-22.60
+phi0[3]=54.8
 names[4]=A-S-P-S
-phi0[4]=50.69
+phi0[4]=-32.80
 names[5]=S-P-S-T
-phi0[5]=-33.42
+phi0[5]=58.0
 names[6]=T-S-P-S
-phi0[6]=54.69
+phi0[6]=-44.8
 names[7]=S-P-S-C
-phi0[7]=-32.72
+phi0[7]=57.0
 names[8]=C-S-P-S
-phi0[8]=54.5000
+phi0[8]=-34.1
 names[9]=S-P-S-G
-phi0[9]=-22.30
+phi0[9]=53.9
 names[10]=G-S-P-S
-phi0[10]=50.66
+phi0[10]=-29.11
 
 mkdir FF
 

@@ -16,20 +16,24 @@ def ana_sim(fn):
     a=[]
     on=1
     [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
-    
-    a_exact=np.array([100.,10.,0.34,0.94])
+  
+
+    a_exact=np.array([100.,10.,0.338,0.94])
     ai=np.zeros(4)
     z=[]
     while(on):
         #Compute pairs
         r1 = rn[:len(rn)//2]
+        
         r2 = rn[len(rn)//2:][::-1]        
         for i in range(len(r2)):
             r2[i] = ANA.period_2d(r1[i], r2[i], L)
         ai[0] = np.mean(np.array(0.1*np.linalg.norm(r1 - r2, axis = 1) < 1, dtype = float))*100.
         
         rp=np.array(r_p)
+        
         dat1=(r_p[:len(r_p)//2])[3:-3]
+        ANA.kahn(dat1)
         dat2=(r_p[len(r_p)//2:])[3:-3]
         [d1, r1, ang1]= ANA.Parseq(dat1)
         [d2, r2, ang2]= ANA.Parseq(dat2)

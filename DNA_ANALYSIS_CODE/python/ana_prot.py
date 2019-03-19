@@ -106,18 +106,22 @@ def auto_corr(d):
         corr[i] = np.mean(np.sum(d[:len(d)-i]*d[i:],axis=1))
     return corr
 
+
 def Parseq(r):
     #Parseq method for computing properties of helix
     n = len(r)
     t=np.array(range(n))
+
     D = np.linalg.det(np.array([[sum(t**2),sum(t)],[sum(t),n]]))
     
     p = np.zeros(3)
+
     #Compute normal
     d = np.zeros(3)
     for i in range(3):
         d[i] = np.linalg.det(np.array([[sum(r[:,i]*t),sum(t)],[sum(r[:,i]),n]]))/D
         p[i] = np.linalg.det(np.array([[sum(t**2),sum(r[:,i]*t)],[sum(t),sum(r[:,i])]]))/D
+
 
     #Compute radius
     radius=0.0
@@ -130,7 +134,29 @@ def Parseq(r):
     v1=v1/np.linalg.norm(v1,axis=1)[:,None]
     v2=v2/np.linalg.norm(v2,axis=1)[:,None]
     ang=np.mean(np.arccos(np.sum(v2*v1,axis=1)))*180./np.pi
+
+
     return d, radius, ang
+
+def kahn(rp):
+    V=[]
+    P=[]
+    for i in range(1,len(rp)-1):
+        a=rp[i-1]-rp[i]
+        b=rp[i+1]-rp[i]
+        a=a/np.linalg.norm(a)
+        b=b/np.linalg.norm(b)
+        p=rp[i]
+
+        v=a+b
+        v=v/np.linalg.norm(v)
+        V.append(v)
+        P.append(p)
+    H=np.cross(V[0],V[3])
+    p2 =P[-1]-P[0]
+    p2=p2/np.linalg.norm(p2)
+    
+    print(p2,H/np.linalg.norm(H))
 
 def BOX_WHISKER(fn):
     #Computes box and whiskers for a single column file

@@ -14,7 +14,7 @@ dphi=phi-phi0
 dphi[dphi>180]=dphi[dphi>180]-360
 dphi[dphi<-180]=dphi[dphi<-180]+360
 fac=180/np.pi
-V = K*(1-np.exp(-((dphi)**2)/(2.*17.1887338539**2)))
+V = K*(1-np.exp(-((dphi)**2)/(2.*17.19**2)))
 kt=2.479*293.15/298.
 
 P=np.exp(-V/kt)

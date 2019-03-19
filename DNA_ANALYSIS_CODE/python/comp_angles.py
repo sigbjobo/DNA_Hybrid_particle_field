@@ -55,7 +55,10 @@ for i in lines:
         if(len(i.split())==6 and angles_on): 
             ang_index.append([int(j) for j in i.split()[1:4]])
         if(tor_on):
-            tor_index.append([int(j) for j in i.split()[1:]])
+            try:
+                tor_index.append([int(j) for j in i.split()[1:]])
+            except: 
+                pass
 #    except:
 #        pass
 

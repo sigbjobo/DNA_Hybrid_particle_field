@@ -4,7 +4,7 @@
 #SBATCH --time=0-0:20:00
 ##SBATCH --mem-per-cpu=2000M
 #SBATCH --partition=normal
-#SBATCH --nodes=12 --ntasks-per-node=16
+#SBATCH --nodes=6 --ntasks-per-node=32
 NPROC=192
 # Set up node file for namd run :
 module purge
@@ -26,6 +26,8 @@ alpha=10
 beta=-10
 
 dna_seq=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+
 
 #Set dna sequence
 bash ${SHELL_PATH}/single_ss.sh ${dna_seq} 20 100
@@ -57,16 +59,7 @@ bash ${SHELL_PATH}/run_para.sh ${NPROC}
 cp -r ${SCRATCH_DIRECTORY}/sim ${SLURM_SUBMIT_DIR}
 rm -rf ${SCRATCH_DIRECTORY}
 #SBATCH --signal=B:USR1@500
-your_cleanup_function()
-{
-echo "function your_cleanup_function called at $(date)"
-cp -r ${SCRATCH_DIRECTORY}/sim ${SLURM_SUBMIT_DIR}
-rm -rf ${SCRATCH_DIRECTORY}
-}
-# call your_cleanup_function once we receive USR1 signal
-trap 'your_cleanup_function' USR1
-echo "starting calculation at $(date)"
-sleep 500 &
+
 wait
  
 exit 0

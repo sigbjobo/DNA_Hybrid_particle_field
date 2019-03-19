@@ -26,7 +26,7 @@ def ana_sim(fn):
         r2 = rn[len(rn)//2:][::-1]        
         for i in range(len(r2)):
             r2[i] = ANA.period_2d(r1[i], r2[i], L)
-        ai[0] = np.mean(np.array(0.1*np.linalg.norm(r1 - r2, axis = 1) < 1.5, dtype = float))*100.
+        ai[0] = np.mean(np.array(0.1*np.linalg.norm(r1 - r2, axis = 1) < 1, dtype = float))*100.
         
         rp=np.array(r_p)
         dat1=(r_p[:len(r_p)//2])[3:-3]
@@ -37,8 +37,9 @@ def ana_sim(fn):
         ai[1]=0.5*(np.mean(360./ang1)+np.mean(360./ang2))
         ai[2]=0.1*0.5*(np.mean(np.linalg.norm(d1))+np.mean(np.linalg.norm(d2)))
         ai[3]=0.1*0.5*(np.mean(r1)+np.mean(r2))
-        
+        print(ai)
         zi=np.mean(((a_exact-ai)/a_exact)**2)
+        
         z.append(zi)
         [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
     z=z[start:]
@@ -54,7 +55,7 @@ def func(x):
     folds = ANA.list_sim_fold()
     z = ana_sim('%s/sim.xyz'%(folds[-1]),'r')
     fp=open('opt.dat','w')
-    fp.write("%f %f %f"%(x1, x2, z))
+    fp.write("%f %f %f %f\n"%(x1, x2, z, 100*z**0.5))
     return np.atleast_2d(np.mean(z))
  
 def func_para(x):
@@ -67,10 +68,10 @@ def func_para(x):
 
     z = ana_sim('%s/sim.xyz'%(folds[-1]))
     fp = open('%s/opt.dat'%(folds[-1]),'w')
-    fp.write("%f %f %f\n"%(x1, x2, z))
+    fp.write("%f %f %f %f\n"%(x1, x2, -z, -100*z**0.5 ))
     fp.close
     fp = open('opt.dat','a')
-    fp.write("%f %f %f\n"%(x1, x2, z))
+    fp.write("%f %f %f %f\n"%(x1, x2, -z, -100*z**0.5 ))
     fp.close()
     return z
 #    return np.atleast_2d(z)

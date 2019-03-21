@@ -3,7 +3,7 @@ dnaseq=$1
 dnaseq2=$2
 L=$3 #nm
 I=$4 #mM
-PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+PYTHON_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 
 python ${PYTHON_PATH}/make_fort5.py $dnaseq $L 0
 mv fort.5 fort_1.5

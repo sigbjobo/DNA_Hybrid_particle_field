@@ -7,10 +7,10 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=4
 
-module load FFTW/3.3.7-intel-2018a
+module load FFTW/3.3.8-intel-2018b
 n=48
-PYTHON_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
-SHELL_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
 
 for j in $(seq 1 20) 
 do

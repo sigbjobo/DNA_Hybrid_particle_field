@@ -1,8 +1,8 @@
 
 
 ls -d sim_*/1_bond/ > fold.dat
-PYTHON_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
-SHELL_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
 
 while read fi
 do

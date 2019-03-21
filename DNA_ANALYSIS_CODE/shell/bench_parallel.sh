@@ -3,7 +3,7 @@
 #SBATCH --account=nn4654k
 #SBATCH --job-name=DNA_PARALLEL
 #SBATCH --time=5:30:00
-#SBATCH --mem-per-cpu=2000M
+##SBATCH --mem-per-cpu=2000M
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
 ##SBATCH --error M23-39.err
@@ -14,9 +14,9 @@
 set -o errexit # exit on errors
 module load intel/2018b
 module load OpenMPI/2.0.1-iccifort-2017.1.132-GCC-5.4.0-2.26
-module load FFTW/3.3.7-intel-2018a
-SHELL_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-OCCAM_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_Hybrid_particle_field/../occam_dna_parallel/"
+module load FFTW/3.3.8-intel-2018b
+SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+OCCAM_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
 
 
 

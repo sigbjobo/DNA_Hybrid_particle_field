@@ -1,8 +1,8 @@
 import os, sys,subprocess
 import numpy as np
 #Setting paths
-SHELL_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-PYTHON_PATH="/home/sigbjobo/Documents/DNA_Project/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 EXTRA_PATH="/home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
 from scipy.spatial.distance import cdist
 sys.path.append(SHELL_PATH)
@@ -21,8 +21,10 @@ def ana_sim(fn):
 
     
     map0=contact_map(r_p)
+    rel=(map0>0)
 #    a_exact=np.array([100.,10.,0.338,0.94])
  #   ai=np.zeros(4)
+ 
     z=[]
     while(on):
         #Compute pairs
@@ -49,7 +51,9 @@ def ana_sim(fn):
         map1=contact_map(r_p)
      #   print(np.mean(np.abs(map0-map1))) 
      #   zi=np.mean(((a_exact-ai)/a_exact)**2)
-        zi=np.mean(np.abs(map0-map1))
+
+        
+        zi=np.mean(np.abs((map0[rel]-map1[rel])/map0[rel]))
         z.append(zi)
         [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
     z=z[start:]
@@ -95,7 +99,7 @@ def contact_map(r, L=[1000,1000,1000], rc=1.0):
     d = [np.abs(d[i] - L[i]*np.around(d[i]/L[i])) for i in range(len(d))]
 
     #MIGHT INTRODUCE CUTTOFF HERE
-    
+
     d = np.sum(d, axis = 0)
     
     return d

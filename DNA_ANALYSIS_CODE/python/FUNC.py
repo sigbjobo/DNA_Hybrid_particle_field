@@ -19,8 +19,8 @@ def ana_sim(fn):
     [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
   
 
-    
-    map0=contact_map(r_p)
+    r=np.vstack((r_p,_,rn))
+    map0=contact_map(r)
     rel=(map0>0)
 #    a_exact=np.array([100.,10.,0.338,0.94])
  #   ai=np.zeros(4)
@@ -47,13 +47,13 @@ def ana_sim(fn):
         # ai[1]=0.5*(np.mean(360./ang1)+np.mean(360./ang2))
         # ai[2]=0.1*0.5*(np.mean(np.linalg.norm(d1))+np.mean(np.linalg.norm(d2)))
         # ai[3]=0.1*0.5*(np.mean(r1)+np.mean(r2))
-        
-        map1=contact_map(r_p)
+        r=np.vstack((r_p,_,rn))
+        map1=contact_map(r,L)
      #   print(np.mean(np.abs(map0-map1))) 
      #   zi=np.mean(((a_exact-ai)/a_exact)**2)
 
         
-        zi=np.mean(np.abs((map0[rel]-map1[rel])/map0[rel]))
+        zi=np.mean(np.abs((map0[rel]-map1[rel])))
         z.append(zi)
         [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
     z=z[start:]
@@ -82,10 +82,10 @@ def func_para(x):
 
     z = ana_sim('%s/sim.xyz'%(folds[-1]))
     fp = open('%s/opt.dat'%(folds[-1]),'w')
-    fp.write("%f %f %f %f\n"%(x1, x2, -z, -100*z**0.5 ))
+    fp.write("%f %f %f\n"%(x1, x2, -z ))
     fp.close
     fp = open('opt.dat','a')
-    fp.write("%f %f %f %f\n"%(x1, x2, -z, -100*z**0.5 ))
+    fp.write("%f %f %f\n"%(x1, x2, -z ))
     fp.close()
     return z
 #    return np.atleast_2d(z)

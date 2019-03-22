@@ -38,10 +38,10 @@ sed -i "s/MM/$M/g" fort.3
 #Set number of atoms
 N=$(tail fort.5 -n 1 | awk '{print $1}')
 sed -i "s/NATOMS/$N/g" fort.1
-sed -i '/number_of_steps:/{n;s/.*/100000/}' fort.1
+sed -i "/number_of_steps:/{n;s/.*/$NSTEPS/}" fort.1
 sed -i '/pot_calc_freq:/{n;s/.*/500/}' fort.1
 sed -i '/SCF_lattice_update:/{n;s/.*/20/}' fort.1
-sed -i '/trj_print:/{n;s/.*/10000/}' fort.1
+sed -i "/trj_print:/{n;s/.*/$NTRAJ/}" fort.1
 sed -i '/out_print:/{n;s/.*/10000/}' fort.1
 
 # SET STRENGTH OF TORSIONAL POTENTIAL
@@ -53,8 +53,6 @@ bash ${SHELL_PATH}/run_para_many.sh ${NPROC} 2
 
 mv fort.8 sim.xyz
 
-#python ${PYTHON_PATH}/center.py
-#mv fort_center.xyz sim.xyz
 cd ..
 
 

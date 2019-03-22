@@ -19,7 +19,7 @@ for i in range(N):
     lines[i+7]=' '.join(ls)
 
     ls = lines[i+104].split()
-    ls[4:7]=['%.4f'%(ai) for ai in A[i]]
+    ls[4:7]=['%.4f'%(ai) for ai in A[i+N]]
     lines[i+104]=' '.join(ls)
 
 fp=open('START.5', 'w')

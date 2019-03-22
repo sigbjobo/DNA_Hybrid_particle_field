@@ -1,5 +1,7 @@
 import os, sys,subprocess
 import numpy as np
+import calculate_rmsd as rmsd
+
 #Setting paths
 SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
 PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
@@ -19,9 +21,9 @@ def ana_sim(fn):
     [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
   
 
-    r=np.vstack((r_p,_,rn))
-    map0=contact_map(r)
-    rel=(map0>0)
+    r0=np.vstack((r_p,_,rn))
+#    map0=contact_map(r)
+#    rel=(map0>0)
 #    a_exact=np.array([100.,10.,0.338,0.94])
  #   ai=np.zeros(4)
  
@@ -48,12 +50,14 @@ def ana_sim(fn):
         # ai[2]=0.1*0.5*(np.mean(np.linalg.norm(d1))+np.mean(np.linalg.norm(d2)))
         # ai[3]=0.1*0.5*(np.mean(r1)+np.mean(r2))
         r=np.vstack((r_p,_,rn))
-        map1=contact_map(r,L)
+       # zi
+        #map1=contact_map(r,L)
      #   print(np.mean(np.abs(map0-map1))) 
      #   zi=np.mean(((a_exact-ai)/a_exact)**2)
 
-        
-        zi=np.mean(np.abs((map0[rel]-map1[rel])))
+       
+        zi=rmsd_dist(r0,r)#=np.mean(np.abs((map0[rel]-map1[rel])))
+        print(zi)
         z.append(zi)
         [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
     z=z[start:]
@@ -104,4 +108,17 @@ def contact_map(r, L=[1000,1000,1000], rc=1.0):
     
     return d
     
-    
+def rmsd_dist(A,B):
+
+    #REMOVE CENTER OF MASS
+    A -= rmsd.centroid(A)
+    B -= rmsd.centroid(B)
+
+    #FIND ROTATION MATRIX
+    U = rmsd.kabsch(A, B)
+
+    # ROTATE TOWARDS B
+    A = np.dot(A, U)
+
+    #RETURN ROOT MEAN SQUARE DEVIATION
+    return  rmsd.rmsd(A, B)

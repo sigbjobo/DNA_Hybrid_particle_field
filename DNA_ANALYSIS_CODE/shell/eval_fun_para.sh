@@ -1,7 +1,7 @@
 #Load new parameters
 alpha=$1
 beta=$2
-
+kphi=$3
 function CreateFolder(){
     #Creates a folder with unique name one number higher than last one
     A=$(ls -l|grep sim_| wc | awk '{print $1}' )
@@ -45,7 +45,7 @@ sed -i "/trj_print:/{n;s/.*/$NTRAJ/}" fort.1
 sed -i '/out_print:/{n;s/.*/10000/}' fort.1
 
 # SET STRENGTH OF TORSIONAL POTENTIAL
-bash ${SHELL_PATH}/setup_FF.sh 10.00
+bash ${SHELL_PATH}/setup_FF.sh ${kphi}
 
 #Run simulation in parallel
 bash ${SHELL_PATH}/run_para_many.sh ${NPROC} 2

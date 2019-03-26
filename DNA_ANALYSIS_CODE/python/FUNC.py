@@ -13,9 +13,9 @@ sys.path.append(EXTRA_PATH)
 
 import ana_prot as ANA
 
-def ana_sim(fn):
+def ana_sim(fn,start=2):
     fp = open(fn,'r')
-    start=0   
+    
     a=[]
     on=1
     [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
@@ -76,12 +76,13 @@ def func(x):
     fp.write("%f %f %f %f\n"%(x1, x2, z, 100*z**0.5))
     return np.atleast_2d(np.mean(z))
  
-def func_para(x):
+def func_para(x,k):
     x = np.atleast_2d(x)
     x1 = x[:, 0]
     x2 = x[:, 1]  
-    
-    subprocess.call("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH, x1, x2), shell=True)#    os.system("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH, x1, x2)) 
+   
+
+    subprocess.call("bash %s/eval_fun_para.sh %f %f %f"%(SHELL_PATH, x1, x2, k), shell=True)#    os.system("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH, x1, x2)) 
     folds = ANA.list_sim_fold()
 
     z = ana_sim('%s/sim.xyz'%(folds[-1]))

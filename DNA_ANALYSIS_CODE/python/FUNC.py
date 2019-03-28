@@ -15,13 +15,14 @@ import ana_prot as ANA
 
 def ana_sim(fn,start=2):
     fp = open(fn,'r')
-    
+#    fp_rmsd=open('rmsd.xyz','w')
+#    fp_cent=open('center.xyz','w')
     a=[]
     on=1
     [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
   
-
-    r0=np.vstack((r_p,_,rn))
+ 
+    r0= np.vstack((r_p,_,rn))
 #    map0=contact_map(r)
 #    rel=(map0>0)
 #    a_exact=np.array([100.,10.,0.338,0.94])
@@ -50,6 +51,7 @@ def ana_sim(fn,start=2):
         # ai[2]=0.1*0.5*(np.mean(np.linalg.norm(d1))+np.mean(np.linalg.norm(d2)))
         # ai[3]=0.1*0.5*(np.mean(r1)+np.mean(r2))
         r=np.vstack((r_p,_,rn))
+#        fp_rmsd=write_rmsd(fp_rmsd,fp_cent,r,r0)
        # zi
         #map1=contact_map(r,L)
      #   print(np.mean(np.abs(map0-map1))) 
@@ -64,6 +66,7 @@ def ana_sim(fn,start=2):
     
     return np.mean(z)
 
+     
 def func(x):
     x = np.atleast_2d(x)
     x1 = x[:, 0]
@@ -108,6 +111,21 @@ def contact_map(r, L=[1000,1000,1000], rc=1.0):
     d = np.sum(d, axis = 0)
     
     return d
+
+def rmsd_VEC(A,B):
+
+    #REMOVE CENTER OF MASS
+    A -= rmsd.centroid(A)
+    B -= rmsd.centroid(B)
+
+    #FIND ROTATION MATRIX
+    U = rmsd.kabsch(A, B)
+
+    # ROTATE TOWARDS B
+    A = np.dot(A, U)
+
+    #RETURN ROOT MEAN SQUARE DEVIATION
+    return  A
     
 def rmsd_dist(A,B):
 
@@ -123,3 +141,25 @@ def rmsd_dist(A,B):
 
     #RETURN ROOT MEAN SQUARE DEVIATION
     return  rmsd.rmsd(A, B)
+
+def write_rmsd(fp,fp2,A,B):
+    A -= rmsd.centroid(A)
+    B -= rmsd.centroid(B)
+
+    fp2.write('%d\n'%(len(A)))
+    fp2.write('\n')
+    for i in range(len(A)):
+        fp2.write('A %f %f %f\n'%(A[i,0],A[i,1],A[i,2]))
+
+
+    #FIND ROTATION MATRIX
+    U = rmsd.kabsch(A, B)
+
+    # ROTATE TOWARDS B
+    A = np.dot(A, U)
+    fp.write('%d\n'%(len(A)))
+    fp.write('\n')
+    for i in range(len(A)):
+        fp.write('A %f %f %f\n'%(A[i,0],A[i,1],A[i,2]))
+  
+    return fp

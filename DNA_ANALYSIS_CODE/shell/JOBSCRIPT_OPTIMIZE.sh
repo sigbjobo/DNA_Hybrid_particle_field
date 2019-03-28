@@ -1,15 +1,15 @@
 #!/bin/bash
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
-#SBATCH --time=0-2:00:00
+#SBATCH --time=0-0:30:00
 #SBATCH --nodes=4 --ntasks-per-node=32
-##SBATCH --qos=devel
+#SBATCH --qos=devel
 
 export NPROC=128 #128
-export NSTEPS=100000
-export NTRAJ=5000
-export OPT_INIT_STEPS=10 # 0
-export OPT_STEPS=30
+export NSTEPS=1000000
+export NTRAJ=2500
+export OPT_INIT_STEPS=1 #10 # 0
+export OPT_STEPS=0 #30
 export kphi=20
 
 # Set up node file for namd run :

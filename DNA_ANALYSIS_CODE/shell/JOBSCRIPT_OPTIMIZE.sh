@@ -2,11 +2,11 @@
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
 #SBATCH --time=0-0:30:00
-#SBATCH --nodes=4 --ntasks-per-node=32
+#SBATCH --nodes=1 --ntasks-per-node=32
 #SBATCH --qos=devel
 
-export NPROC=128 #128
-export NSTEPS=1000000
+export NPROC=32 #128
+export NSTEPS=10000
 export NTRAJ=2500
 export OPT_INIT_STEPS=1 #10 # 0
 export OPT_STEPS=0 #30
@@ -31,7 +31,7 @@ mkdir sim
 cd sim
 
 #RUN OPTIMIZATION
-python ${PYTHON_PATH}/occam_bayesian_2d.py ${OPT_INIT_STEPS} ${OPT_STEPS} ${kphi}
+python ${PYTHON_PATH}/occam_bayesian_2d.py ${OPT_INIT_STEPS} ${OPT_STEPS}
 
 cp -r ${SCRATCH_DIRECTORY}/sim ${SLURM_SUBMIT_DIR}/sim
 mkdir -p /cluster/projects/nn4654k/sigbjobo/${SLURM_JOB_ID}

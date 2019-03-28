@@ -59,12 +59,12 @@ def ana_sim(fn,start=2):
 
        
         zi=rmsd_dist(r0,r)#=np.mean(np.abs((map0[rel]-map1[rel])))
-        print(zi)
+#        print(zi)
         z.append(zi)
         [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
     z=z[start:]
     
-    return np.mean(z)
+    return [np.mean(z), np.std(z)]
 
      
 def func(x):
@@ -72,6 +72,8 @@ def func(x):
     x1 = x[:, 0]
     x2 = x[:, 1]    
     #os.system("bash %s/eval_fun.sh %f %f "%(SHELL_PATH, x1, x2)) 
+
+
     subprocess.call("bash %s/eval_fun.sh %f %f "%(SHELL_PATH, x1, x2), shell=True)
     folds = ANA.list_sim_fold()
     z = ana_sim('%s/sim.xyz'%(folds[-1]),'r')
@@ -79,21 +81,28 @@ def func(x):
     fp.write("%f %f %f %f\n"%(x1, x2, z, 100*z**0.5))
     return np.atleast_2d(np.mean(z))
  
-def func_para(x,k):
-    x = np.atleast_2d(x)
-    x1 = x[:, 0]
-    x2 = x[:, 1]  
-   
+def func_para():
+    #x = np.atleast_2d(x)
+    #x1 = x[:, 0]
 
-    subprocess.call("bash %s/eval_fun_para.sh %f %f %f"%(SHELL_PATH, x1, x2, k), shell=True)#    os.system("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH, x1, x2)) 
+    #SETTING PARAMETERS FROM EXPORTED VARIABLES
+    x1 = float(os.system('echo $alpha'))
+    x2 = float(os.system('echo $beta'))
+    #x2 = x[:, 1]  
+   # if(len(x)>2):
+        
+   # else:
+
+    subprocess.call("bash %s/eval_fun_para.sh"%(SHELL_PATH), shell=True)#    os.system("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH, x1, x2)) 
+  
     folds = ANA.list_sim_fold()
 
-    z = ana_sim('%s/sim.xyz'%(folds[-1]))
+    [z,z_std] = ana_sim('%s/sim.xyz'%(folds[-1]))
     fp = open('%s/opt.dat'%(folds[-1]),'w')
-    fp.write("%f %f %f\n"%(x1, x2, -z ))
+    fp.write("%f %f %f %f\n"%(x1, x2, -z, z_std))
     fp.close
     fp = open('opt.dat','a')
-    fp.write("%f %f %f\n"%(x1, x2, -z ))
+    fp.write("%f %f %f %f\n"%(x1, x2, -z, z_std))
     fp.close()
     return z
 #    return np.atleast_2d(z)

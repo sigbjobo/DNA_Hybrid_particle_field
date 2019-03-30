@@ -1,8 +1,8 @@
-NCPU=$1
+
 NMOL=$(head  fort.5 -n 5 | tail -n 1 | awk '{print $1}')
 NATOM=$(tail fort.5 -n 1 | awk '{print $1}')
-NMOLA=1
 NATOMA=$(grep -nr " P \| A \| T \| C \| G \| S "  fort.5 | wc | awk '{print $1;}')
+NATOMA=$(python -c "print(int(${NATOMA}/${NSOLUTE}))")
 NMOLB=$(grep -nr "NA" fort.5 | wc | awk '{print $1;}')
 NATOMB=1
 NMOLC=$(grep -nr "CL" fort.5 | wc | awk '{print $1;}')
@@ -19,7 +19,7 @@ rm input.txt
 echo "1" >>input.txt
 echo "$NMOL"   >> input.txt
 echo "$NATOM"  >> input.txt
-echo "$NMOLA"  >> input.txt
+echo "$NSOLUTE"  >> input.txt
 echo "$NATOMA" >> input.txt
 echo "$NMOLB"  >> input.txt
 echo "$NATOMB" >> input.txt
@@ -28,6 +28,5 @@ echo "$NATOMC" >> input.txt
 echo "$NMOLD"  >> input.txt
 echo "$NATOMD" >> input.txt
 echo "1"       >> input.txt
-echo "$NCPU"   >> input.txt
+echo "$NPROC"   >> input.txt
 #echo "$NCONF"   >> input.txt
-

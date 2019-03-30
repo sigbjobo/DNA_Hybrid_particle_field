@@ -1,12 +1,13 @@
-import sys
+import sys,os
 
 #TAKING INPUT
 fn = sys.argv[1]
-NW = float(sys.argv[2])
-AT = float(sys.argv[3])
-GC = AT
-PP = float(sys.argv[4])
-PW = float(sys.argv[5])
+
+NW=float(os.environ['alpha'])
+AT=float(os.environ['beta'])
+GC=AT
+PP=float(os.environ['PP'])
+PW=float(os.environ['PW'])
 
 #REPEAT INPUT PARAMETERS
 print("CHI_NW: %.2f"%(NW))

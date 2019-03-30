@@ -244,5 +244,70 @@ def hist_d_calpha(d, calpha, p, L):
     #To get density rho(r,calpha): H*rho_0
     #Where rho_0 is the density of for which you measure the density of, for instance salt concentration.
     return [H, d_edges, calpha_edges]
+
+def contact_map(r, L=[1000,1000,1000], rc=1.0):
+    """
+    FUNCTION THAT COMPUTES CONTACTMAP MATRIX
+    """
+    d = [cdist(r[:,i][:,np.newaxis],r[:,i][:,np.newaxis]) for i in range(len(L))]
+    d = [np.abs(d[i] - L[i]*np.around(d[i]/L[i])) for i in range(len(d))]
+
+    #MIGHT INTRODUCE CUTTOFF HERE
+
+    d = np.sum(d, axis = 0)
+    
+    return d
+
+def rmsd_VEC(A,B):
+
+    #REMOVE CENTER OF MASS
+    A -= rmsd.centroid(A)
+    B -= rmsd.centroid(B)
+
+    #FIND ROTATION MATRIX
+    U = rmsd.kabsch(A, B)
+
+    # ROTATE TOWARDS B
+    A = np.dot(A, U)
+
+    #RETURN ROTATED ARRAY
+    return  A
+    
+def rmsd_dist(A,B):
+    
+    #REMOVE CENTER OF MASS
+    A -= rmsd.centroid(A)
+    B -= rmsd.centroid(B)
+
+    #FIND ROTATION MATRIX
+    U = rmsd.kabsch(A, B)
+
+    # ROTATE TOWARDS B
+    A = np.dot(A, U)
+
+    #RETURN ROOT MEAN SQUARE DEVIATION
+    return  rmsd.rmsd(A, B)
+
+def write_rmsd(fp,fp2,A,B):
+    A -= rmsd.centroid(A)
+    B -= rmsd.centroid(B)
+
+    fp2.write('%d\n'%(len(A)))
+    fp2.write('\n')
+    for i in range(len(A)):
+        fp2.write('A %f %f %f\n'%(A[i,0],A[i,1],A[i,2]))
+
+
+    #FIND ROTATION MATRIX
+    U = rmsd.kabsch(A, B)
+
+    # ROTATE TOWARDS B
+    A = np.dot(A, U)
+    fp.write('%d\n'%(len(A)))
+    fp.write('\n')
+    for i in range(len(A)):
+        fp.write('A %f %f %f\n'%(A[i,0],A[i,1],A[i,2]))
+  
+    return fp
     
     

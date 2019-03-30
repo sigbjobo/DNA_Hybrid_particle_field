@@ -1,13 +1,11 @@
 # /usr/local/bin/python3
-#SIGBJORN ADDONS
+
 import sys
-SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
-EXTRA_PATH="/home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
-sys.path.append(SHELL_PATH)
-sys.path.append(PYTHON_PATH)
-sys.path.append(EXTRA_PATH)
-import FUNC as F
+
+#ADD PATHS
+sys.path.append(os.environ['SHELL_PATH'])
+sys.path.append(os.environ['PYTHON_PATH'])
+import RUN_ANA_OCCAM as F
 
 import os
 import numpy as np
@@ -180,16 +178,6 @@ def optimize_4d(path=None, steps=None, init_points=None, bounds=None,
 
 
 if __name__ == '__main__':
-    # Max (x, y) values of the Franke test function, as computed by Matlab:
-    #
-    # >> n = 5000; pts = (0:n)/n; [x,y] = ndgrid(pts,pts); z = franke(x,y);
-    # >> [m,i] = max(z); [mm,j] = max(m); i(j)/n, j/n
-    # (0.2062, 0.2082)
-    #
-#    k = float(sys.argv[3])
-    # opt=optimize_2d(steps=int(sys.argv[2]), init_points=int(sys.argv[1]),
-    #             bounds={'x': (0, 20), 'y': (-15, 0)},
-    #              plot=False)
     opt=optimize_4d(steps=int(sys.argv[2]), init_points=int(sys.argv[1]),
                 bounds={'x': (0, 20), 'y': (-15, 0), 'z': (-10, 0),'w': (-10, 0)},
                  plot=False)

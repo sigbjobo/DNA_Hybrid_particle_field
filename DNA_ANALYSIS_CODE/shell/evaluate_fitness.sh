@@ -1,7 +1,5 @@
 #Load new parameters
-#alpha=$1
-#beta=$2
-#kphi=$3
+
 function CreateFolder(){
     #Creates a folder with unique name one number higher than last one
     A=$(ls -l|grep sim_| wc | awk '{print $1}' )
@@ -16,9 +14,6 @@ function CreateFolder(){
 }
 
 
-PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
-SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-INPUT_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
 CreateFolder
 
 #Setup simulation
@@ -29,7 +24,7 @@ cp -r ${INPUT_PATH}/PARA/* .
 cp ${INPUT_PATH}/OPTIMIZATION/START.5 fort.5
 
 #New parameters
-python ${PYTHON_PATH}/set_chi.py fort.3 $alpha $beta $PP $PW
+python ${PYTHON_PATH}/set_chi.py fort.3 
 
 L=$(head  fort.5 -n 2 | tail -n 1 | awk '{print $1}')
 M=$(python -c "print(int($L / 0.67))")
@@ -48,8 +43,7 @@ sed -i '/out_print:/{n;s/.*/10000/}' fort.1
 bash ${SHELL_PATH}/setup_FF.sh ${kphi}
 
 #Run simulation in parallel
-bash ${SHELL_PATH}/run_para_many.sh ${NPROC} 2
-
+bash ${SHELL_PATH}/run_para.sh 
 
 mv fort.8 sim.xyz
 

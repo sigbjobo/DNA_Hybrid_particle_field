@@ -3,6 +3,8 @@
 kphi=$1
 n=48
 PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+
+#EQUILIBIRUM TORSIONAL ANGLES
 names[1]=P-S-P-S
 phi0[1]=-154.8
 names[2]=S-P-S-P

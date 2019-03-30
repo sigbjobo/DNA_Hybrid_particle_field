@@ -16,10 +16,10 @@ NCONF=$(python -c "int(${STEPS}//${TRJ_PRINT}+2)")
 
 
 rm input.txt
-echo "1" >>input.txt
+echo "1"       >> input.txt
 echo "$NMOL"   >> input.txt
 echo "$NATOM"  >> input.txt
-echo "$NSOLUTE"  >> input.txt
+echo "$NSOLUTE">> input.txt
 echo "$NATOMA" >> input.txt
 echo "$NMOLB"  >> input.txt
 echo "$NATOMB" >> input.txt
@@ -28,5 +28,5 @@ echo "$NATOMC" >> input.txt
 echo "$NMOLD"  >> input.txt
 echo "$NATOMD" >> input.txt
 echo "1"       >> input.txt
-echo "$NPROC"   >> input.txt
+echo "$NPROC"  >> input.txt
 #echo "$NCONF"   >> input.txt

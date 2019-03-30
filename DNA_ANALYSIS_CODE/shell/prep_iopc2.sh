@@ -1,4 +1,3 @@
-NPROC=$1
 TIME_STEP=$(awk '/time_step:/{getline; print}' fort.1)
 TRJ_PRINT=$(awk '/trj_print:/{getline; print}' fort.1)
 STEPS=$(awk '/number_of_steps:/{getline; print}' fort.1)
@@ -10,4 +9,3 @@ echo "$NPROC"     >> input.txt
 echo "0"          >> input.txt
 echo "$TIME_STEP" >> input.txt
 echo "${NCONF}"   >> input.txt
-

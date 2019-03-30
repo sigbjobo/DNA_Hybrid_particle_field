@@ -36,22 +36,22 @@ def ana_sim(fn, start=10):
     #REMOVE FRAMES
     z=z[start:]
     
-    return [np.mean(z), np.std(z)]
+    return np.mean(z), np.std(z)
 
  
 def func_para():
 
     #START SIMULATION 
-    subprocess.call("bash %s/evaluate_fitness.sh"%(SHELL_PATH), shell=True)
+    subprocess.call("bash %s/evaluate_fitness.sh"%(os.environ["SHELL_PATH"]), shell=True)
 
     #LIST ALL SIMULATIONS
     folds = ANA.list_sim_fold()
 
     #ANALYZE CURRENT SIMULATION
-    [z,z_std] = ana_sim('%s/sim.xyz'%(folds[-1]))
+    z,z_std = ana_sim('%s/sim.xyz'%(folds[-1]))
 
     #STORE FITNESS
-    fp = open('../opt.dat','a')
+    fp = open('opt.dat','a')
     fp.write("%s %s %s %s %f %f\n"%(os.environ['alpha'], os.environ['beta'], os.environ['PP'], os.environ['PW'], -z, z_std))
     fp.close()
 

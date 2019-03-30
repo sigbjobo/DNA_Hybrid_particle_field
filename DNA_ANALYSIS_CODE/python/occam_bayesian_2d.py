@@ -1,13 +1,11 @@
 # /usr/local/bin/python3
 
-import sys
-
-#ADD PATHS
+#ADDED BY SIGBJORN
+import sys, os
 sys.path.append(os.environ['SHELL_PATH'])
 sys.path.append(os.environ['PYTHON_PATH'])
 import RUN_ANA_OCCAM as F
 
-import os
 import numpy as np
 from math import isnan
 from bayes_opt import BayesianOptimization
@@ -179,7 +177,7 @@ def optimize_4d(path=None, steps=None, init_points=None, bounds=None,
 
 if __name__ == '__main__':
     opt=optimize_4d(steps=int(sys.argv[2]), init_points=int(sys.argv[1]),
-                bounds={'x': (0, 20), 'y': (-15, 0), 'z': (-10, 0),'w': (-10, 0)},
+                bounds={'x': (0, 20), 'y': (-15, 0), 'z': (-10, 0),'w': (-10, 10)},
                  plot=False)
 
     # opt = optimize_2d(steps=10, init_points=10,

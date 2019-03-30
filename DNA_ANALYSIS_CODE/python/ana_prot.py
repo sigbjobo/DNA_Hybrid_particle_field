@@ -1,7 +1,7 @@
 import numpy as np
 import copy, glob, sys
 from scipy.spatial import distance
-
+import calculate_rmsd as rmsd
 def torsional(x1,x2,x3,x4):
     #computes torsional angle
     v1 = x1-x2

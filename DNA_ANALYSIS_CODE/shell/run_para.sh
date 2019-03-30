@@ -9,14 +9,16 @@ CURRENT_DIREC=$(pwd)
 echo "Number of proccessors: ${NPROC}"
 
 #COMPILE OCCAM AND IOPC
-if [ COMPILE==1 ]
+if [ "$COMPILE" == "1" ]
 then
+    echo "COMPILING"
     cd ${OCCAM_PATH}
     rm -f *.o
     rm *.mod
     bash compile_extra.sh
     make
     cd  ${OCCAM_PATH}/IOPC_input
+    bash compile.sh
     make
 fi
 
@@ -25,10 +27,9 @@ cp ${OCCAM_PATH}/occamcgmpi ${CURRENT_DIREC}/
 cp ${OCCAM_PATH}/IOPC_input/iopc ${CURRENT_DIREC}/
 
 
-
 #PREPARE IOPC FORWARD
 cp fort.5 fort.10
-bash ${SHELL_PATH}/prep_iopc1.sh ${NPROC}
+bash ${SHELL_PATH}/prep_iopc1.sh
 
 #RUN IOPC FORWARD
 ${OCCAM_PATH}/IOPC_input/iopc

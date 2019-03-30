@@ -14,10 +14,10 @@
 
 # # Set up node file for namd run :
 # module load python
-module load FFTW/3.3.8-intel-2018b
+module load FFTW/3.3.7-intel-2018a
 n=48
-PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
-SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
 #bash setup_FF.sh $1
 kphi=$1
 names[1]=P-S-P-S

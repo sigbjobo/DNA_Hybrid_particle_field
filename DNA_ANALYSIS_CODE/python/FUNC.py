@@ -3,8 +3,8 @@ import numpy as np
 import calculate_rmsd as rmsd
 
 #Setting paths
-SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 EXTRA_PATH="/home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
 from scipy.spatial.distance import cdist
 sys.path.append(SHELL_PATH)
@@ -13,7 +13,7 @@ sys.path.append(EXTRA_PATH)
 
 import ana_prot as ANA
 
-def ana_sim(fn,start=2):
+def ana_sim(fn,start=10):
     fp = open(fn,'r')
 #    fp_rmsd=open('rmsd.xyz','w')
 #    fp_cent=open('center.xyz','w')
@@ -86,8 +86,8 @@ def func_para():
     #x1 = x[:, 0]
 
     #SETTING PARAMETERS FROM EXPORTED VARIABLES
-    x1 = float(os.system('echo $alpha'))
-    x2 = float(os.system('echo $beta'))
+    x1 = float(os.environ['alpha'])
+    x2 = float(os.environ['beta'])
     #x2 = x[:, 1]  
    # if(len(x)>2):
         
@@ -96,13 +96,11 @@ def func_para():
     subprocess.call("bash %s/eval_fun_para.sh"%(SHELL_PATH), shell=True)#    os.system("bash %s/eval_fun_para.sh %f %f "%(SHELL_PATH, x1, x2)) 
   
     folds = ANA.list_sim_fold()
-
+    
     [z,z_std] = ana_sim('%s/sim.xyz'%(folds[-1]))
-    fp = open('%s/opt.dat'%(folds[-1]),'w')
-    fp.write("%f %f %f %f\n"%(x1, x2, -z, z_std))
-    fp.close
+    
     fp = open('opt.dat','a')
-    fp.write("%f %f %f %f\n"%(x1, x2, -z, z_std))
+    fp.write("%s %s %s %s %f %f\n"%(os.environ['alpha'], os.environ['beta'], os.environ['PP'], os.environ['PW'], -z, z_std))
     fp.close()
     return z
 #    return np.atleast_2d(z)

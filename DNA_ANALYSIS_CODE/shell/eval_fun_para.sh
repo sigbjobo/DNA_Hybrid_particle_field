@@ -16,9 +16,9 @@ function CreateFolder(){
 }
 
 
-PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
-SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-INPUT_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
+PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+INPUT_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
 CreateFolder
 
 #Setup simulation
@@ -29,13 +29,7 @@ cp -r ${INPUT_PATH}/PARA/* .
 cp ${INPUT_PATH}/OPTIMIZATION/START.5 fort.5
 
 #New parameters
-NW=$alpha
-AT=$beta
-PP=0
-PW=-3.6
-python ${PYTHON_PATH}/set_fort3.py fort.3 $NW $AT $PP $PW
-#sed -i "s/alpha/${alpha}/g" fort.3
-#sed -i "s/beta/${beta}/g"   fort.3
+python ${PYTHON_PATH}/set_chi.py fort.3 $alpha $beta $PP $PW
 
 L=$(head  fort.5 -n 2 | tail -n 1 | awk '{print $1}')
 M=$(python -c "print(int($L / 0.67))")

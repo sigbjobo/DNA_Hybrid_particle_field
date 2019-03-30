@@ -1,8 +1,8 @@
 # /usr/local/bin/python3
 #SIGBJORN ADDONS
 import sys
-SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 EXTRA_PATH="/home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
 sys.path.append(SHELL_PATH)
 sys.path.append(PYTHON_PATH)
@@ -13,7 +13,8 @@ import os
 import numpy as np
 from math import isnan
 from bayes_opt import BayesianOptimization
-from bayes_opt.observer import JSONLogger, ScreenLogger
+#from bayes_opt.observer import JSONLogger, ScreenLogger
+from bayes_opt.logger import JSONLogger, ScreenLogger
 from bayes_opt.event import Events
 from bayes_opt.util import load_logs
 #from franke import franke
@@ -67,13 +68,70 @@ def cost(result):
     return - (result - target)**2
 
 
+
+
+
 def optimize_2d(path=None, steps=None, init_points=None, bounds=None,
                 true_function=None, plot=False, load=False):
     
     def wrapper(x, y):
-        
-        os.system('export alpha=%f' %(x))
-        os.system('export beta=%f'  %(y))
+        os.environ['alpha'] = "%f"%(x)
+        os.environ['beta']  = "%f"%(y)
+        res = -F.func_para()
+        return res
+
+    opt = BayesianOptimization(f=wrapper,
+                               pbounds=bounds,
+                               verbose=2,
+                               random_state=92898)
+    log_file = new_log_file_name()
+    logger = JSONLogger(path=log_file)
+    screen_logger = ScreenLogger(verbose=2)
+    opt.subscribe(Events.OPTMIZATION_STEP, logger)
+    opt.subscribe(Events.OPTMIZATION_START, screen_logger)
+    opt.subscribe(Events.OPTMIZATION_STEP, screen_logger)
+    opt.subscribe(Events.OPTMIZATION_END, screen_logger)
+    print('Logging to logfile: ', os.path.abspath(log_file))
+    dump_bounds(log_file, bounds)
+
+    no_log_files_found = False
+    if load:
+        files = find_log_files()
+        if len(files) > 0:
+            print('Loading previous runs from logfile(s):')
+            for f in files:
+                print(f)
+            load_logs(opt, logs=files)
+        else:
+            no_log_files_found = True
+    if (init_points is not None) and (init_points > 0):
+        if no_log_files_found or not load:
+            opt.maximize(init_points=init_points, n_iter=0)
+
+    first_step = True
+    opt.unsubscribe(Events.OPTMIZATION_END, screen_logger)
+    print('')
+    if _check_steps_finite(steps):
+        for _ in range(steps):
+            opt.maximize(init_points=0, n_iter=1)
+            if first_step:
+                opt.unsubscribe(Events.OPTMIZATION_START, screen_logger)
+                first_step = False
+    else:
+        while True:
+            opt.maximize(init_points=0, n_iter=1)
+    print("MAX: ", opt.max)
+    return opt
+
+def optimize_4d(path=None, steps=None, init_points=None, bounds=None,
+                true_function=None, plot=False, load=False):
+    
+    def wrapper(x, y, z, w):
+        os.environ['alpha'] = "%f"%(x)
+        os.environ['beta']  = "%f"%(y)
+        os.environ['PP']    = "%f"%(z)
+        os.environ['PW']    = "%f"%(w)
+      
         res = -F.func_para()
         return res
 
@@ -129,8 +187,11 @@ if __name__ == '__main__':
     # (0.2062, 0.2082)
     #
 #    k = float(sys.argv[3])
-    opt=optimize_2d(steps=int(sys.argv[2]), init_points=int(sys.argv[1]),
-                bounds={'x': (0, 20), 'y': (-15, 0)},
+    # opt=optimize_2d(steps=int(sys.argv[2]), init_points=int(sys.argv[1]),
+    #             bounds={'x': (0, 20), 'y': (-15, 0)},
+    #              plot=False)
+    opt=optimize_4d(steps=int(sys.argv[2]), init_points=int(sys.argv[1]),
+                bounds={'x': (0, 20), 'y': (-15, 0), 'z': (-10, 0),'w': (-10, 0)},
                  plot=False)
 
     # opt = optimize_2d(steps=10, init_points=10,

@@ -1,23 +1,23 @@
 #!/bin/bash
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
-#SBATCH --time=2-0:00:00
-#SBATCH --ntasks=180 #1 --ntasks-per-node=32
-##SBATCH --qos=devel
+#SBATCH --time=0-2:00:00
+#SBATCH --ntasks=40 #1 --ntasks-per-node=32
+#SBATCH --qos=devel
 
 #MANDATORY SETTINGS
-export NPROC=180
+export NPROC=20
 export COMPILE=0
 export NSOLUTE=2
 
 #SETTINGS SPECIFIC TO BAYSIAN OPTIMIZATION
-export NSTEPS=1000000
-export NTRAJ=2500
+export NSTEPS=10000 #0000
+export NTRAJ=250
 export OPT_INIT_STEPS=10 
 export OPT_STEPS=40
 export kphi=20
-export alpha=10
-export beta=-10
+export NW=10
+export NN=-10
 export PP=0
 export PW=-3.6
 
@@ -46,7 +46,7 @@ mkdir sim
 cd sim
 
 #RUN OPTIMIZATION
-python ${PYTHON_PATH}/occam_bayesian_2d.py ${OPT_INIT_STEPS} ${OPT_STEPS}
+python ${PYTHON_PATH}/occam_bayesian_2d.py 
 
 #SAVE DATA
 cp -r ${SCRATCH_DIRECTORY}/sim ${SLURM_SUBMIT_DIR}/sim

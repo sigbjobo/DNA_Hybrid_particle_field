@@ -14,16 +14,16 @@ def ana_sim(fn, start=10):
     on=1
 
     #READ FIRST FRAME
-    [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
+    [fp, rp, rs, rn, L, on] = ANA.read_frame(fp)
   
     #MAKE Nx3 VECTOR CONTAINING POSITIONS OF INITIAL STRUCTURE
-    r0= np.vstack((r_p,_,rn))
+    r0= np.vstack((rp,rs,rn))
 
     #VECTOR CONTAINING FITNESS
     z=[]
     while(on):
         
-        r=np.vstack((r_p,_,rn))
+        r=np.vstack((rp,rs,rn))
 
         #FITNESS OF FRAME
         zi=ANA.rmsd_dist(r0,r)
@@ -31,7 +31,7 @@ def ana_sim(fn, start=10):
         z.append(zi)
 
         #READ NEW FRAME
-        [fp, r_p, _, rn, L, on] = ANA.read_frame(fp)
+        [fp, rp, rs, rn, L, on] = ANA.read_frame(fp)
 
     #REMOVE FRAMES
     z=z[start:]

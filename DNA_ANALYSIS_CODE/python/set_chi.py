@@ -3,8 +3,8 @@ import sys,os
 #TAKING INPUT
 fn = sys.argv[1]
 
-NW=float(os.environ['alpha'])
-AT=float(os.environ['beta'])
+NW=float(os.environ['NW'])
+AT=float(os.environ['NN'])
 GC=AT
 PP=float(os.environ['PP'])
 PW=float(os.environ['PW'])

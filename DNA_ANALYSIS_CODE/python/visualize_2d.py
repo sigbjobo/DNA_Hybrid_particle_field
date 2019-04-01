@@ -5,15 +5,13 @@ import matplotlib.transforms as trs
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
 from bayes_opt import UtilityFunction
 
-
 def posterior(optimizer, x_observed, y_observed, target_observed,
               design_matrix):
     var_observed = np.hstack((x_observed, y_observed))
     optimizer._gp.fit(var_observed, target_observed)
     mu, sigma = optimizer._gp.predict(design_matrix, return_std=True)
     return mu, sigma
-
-
+ 
 class PlotProgress_2D:
     def __init__(self, optimizer, true_function=None, cost=None):
         self.optimizer = optimizer

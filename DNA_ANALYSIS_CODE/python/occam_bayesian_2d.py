@@ -10,7 +10,7 @@ import numpy as np
 from math import isnan
 from bayes_opt import BayesianOptimization
 #from bayes_opt.observer import JSONLogger, ScreenLogger
-from bayes_opt.logger import JSONLogger, ScreenLogger
+#from bayes_opt.logger import JSONLogger, ScreenLogger
 from bayes_opt.event import Events
 from bayes_opt.util import load_logs
 #from franke import franke

@@ -6,15 +6,16 @@ fn = sys.argv[1]
 NW=float(os.environ['NW'])
 AT=float(os.environ['NN'])
 GC=AT
-PP=float(os.environ['PP'])
 PW=float(os.environ['PW'])
+PP=float(os.environ['PP'])
 
 #REPEAT INPUT PARAMETERS
 print("CHI_NW: %.2f"%(NW))
 print("CHI_AT: %.2f"%(AT))
 print("CHI_GC: %.2f"%(GC))
-print("CHI_PP: %.2f"%(PP))
 print("CHI_PW: %.2f"%(PW))
+print("CHI_PP: %.2f"%(PP))
+
 
 #READ FORT.3
 lines = open('fort.3','r').readlines()

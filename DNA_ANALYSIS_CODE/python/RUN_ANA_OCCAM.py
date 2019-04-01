@@ -52,7 +52,7 @@ def func_para():
 
     #STORE FITNESS
     fp = open('opt.dat','a')
-    fp.write("%s %s %s %s %f %f\n"%(os.environ['alpha'], os.environ['beta'], os.environ['PP'], os.environ['PW'], -z, z_std))
+    fp.write("%s %s %s %s %f %f\n"%(os.environ['NW'], os.environ['NN'], os.environ['PW'], os.environ['PP'], -z, z_std))
     fp.close()
 
     #RETURN FITNESS

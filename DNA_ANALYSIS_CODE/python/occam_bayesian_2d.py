@@ -125,8 +125,8 @@ def optimize_4d(path=None, steps=None, init_points=None, bounds=None,
     def wrapper(x, y, z, w):
         os.environ['NW']    = "%f"%(x)
         os.environ['NN']    = "%f"%(y)
-        os.environ['PP']    = "%f"%(z)
-        os.environ['PW']    = "%f"%(w)
+        os.environ['PW']    = "%f"%(z)
+        os.environ['PP']    = "%f"%(w)
       
         res = -F.func_para()
         return res
@@ -177,9 +177,10 @@ def optimize_4d(path=None, steps=None, init_points=None, bounds=None,
 
 if __name__ == '__main__':
 
-    opt=optimize_4d(steps=int(os.environ['OPT_STEPS']), init_points=int(os.environ['OPT_INIT_STEPS']),
-                bounds={'x': (0, 20), 'y': (-15, 0), 'z': (-10, 0),'w': (-10, 10)},
-                 plot=False)
+    opt=optimize_4d(steps=int(os.environ['OPT_STEPS']),
+                    init_points=int(os.environ['OPT_INIT_STEPS']),
+                    bounds={'x': (0, 20), 'y': (-15, 0),'z': (-10, 10),
+                            'w': (-10, 0)}, plot=False)
 
     # opt = optimize_2d(steps=10, init_points=10,
     #                   bounds={'x': (0, 1), 'y': (-0.2, 1)}, load=True)

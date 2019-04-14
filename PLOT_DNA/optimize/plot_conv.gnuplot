@@ -3,20 +3,23 @@ set terminal epslatex size 3.4,2.3 font ",10" standalone header '\usepackage{siu
 #bending
 set output 'eta_opt.tex'
 set border lw 2
-set ylabel '$\eta/\%$'
+set ylabel '$\eta/\si{nm}$'
 set xlabel '$N_{\si{it}}/\#$'
 #set yrange [0:26]
+set xrange [-1:51] 
+set key  maxrow 4 samplen 1 spacing -2 width 2
+#set logscale y
+plot "opt.dat"   using 0:(-0.1*$5):(0.1*$6) with errorbars lw 2 title ''
  
-#set key bottom right maxrow 3 samplen 1 spacing 1 width -4
-
-plot "opt.dat"   using 1:6:7 w errorbars lw 2 title ''
- 
-set output 'eta_opt.tex'
+set output 'chi_opt.tex'
 set ylabel '$\chi/\si{kJ.mol^{-1}}$'
-plot "opt.dat"   using 1:2 w l lw 2 title ''
-     ""		 using 1:3 w l lw 2 title ''
-     ""		 using 1:4 w l lw 2 title ''	
-     ""		 using 1:5 w l lw 2 title ''
+#unset logscale y
+set key above
+set yrange [-20:25]
+plot "opt.dat"   using 0:1 w p lw 2 title '$\chi_{NW}$',\
+     ""		 using 0:2 w p lw 2 title '$\chi_{NN}$',\
+     ""		 using 0:3 w p lw 2 title '$\chi_{PW}$',\
+     ""		 using 0:4 w p lw 2 title '$\chi_{PP}$'
 
 
      

@@ -79,3 +79,16 @@ mv bench_scaling.pdf ../PLOTS/
 
 rm *aux *eps *log *pdf *~ *tex
 cd ..
+
+
+cd optimize
+gnuplot plot_conv.gnuplot
+
+pdflatex eta_opt.tex
+pdflatex chi_opt.tex
+
+
+mv *_opt.pdf ../PLOTS/
+rm *aux *eps *log *pdf *~ *tex
+cd ..
+

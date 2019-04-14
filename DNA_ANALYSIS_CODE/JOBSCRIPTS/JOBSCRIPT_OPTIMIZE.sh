@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
-#SBATCH --time=2-0:0:0
+#SBATCH --time=3-0:0:0
 #SBATCH --nodes=6 --ntasks-per-node=32
 ##SBATCH --qos=devel
 
@@ -11,8 +11,8 @@ export COMPILE=0
 export NSOLUTE=2
 
 #SETTINGS SPECIFIC TO BAYSIAN OPTIMIZATION
-export NSTEPS=1000000
-export NTRAJ=2500
+export NSTEPS=4000000
+export NTRAJ=5000
 export OPT_INIT_STEPS=10 
 export OPT_STEPS=40
 export kphi=20

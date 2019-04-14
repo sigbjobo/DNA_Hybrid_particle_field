@@ -9,7 +9,7 @@ import RUN_ANA_OCCAM as F
 import numpy as np
 from math import isnan
 from bayes_opt import BayesianOptimization
-#from bayes_opt.observer import JSONLogger, ScreenLogger
+from bayes_opt.observer import JSONLogger, ScreenLogger
 #from bayes_opt.logger import JSONLogger, ScreenLogger
 from bayes_opt.event import Events
 from bayes_opt.util import load_logs
@@ -102,20 +102,20 @@ def optimize_2d(path=None, steps=None, init_points=None, bounds=None,
             no_log_files_found = True
     if (init_points is not None) and (init_points > 0):
         if no_log_files_found or not load:
-            opt.maximize(init_points=init_points, n_iter=0)
+            opt.maximize(init_points=init_points, n_iter=0,alpha=1e-3)
 
     first_step = True
     opt.unsubscribe(Events.OPTMIZATION_END, screen_logger)
     print('')
     if _check_steps_finite(steps):
         for _ in range(steps):
-            opt.maximize(init_points=0, n_iter=1)
+            opt.maximize(init_points=0, n_iter=1,alpha=1e-3)
             if first_step:
                 opt.unsubscribe(Events.OPTMIZATION_START, screen_logger)
                 first_step = False
     else:
         while True:
-            opt.maximize(init_points=0, n_iter=1)
+            opt.maximize(init_points=0, n_iter=1,alpha=1e-3)
     print("MAX: ", opt.max)
     return opt
 
@@ -157,20 +157,20 @@ def optimize_4d(path=None, steps=None, init_points=None, bounds=None,
             no_log_files_found = True
     if (init_points is not None) and (init_points > 0):
         if no_log_files_found or not load:
-            opt.maximize(init_points=init_points, n_iter=0)
+            opt.maximize(init_points=init_points, n_iter=0,alpha=1e-3)
 
     first_step = True
     opt.unsubscribe(Events.OPTMIZATION_END, screen_logger)
     print('')
     if _check_steps_finite(steps):
         for _ in range(steps):
-            opt.maximize(init_points=0, n_iter=1)
+            opt.maximize(init_points=0, n_iter=1,alpha=1e-3)
             if first_step:
                 opt.unsubscribe(Events.OPTMIZATION_START, screen_logger)
                 first_step = False
     else:
         while True:
-            opt.maximize(init_points=0, n_iter=1)
+            opt.maximize(init_points=0, n_iter=1,alpha=1e-3)
     print("MAX: ", opt.max)
     return opt
 
@@ -179,8 +179,8 @@ if __name__ == '__main__':
 
     opt=optimize_4d(steps=int(os.environ['OPT_STEPS']),
                     init_points=int(os.environ['OPT_INIT_STEPS']),
-                    bounds={'x': (0, 20), 'y': (-15, 0),'z': (-10, 10),
-                            'w': (-10, 0)}, plot=False)
+                    bounds={'x': (5, 20), 'y': (-15, -5),'z': (-15, -5),
+                            'w': (-5, 0)}, plot=False)
 
     # opt = optimize_2d(steps=10, init_points=10,
     #                   bounds={'x': (0, 1), 'y': (-0.2, 1)}, load=True)

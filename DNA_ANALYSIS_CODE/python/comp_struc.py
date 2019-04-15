@@ -35,9 +35,13 @@ while(1):
                 r_p.append([float(d) for d in l[1:]])
 
     if(n_frames>=n_start):
+
         r_p=np.array(r_p)
-        dat1=(r_p[:len(r_p)//2])[3:-3]
-        dat2=(r_p[len(r_p)//2:])[3:-3]
+    
+        dat1=(r_p[:len(r_p)//2])#[2:-2]
+        dat2=(r_p[len(r_p)//2:])#[2:-2]
         [d1,r1,ang1,d]= AXIS.Parseq(dat1)
         [d2,r2,ang2,d]= AXIS.Parseq(dat2)
         fp_out.write('%d %f %f %f %f %f %f\n'%(n_frames, d1, d2, r1, r2, ang1, ang2))
+
+     

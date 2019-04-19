@@ -61,12 +61,15 @@ rm *aux *eps *log *pdf *~ *tex
 cd ..
 
 #End-end distance
-
 cd persistence
 gnuplot plot_end.gnuplot
-
 pdflatex end_end.tex
+pdflatex end_end_dist.tex
+pdflatex end_end_mean.tex
+
 mv end_end.pdf ../PLOTS/
+mv end_end_dist.pdf ../PLOTS/
+mv end_end_mean.pdf ../PLOTS/
 
 rm *aux *eps *log *pdf *~ *tex
 cd ..

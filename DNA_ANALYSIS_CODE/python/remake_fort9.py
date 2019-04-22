@@ -35,7 +35,7 @@ for fn in final_configs:
                 id_fort5=index[atomid]
 
                 lfort5=fort5_lines[id_fort5].split()
-                lfort5[4:10]=ls[5:11]
+                lfort5[4:10]=ls[4:10]
                 fort9_lines[id_fort5]='%s'%(' '.join(lfort5))
         else:
             break

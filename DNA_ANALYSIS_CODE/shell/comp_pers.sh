@@ -20,6 +20,7 @@ do
     cat end_end.dat | awk  '{printf("%.2f\n"),  $1*20000*0.03*0.001 }' >>../pos.dat
     cat end_end.dat | awk  '{printf("%.2f\n"),  $2 }' >>end.dat
 
+    
     mv end_end.dat end_end.xvg
     b=$(gmx analyze -f end_end.xvg -dist -bw 2.5 -b 800 | grep SS1 | awk '{printf("%.2f %.2f\n"),$2 ,$3}')
 
@@ -27,7 +28,8 @@ do
     echo "$a2 $b">> ../PLOT_DATA/mean.dat
 
     grep -v "@\|#" distr.xvg > ../PLOT_DATA/"${a}".xvg
-    
+    mv contact.dat ../PLOT_DATA/contact_"${a}".dat
+
     cd ../
 done < fold.dat
 

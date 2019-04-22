@@ -95,3 +95,12 @@ mv *_opt.pdf ../PLOTS/
 rm *aux *eps *log *pdf *~ *tex
 cd ..
 
+
+#HAIRPIN
+cd hairpin
+gnuplot plot_hairpin.gnuplot
+pdflatex hairpin-form.tex
+
+mv hairpin-form.pdf ../PLOTS/
+rm *aux *eps *log *pdf *~ *tex
+cd ..

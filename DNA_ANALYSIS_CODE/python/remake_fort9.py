@@ -1,10 +1,10 @@
 #SCRIPT FOR MAKING A FORT.9 FILE OUT OF FORT.4**-5***
 
 import glob
-
+import numpy as np
 #READ START FILE
 fort5_lines = open('fort.5').readlines()
-
+L=[float(li.replace('D','E'))  for li in fort5_lines[1].split()]
 #MAKE A COPY
 fort9_lines  = fort5_lines[:]
 fp_out=open('fort.9','w')
@@ -33,9 +33,12 @@ for fn in final_configs:
                 
                 atomid=int(ls[1])-1
                 id_fort5=index[atomid]
-
+ 
                 lfort5=fort5_lines[id_fort5].split()
-                lfort5[4:10]=ls[4:10]
+                ls=ls[5:11]
+                ls[:len(ls)//2]=['%f'%(np.mod(float(ls[i].replace('D','E')),L[i])) for i in range(3)]
+                lfort5[4:10]=ls
+
                 fort9_lines[id_fort5]='%s'%(' '.join(lfort5))
         else:
             break

@@ -18,10 +18,8 @@ rm fort_2.5 fort_1.5
 
 
 NP=$(grep -nr "P" fort.5 | wc | awk '{print $1;}')
-
-
-N_NA=$(python -c "print(int(0.25*$I*6.022E23*($L*1E-9)**3+0.5*$NP))") # | awk '{print $1;}'
-N_CL=$(python -c "print(int(0.25*$I*6.022E23*($L*1E-9)**3))") # | awk '{print $1;}'
+N_NA=$(python -c "print(int(0.25*$I*6.022E23*($L*1E-9)**3+0.5*$NP))")
+N_CL=$(python -c "print(int(0.25*$I*6.022E23*($L*1E-9)**3))") 
  
 
 python ${PYTHON_PATH}/solvate_dna.py fort.5 fort_solv.5 $N_NA $N_CL

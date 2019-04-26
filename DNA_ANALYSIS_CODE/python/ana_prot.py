@@ -2,6 +2,9 @@ import numpy as np
 import copy, glob, sys
 from scipy.spatial import distance
 import calculate_rmsd as rmsd
+from scipy.spatial import distance
+from scipy.interpolate import interp1d
+
 def torsional(x1,x2,x3,x4):
     #computes torsional angle
     v1 = x1-x2
@@ -311,3 +314,36 @@ def write_rmsd(fp,fp2,A,B):
     return fp
     
     
+def minor_major(r_p):
+    r1=(r_p[:len(r_p)//2])
+    r2=(r_p[len(r_p)//2:])
+    r2=r2[::-1]
+    dists=[]
+
+    n=np.linspace(0,1,len(r1))
+    resolution=40
+    add=1
+    n2=np.linspace(0,1,len(r1)*resolution)
+
+    R1func=interp1d(n,r1,axis=0,kind='cubic')
+    R2func=interp1d(n,r2,axis=0,kind='cubic')
+    R1=R1func(n2)
+    R2=R2func(n2)
+
+    for i in range(4,len(r1)-5):
+    
+        RA=R1[int(np.ceil((i-add)*resolution)):int(np.floor((i+add)*resolution))]
+        RB=R2[int(np.ceil((i-3-add)*resolution)):int(np.floor((i-3+add)*resolution))]
+        RC=R2[int(np.ceil((i+5-add)*resolution)):int(np.floor((i+5+add)*resolution))]
+
+
+        d0=np.min(distance.cdist(RA,RB))
+        d1=np.min(distance.cdist(RA,RC))
+
+        dists.append([d0,d1])
+    dists=np.array(dists)
+
+    #COMPUTE MEAN  OF MINOR AND MAJOR GROOVE
+    mean = np.mean(dists,axis=0)
+    
+    return mean

@@ -1,28 +1,28 @@
 #!/bin/bash
-#SBATCH --job-name=OPTIMIZE_DNA
+#SBATCH --job-name=DS_PER
 #SBATCH --account=nn4654k
-#SBATCH --time=1-0:0:0
+#SBATCH --time=3-2:0:0
 #SBATCH --nodes=6 --ntasks-per-node=32
-##SBATCH --qos=devel
+
+set -e
+
 
 #MANDATORY SETTINGS
 export NPROC=192 #192
 export COMPILE=0
 export NSOLUTE=2
 
-
 export kphi=$1
 
 
  
 #SETTINGS SPECIFIC TO BAYSIAN OPTIMIZATION
-export NSTEPS=40000000
+NSTEPS=150000000
 export NTRAJ=20000
 export NW=19
 export NN=-12.7
 export PP=-4.2
 export PW=-7.2
-
 export dna_seq=CCGCCAGCGGCGTTATTACATTTAATTCTTAAGTATTATAAGTAATATGGCCGCTGCGCC
 export rev_dna_seq=GGCGCAGCGGCCATATTACTTATAATACTTAAGAATTAAATGTAATAACGCCGCTGGCGG
 
@@ -40,10 +40,6 @@ module load intel/2018b
 module load FFTW/3.3.8-intel-2018b
 module load Python/3.6.4-intel-2018a
 
-
-#REMOVE OLD SIMULATIONS
-rm ${SLURM_SUBMIT_DIR}/sim -rf
-
 #PREPARE SIMULATION DIRECTORY
 mkdir -p ${SCRATCH_DIRECTORY}
 cd ${SCRATCH_DIRECTORY}
@@ -51,11 +47,11 @@ cd ${SCRATCH_DIRECTORY}
 folder=SIM_${kphi}
 mkdir ${folder}
 cd ${folder}
-
+ 
 #MAKE SYSTEM
 cp -r ${INPUT_PATH}/PARA/* .
 
-bash ${SHELL_PATH}/double_ds.sh ${dna_seq} 20 100
+bash ${SHELL_PATH}/double_ds.sh ${dna_seq} ${rev_dna_seq} 20 150
 
 python ${PYTHON_PATH}/set_chi.py fort.3
 
@@ -71,14 +67,17 @@ sed -i '/pot_calc_freq:/{n;s/.*/500/}' fort.1
 sed -i '/SCF_lattice_update:/{n;s/.*/50/}' fort.1
 sed -i "/trj_print:/{n;s/.*/$NTRAJ/}" fort.1
 sed -i '/out_print:/{n;s/.*/10000/}' fort.1
+sed -i '/target_temperature:/{n;s/.*/1000     0.000/}' fort.1
 
-# SET STRENGTH OF TORSIONAL POTENTIAL                                                                                     
+# SET STRENGTH OF TORSIONAL POTENTIAL                                        
 bash ${SHELL_PATH}/setup_FF.sh ${kphi}
+
+
+#PREPARE DATA-COLLECTION RUN
+sed -i '/target_temperature:/{n;s/.*/300     0.000/}' fort.1
 
 #RUN SIMULATION
 bash ${SHELL_PATH}/run_para.sh
-
-
 
 #SAVE DATA
 cp -r ${SCRATCH_DIRECTORY}/${folder} ${SLURM_SUBMIT_DIR}/${folder}

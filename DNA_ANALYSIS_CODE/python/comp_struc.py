@@ -10,28 +10,28 @@ import numpy as np
 import struc_prop as AXIS
 from scipy.spatial import distance
 from scipy.interpolate import interp1d
-fp_out=open('data.xyz','w')
+fp_out2=open('data.xyz','w')
 def write_xyz(r1,r2,fp):
     fp.write('%d\n'%(len(r1)+len(r2)))
-    fp.write('%f %f %f\n'%(100,100,100))
+    fp.write('0 %f %f %f\n'%(20,20,20))
     for i in range(len(r1)):
-        fp.write('%d %f %f %f \n'%(i+1,r1[i][0],r1[i][1],r1[i][2]))
+        fp.write('%s %f %f %f \n'%('P',r1[i][0],r1[i][1],r1[i][2]))
     for i in range(len(r2)):
-        fp.write('%d %f %f %f \n'%(i+1+len(r1),r2[i][0],r2[i][1],r2[i][2]))
+        fp.write('%s %f %f %f \n'%('P',r2[i][0],r2[i][1],r2[i][2]))
 
 def minor_major(r1,r2):
     dists=[]
     
     n=np.linspace(0,1,len(r1))
     resolution=40
-    add=1
+    add=0.5
     n2=np.linspace(0,1,len(r1)*resolution)
    
     R1func=interp1d(n,r1,axis=0,kind='cubic')
     R2func=interp1d(n,r2,axis=0,kind='cubic')
     R1=R1func(n2)
     R2=R2func(n2)
-    write_xyz(R1,R2,fp_out)
+   # write_xyz(R1,R2,fp_out2)
     
 
     for i in range(4,len(r1)-5):

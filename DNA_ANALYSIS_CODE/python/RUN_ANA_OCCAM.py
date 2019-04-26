@@ -25,9 +25,14 @@ def ana_sim(fn, start=10):
         
         r=np.vstack((rp,rs,rn))
 
+        #RMSD OF FRAME
+        rmsd=ANA.rmsd_dist(r0,r)*0.1
+        
+        #GROOVES                                                                                                                                    
+        meangrooves = ANA.minor_major(rp)*0.1
+      
         #FITNESS OF FRAME
-        zi=ANA.rmsd_dist(r0,r)
-
+        zi = np.sqrt(0.5*((meangrooves[0]-1.18)**2+(meangrooves[1]-1.71)**2)+rmsd**2)
         z.append(zi)
 
         #READ NEW FRAME

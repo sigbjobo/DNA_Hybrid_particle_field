@@ -1,5 +1,3 @@
-#Load new parameters
-
 function CreateFolder(){
     #Creates a folder with unique name one number higher than last one
     A=$(ls -l|grep sim_| wc | awk '{print $1}' )
@@ -39,13 +37,15 @@ sed -i '/SCF_lattice_update:/{n;s/.*/20/}' fort.1
 sed -i "/trj_print:/{n;s/.*/$NTRAJ/}" fort.1
 sed -i '/out_print:/{n;s/.*/10000/}' fort.1
 
-# SET STRENGTH OF TORSIONAL POTENTIAL
+#SET STRENGTH OF TORSIONAL POTENTIAL
 bash ${SHELL_PATH}/setup_FF.sh ${kphi}
 
-#Run simulation in parallel
+#RUN SIMULATION IN PARALLEL
 bash ${SHELL_PATH}/run_para.sh 
 
-mv fort.8 sim.xyz
+#CENTER THE DNA
+python ${PYTHON_PATH}/center.py fort.8
+mv fort_center.xyz sim.xyz
 
 cd ..
 

@@ -2,15 +2,13 @@
 
 CURRENT_DIREC=$(pwd)
  
-#echo "Number of proccessors: ${NPROC}"
-
 #COMPILE OCCAM AND IOPC
 if [ "$COMPILE" == "1" ]
 then
     echo "COMPILING"
     cd ${OCCAM_PATH}
     rm -f *.o
-    rm *.mod
+    rm -f *.mod
     bash compile_extra.sh
     make
     cd  ${OCCAM_PATH}/IOPC_input
@@ -19,6 +17,10 @@ then
 fi
 
 cd ${CURRENT_DIREC}/
+#REMOVE FILES THAT CAN INTERFERE WITH OCCAM
+rm -f fort.[1-9][0-9]
+rm -f fort.7 fort.2  fort.8 
+
 cp ${OCCAM_PATH}/occamcgmpi ${CURRENT_DIREC}/
 cp ${OCCAM_PATH}/IOPC_input/iopc ${CURRENT_DIREC}/
 
@@ -43,5 +45,5 @@ ${OCCAM_PATH}/IOPC_input/iopc
 python ${PYTHON_PATH}/remake_fort9.py
 
 #REMOVE START FILES FOR PARALLEL VERSION
-rm *.[1-9][0-9][0-9]
-rm *.[2-9][0-9]
+rm -f fort.[1-9][0-9][0-9]
+rm -f fort.[2-9][0-9]

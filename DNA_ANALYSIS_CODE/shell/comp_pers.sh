@@ -15,9 +15,9 @@ do
 
     TRJ_PRINT=$(awk '/trj_print:/{getline; print}' fort.1)
 #    echo "${TRJ_PRINT}"
-    echo "#time">../pos.dat
+    echo "#time">pos.dat
     echo "${fi}">end.dat
-    cat end_end.dat | awk  '{printf("%.2f\n"),  $1*20000*0.03*0.001 }' >>../pos.dat
+    cat end_end.dat | awk  '{printf("%.2f\n"),  $1*20000*0.03*0.001 }' >>pos.dat
     cat end_end.dat | awk  '{printf("%.2f\n"),  $2 }' >>end.dat
 
     
@@ -27,13 +27,13 @@ do
     a2=$(python -c "print('$a'.split('_')[1])")
     echo "$a2 $b">> ../PLOT_DATA/mean.dat
 
-    grep -v "@\|#" distr.xvg > ../PLOT_DATA/"${a}".xvg
-    mv contact.dat ../PLOT_DATA/contact_"${a}".dat
-
+    grep -v "@\|#" distr.xvg > ../PLOT_DATA/"${a2}".xvg
+    mv contact.dat ../PLOT_DATA/contact_"${a2}".dat
+    paste -d '\t' {pos.dat,end.dat}     >> ../PLOT_DATA/${a2}_end.dat
     cd ../
 done < fold.dat
 
 
 
 
-paste -d '\t' {pos.dat,SIM_*/end.dat}     >> PLOT_DATA/END_END.dat
+#paste -d '\t' {pos.dat,SIM_*/end.dat}     >> PLOT_DATA/END_END.dat

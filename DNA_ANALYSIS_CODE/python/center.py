@@ -1,7 +1,7 @@
 import numpy as np
+import sys 
 
-
-fp  = open('mem_nowater.xyz')
+fp  = open(sys.argv[1])
 fp2 = open('fort_center.xyz', 'w')
 fp3 = open('fort.5')
 
@@ -23,9 +23,9 @@ while True:
     fp2.write(str)
     
     str=str.split()
-    LX = float(str[1])
-    LY = float(str[2])
-    LZ = float(str[3])
+    LX = float(str[1])*10
+    LY = float(str[2])*10
+    LZ = float(str[3])*10
     data = np.zeros([N,3])
     names = []
     for i in range(N):

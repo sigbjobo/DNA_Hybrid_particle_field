@@ -6,19 +6,20 @@
 ##SBATCH --qos=devel
 
 #MANDATORY SETTINGS
-export NPROC=192
+export NPROC=192 #192
 export COMPILE=0
 export NSOLUTE=2
 
 #SETTINGS SPECIFIC TO BAYSIAN OPTIMIZATION
-export NSTEPS=4000000
-export NTRAJ=5000
-export OPT_INIT_STEPS=10 
-export OPT_STEPS=40
-export kphi=10
-export NW=10
-export NN=-10
-export PP=0
+export NSTEPS=4000000 #0
+export NTRAJ=5000 #5000
+export OPT_INIT_STEPS=0 
+export OPT_STEPS=49
+export kphi=$1
+export NW=19.0
+export NN=-12.7
+export PP=-4.2
+#export PW=-7.2
 export PW=-3.6
 
 #DIRECTORIES
@@ -36,20 +37,21 @@ module load FFTW/3.3.8-intel-2018b
 module load Python/3.6.4-intel-2018a
 
 
+folder=sim_${kphi}
 #REMOVE OLD SIMULATIONS
-rm ${SLURM_SUBMIT_DIR}/sim -rf
+rm ${SLURM_SUBMIT_DIR}/${folder} -rf
 
-#PREPARE SIMULATION DIRECTORY
+#PREPARE ${FOLDER}ULATION DIRECTORY
 mkdir -p ${SCRATCH_DIRECTORY}
 cd ${SCRATCH_DIRECTORY}
-mkdir sim
-cd sim
+mkdir ${folder}
+cd ${folder}
 
 #RUN OPTIMIZATION
 python ${PYTHON_PATH}/occam_bayesian_2d.py 
 
 #SAVE DATA
-cp -r ${SCRATCH_DIRECTORY}/sim ${SLURM_SUBMIT_DIR}/sim
+cp -r ${SCRATCH_DIRECTORY}/${folder} ${SLURM_SUBMIT_DIR}/${folder}
 
 
 exit 0

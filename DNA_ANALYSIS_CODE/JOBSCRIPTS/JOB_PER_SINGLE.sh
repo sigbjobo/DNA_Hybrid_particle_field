@@ -1,7 +1,7 @@
-y#!/bin/bash
-#SBATCH --job-name=OPTIMIZE_DNA
+#!/bin/bash
+#SBATCH --job-name=SINGLE_PER
 #SBATCH --account=nn4654k
-#SBATCH --time=1-0:0:0
+#SBATCH --time=3-0:0:0
 #SBATCH --nodes=6 --ntasks-per-node=32
 ##SBATCH --qos=devel
 
@@ -10,13 +10,12 @@ export NPROC=192 #192
 export COMPILE=0
 export NSOLUTE=1
 
-
 export kphi=$1
 
 
  
 #SETTINGS SPECIFIC TO BAYSIAN OPTIMIZATION
-export NSTEPS=40000000
+export NSTEPS=150000000
 export NTRAJ=20000
 export NW=19
 export NN=-12.7
@@ -51,7 +50,7 @@ cd ${folder}
 #MAKE SYSTEM
 cp -r ${INPUT_PATH}/PARA/* .
 
-bash ${SHELL_PATH}/single_ss.sh ${dna_seq} 20 100
+bash ${SHELL_PATH}/single_ss.sh ${dna_seq} 20 150
 
 python ${PYTHON_PATH}/set_chi.py fort.3
 
@@ -67,14 +66,22 @@ sed -i '/pot_calc_freq:/{n;s/.*/500/}' fort.1
 sed -i '/SCF_lattice_update:/{n;s/.*/50/}' fort.1
 sed -i "/trj_print:/{n;s/.*/$NTRAJ/}" fort.1
 sed -i '/out_print:/{n;s/.*/10000/}' fort.1
-
+sed -i '/target_temperature:/{n;s/.*/1000     0.000/}' fort.1
 # SET STRENGTH OF TORSIONAL POTENTIAL                                        
 bash ${SHELL_PATH}/setup_FF.sh ${kphi}
 
-#RUN SIMULATION
+#ANNEAL SIMULATION TO CREATE RANDOM COIL
+sed -i "/number_of_steps:/{n;s/.*/700000/}" fort.1
+sed -i '/target_temperature:/{n;s/.*/1000     -0.001/}' fort.1
 bash ${SHELL_PATH}/run_para.sh
 
+#PREPARE DATA-COLLECTION RUN
+cp fort.9 fort.5
+sed -i "/number_of_steps:/{n;s/.*/$NSTEPS/}" fort.1
+sed -i '/target_temperature:/{n;s/.*/300     0.000/}' fort.1
 
+#RUN SIMULATION
+bash ${SHELL_PATH}/run_para.sh
 
 #SAVE DATA
 cp -r ${SCRATCH_DIRECTORY}/${folder} ${SLURM_SUBMIT_DIR}/${folder}

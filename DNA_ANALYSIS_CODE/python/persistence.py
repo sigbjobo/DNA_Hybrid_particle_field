@@ -10,6 +10,11 @@ import numpy as np
 import ana_prot as ANA
 
 
+if(len(sys.argv)>2):
+    start=int(sys.argv[2])
+else:
+    start=0
+
 n_nuc=15
 fp = open(sys.argv[1],'r')
 
@@ -17,13 +22,19 @@ frame=1
 not_empty=1
 fp2=open('end_end.dat','w')
 fp3=open('contact.dat','w')
+fp4=open('RG.dat','w')
+fp5=open('CORR.dat','w')
+
+correlation=[]
+
 
 [fp, rp, rs, rn, L, not_empty] = ANA.read_frame(fp)
 while(not_empty):
     rp = ANA.array_period(rp, L)
     
     fp2.write("%5d %4.1f\n" %(frame,ANA.bond(rp[0],rp[-1])))
-  
+    fp4.write("%5d %4.1f\n" %(frame,ANA.RG(rp)))
+    fp5.write("%5d %s\n"%(frame,' '.join(['%.4f'%(dr) for dr in  ANA.CORR(rp)])))
     try:
         rn = ANA.array_period(rn, L)
         #COMPUTE LENGTH BETWEEN NUCLEOBASES, 
@@ -46,7 +57,18 @@ while(not_empty):
 
     frame += 1
     [fp, rp, rs, rn, L, not_empty] = ANA.read_frame(fp)
+fp.close()
 fp2.close()
 fp3.close()
-  
-    
+fp4.close()  
+fp5.close()    
+
+
+#EXTRA POST PROCCESSING
+CORR=np.loadtxt('CORR.dat')[start:,1:]
+CORR_MEAN=np.mean(CORR,axis=0)
+CORR_STD=np.std(CORR,axis=0)
+fp=open('CORR_MEAN.dat','w')
+for i in range(len(CORR_MEAN)):
+    fp.write('%d %f %f\n'%(i,CORR_MEAN[i],CORR_STD[i]))
+fp.close()

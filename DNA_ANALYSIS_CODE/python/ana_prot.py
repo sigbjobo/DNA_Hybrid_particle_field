@@ -347,3 +347,41 @@ def minor_major(r_p):
     mean = np.mean(dists,axis=0)
     
     return mean
+
+def RG(r):
+    """
+    Computes root mean square deviation for a polymer with r positions
+    """
+
+    #CENTER OF MASS
+    r_cm = np.mean(r,axis=0)
+
+    return np.mean(np.linalg.norm(r - r_cm,axis=1))
+
+def CORR(r):
+    """
+    Computes radial <r_10i*r_10(i-1)> 
+    """
+    
+    #NUMBER OF ATOMS IN CHAIN
+  #  natoms=len(r)
+    
+
+    #BOND BETWEEN PHOSPHOR SEPARETED BY 10
+    bond10 = r[10:]-r[:-10]
+    
+    #NORMALIZE
+    bond10 = bond10/np.linalg.norm(bond10,axis=1)[:,np.newaxis]
+
+    #NUMBER OF COMPARRISONS
+    ncomp=len(bond10)
+
+    #RETURN VARIABLE
+    ret=np.zeros(ncomp)
+
+    #LOOP THROUGH COMPARRISONS
+    for i in range(ncomp): 
+        drdr=np.sum(bond10[i:]*bond10[:-i+len(bond10)],axis=1)
+        ret[i]=np.mean(drdr)
+   
+    return ret

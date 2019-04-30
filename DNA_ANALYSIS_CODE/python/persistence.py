@@ -10,12 +10,20 @@ import numpy as np
 import ana_prot as ANA
 
 
+#START STATISTICS AFTER
 if(len(sys.argv)>2):
     start=int(sys.argv[2])
 else:
     start=0
 
-n_nuc=15
+#CHECK IF DOUBLE STRANDED
+if(len(sys.argv)>3):
+    isdouble=int(sys.argv[3])
+else:
+    isdouble=0
+
+
+#INPUT FILE
 fp = open(sys.argv[1],'r')
 
 frame=1
@@ -32,18 +40,42 @@ correlation=[]
 while(not_empty):
     rp = ANA.array_period(rp, L)
     
-    fp2.write("%5d %4.1f\n" %(frame,ANA.bond(rp[0],rp[-1])))
-    fp4.write("%5d %4.1f\n" %(frame,ANA.RG(rp)))
-    fp5.write("%5d %s\n"%(frame,' '.join(['%.4f'%(dr) for dr in  ANA.CORR(rp)])))
+    if(isdouble):
+        
+        rp1 = ANA.array_period(rp[:len(rp)//2], L)
+        rp2 = ANA.array_period(rp[len(rp):], L)
+        rp1=rp1[::-1]
+        rp=ANA.array_period(np.hstack(rp1,rp2),L)
+        
+        
+        fp2.write("%5d %4.1f\n" %(frame,0.5*(ANA.bond(rp1[0],rp1[-1])+ANA.bond(rp2[0],rp2[-1]))))
+        fp4.write("%5d %4.1f\n" %(frame,ANA.RG(rp)))
+        corr=0.5*(ANA.CORR(rp1)+ANA.CORR(rp2))
+        fp5.write("%5d %s\n"%(frame,' '.join(['%.4f'%(dr) for dr in  corr])))
+
+    else:
+        rp = ANA.array_period(rp, L)
+        fp2.write("%5d %4.1f\n" %(frame,ANA.bond(rp[0],rp[-1])))
+        fp4.write("%5d %4.1f\n" %(frame,ANA.RG(rp)))
+        fp5.write("%5d %s\n"%(frame,' '.join(['%.4f'%(dr) for dr in  ANA.CORR(rp)])))
     try:
-        rn = ANA.array_period(rn, L)
-        #COMPUTE LENGTH BETWEEN NUCLEOBASES, 
-        rn1=rn[:len(rn)//2]
-        rn1=rn1[::-1]
-        if(np.mod(len(rn),2)==0):
+        if(isdouble):
+            rn = ANA.array_period(rn, L)
+           
+            rn1=rn[:len(rn)//2]
+            rn1=rn1[::-1]
             rn2=rn[len(rn)//2:]
+
         else:
-            rn2=rn[1+len(rn)//2:]
+            rn = ANA.array_period(rn, L)
+            #COMPUTE LENGTH BETWEEN NUCLEOBASES, 
+            rn1=rn[:len(rn)//2]
+            rn1=rn1[::-1]
+            if(np.mod(len(rn),2)==0):
+                rn2=rn[len(rn)//2:]
+            else:
+                rn2=rn[1+len(rn)//2:]
+        #COMPUTE LENGTH BETWEEN NUCLEOBASES, 
         dist = np.linalg.norm(rn1-rn2,axis=1)
         for i in range(len(dist)):
             di=dist[i]

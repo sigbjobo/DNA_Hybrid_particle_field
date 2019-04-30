@@ -1,6 +1,23 @@
 
 rm PLOTS/*
 
+
+# Single chain phase diagram
+cd single_pd
+gnuplot plot_pd.gnuplot
+gnuplot plot_pd_single.gnuplot
+
+
+a=$(find .  | grep .tex)
+for i in $a; do pdflatex $i;done
+
+a=$(find . | grep -v "converted" |  grep .pdf)
+for i in $a; do mv $i ../PLOTS/;done
+
+rm *aux *eps *log *pdf *~ *tex
+cd ..
+
+
 cd plot_intra
 gnuplot plot_averages.gnuplot
 pdflatex ang_mean.tex

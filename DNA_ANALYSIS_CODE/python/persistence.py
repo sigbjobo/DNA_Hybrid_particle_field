@@ -38,14 +38,14 @@ correlation=[]
 
 [fp, rp, rs, rn, L, not_empty] = ANA.read_frame(fp)
 while(not_empty):
-    rp = ANA.array_period(rp, L)
+   # rp = ANA.array_period(rp, L)
     
     if(isdouble):
         
         rp1 = ANA.array_period(rp[:len(rp)//2], L)
-        rp2 = ANA.array_period(rp[len(rp):], L)
+        rp2 = ANA.array_period(rp[len(rp)//2:], L)
         rp1=rp1[::-1]
-        rp=ANA.array_period(np.hstack(rp1,rp2),L)
+        rp=ANA.array_period(rp,L)#np.vstack((rp1,rp2)),L)
         
         
         fp2.write("%5d %4.1f\n" %(frame,0.5*(ANA.bond(rp1[0],rp1[-1])+ANA.bond(rp2[0],rp2[-1]))))

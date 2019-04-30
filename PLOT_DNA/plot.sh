@@ -9,7 +9,20 @@ gnuplot plot_pd_single.gnuplot
 
 
 a=$(find .  | grep .tex)
-for i in $a; do pdflatex $i;done
+for i in $a; do pdflatex -interaction=batchmode  $i;done
+
+a=$(find . | grep -v "converted" |  grep .pdf)
+for i in $a; do mv $i ../PLOTS/;done
+
+rm *aux *eps *log *pdf *~ *tex
+cd ..
+
+# Double strand persistence
+cd persistence_double
+gnuplot plot_ds_per.gnuplot
+
+a=$(find .  | grep .tex)
+for i in $a; do pdflatex -interaction=batchmode  $i;done
 
 a=$(find . | grep -v "converted" |  grep .pdf)
 for i in $a; do mv $i ../PLOTS/;done
@@ -20,9 +33,9 @@ cd ..
 
 cd plot_intra
 gnuplot plot_averages.gnuplot
-pdflatex ang_mean.tex
-pdflatex bond_mean.tex
-pdflatex tor_mean.tex
+pdflatex -interaction=batchmode  ang_mean.tex
+pdflatex -interaction=batchmode  bond_mean.tex
+pdflatex -interaction=batchmode  tor_mean.tex
 
 mv tor_mean.pdf ../PLOTS/
 mv ang_mean.pdf ../PLOTS/
@@ -35,8 +48,8 @@ cd ..
 cd k_bonds
 gnuplot basepair.gnuplot
 
-pdflatex basepairs.tex
-pdflatex basepairs_ang.tex
+pdflatex -interaction=batchmode  basepairs.tex
+pdflatex -interaction=batchmode  basepairs_ang.tex
 
 mv basepairs.pdf ../PLOTS/
 mv basepairs_ang.pdf ../PLOTS/
@@ -46,8 +59,8 @@ cd ..
 cd alpha_bonds
 gnuplot basepair.gnuplot
 
-pdflatex basepairs.tex
-pdflatex basepairs_ang.tex
+pdflatex -interaction=batchmode  basepairs.tex
+pdflatex -interaction=batchmode  basepairs_ang.tex
 
 mv basepairs.pdf ../PLOTS/bp_alpha.pdf
 mv basepairs_ang.pdf ../PLOTS/bp_ang_alpha.pdf
@@ -57,8 +70,8 @@ cd ..
 cd beta_bonds
 gnuplot basepair.gnuplot
 
-pdflatex basepairs.tex
-pdflatex basepairs_ang.tex
+pdflatex -interaction=batchmode  basepairs.tex
+pdflatex -interaction=batchmode  basepairs_ang.tex
 
 mv basepairs.pdf ../PLOTS/bp_beta.pdf
 mv basepairs_ang.pdf ../PLOTS/bp_ang_beta.pdf
@@ -69,8 +82,8 @@ cd ..
 cd salt_bonds
 gnuplot basepair.gnuplot
 
-pdflatex basepairs.tex
-pdflatex basepairs_ang.tex
+pdflatex -interaction=batchmode  basepairs.tex
+pdflatex -interaction=batchmode  basepairs_ang.tex
 
 mv basepairs.pdf ../PLOTS/bp_salt.pdf
 mv basepairs_ang.pdf ../PLOTS/bp_ang_salt.pdf
@@ -80,9 +93,9 @@ cd ..
 #End-end distance
 cd persistence
 gnuplot plot_end.gnuplot
-pdflatex end_end.tex
-pdflatex end_end_dist.tex
-pdflatex end_end_mean.tex
+pdflatex -interaction=batchmode  end_end.tex
+pdflatex -interaction=batchmode  end_end_dist.tex
+pdflatex -interaction=batchmode  end_end_mean.tex
 
 mv end_end.pdf ../PLOTS/
 mv end_end_dist.pdf ../PLOTS/
@@ -94,7 +107,7 @@ cd ..
 cd benchmark
 gnuplot plot_bench.gnuplot
 
-pdflatex bench_scaling.tex
+pdflatex -interaction=batchmode  bench_scaling.tex
 mv bench_scaling.pdf ../PLOTS/
 
 rm *aux *eps *log *pdf *~ *tex
@@ -104,8 +117,8 @@ cd ..
 cd optimize
 gnuplot plot_conv.gnuplot
 
-pdflatex eta_opt.tex
-pdflatex chi_opt.tex
+pdflatex -interaction=batchmode  eta_opt.tex
+pdflatex -interaction=batchmode  chi_opt.tex
 
 
 mv *_opt.pdf ../PLOTS/
@@ -116,7 +129,7 @@ cd ..
 #HAIRPIN
 cd hairpin
 gnuplot plot_hairpin.gnuplot
-pdflatex hairpin-form.tex
+pdflatex -interaction=batchmode  hairpin-form.tex
 
 mv hairpin-form.pdf ../PLOTS/
 rm *aux *eps *log *pdf *~ *tex

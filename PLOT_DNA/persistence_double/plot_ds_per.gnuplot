@@ -17,6 +17,8 @@ set yrange [5:22]
 set xtics 1000
 
 set output "EE-DS.tex"
+
+
 plot "PLOT_DATA/EE_5_.dat"  u 1:($2*0.1) w l lw 2 t '5',\
      "PLOT_DATA/EE_6_.dat"  u 1:($2*0.1) w l lw 2 t '6',\
      "PLOT_DATA/EE_7_.dat"  u 1:($2*0.1) w l lw 2 t '7',\
@@ -44,6 +46,23 @@ plot "PLOT_DATA/RG_5_.dat"  u 1:($2*0.1) w l lw 2 t '5',\
 
 
 # CORR
+f1(x) = exp(-x/a)
+set print "lp.dat"
+fit f1(x) "PLOT_DATA/CORR_5_.dat" u ($1*0.34):2 via a
+print 5, a
+fit f1(x) "PLOT_DATA/CORR_6_.dat" u ($1*0.34):2 via a
+print 6, a
+fit f1(x) "PLOT_DATA/CORR_7_.dat" u ($1*0.34):2 via a
+print 7, a
+fit f1(x) "PLOT_DATA/CORR_8_.dat" u ($1*0.34):2 via a
+print 8, a
+fit f1(x) "PLOT_DATA/CORR_9_.dat" u ($1*0.34):2 via a
+print 9, a
+fit f1(x) "PLOT_DATA/CORR_10_.dat" u ($1*0.34):2 via a
+print 10, a
+unset print
+
+
 set ylabel '$\left<\mathbf{t}\cdot\mathbf{t}_l\right>$'
 set xlabel '$l/\si{nm}$'
 
@@ -59,3 +78,13 @@ plot "PLOT_DATA/CORR_5_.dat"  u ($1*0.34):2 w p lw 2 t '5',\
      "PLOT_DATA/CORR_8_.dat"  u ($1*0.34):2 w p lw 2 t '8',\
      "PLOT_DATA/CORR_9_.dat"  u ($1*0.34):2 w p lw 2 t '9',\
      "PLOT_DATA/CORR_10_.dat" u ($1*0.34):2 w p lw 2 t '10'
+
+
+set output "LP-DS.tex"
+set xtics auto
+set ytics auto
+set ylabel '$l_{\si{p}}$'
+set xlabel '$k_\phi$'
+set xrange [4:11]
+set yrange [0:100]
+plot "lp.dat" t '' w p

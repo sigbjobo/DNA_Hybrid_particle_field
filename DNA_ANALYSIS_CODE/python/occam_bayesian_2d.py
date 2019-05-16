@@ -247,14 +247,14 @@ if __name__ == '__main__':
 
     
 
-    # opt=optimize_4d(steps=int(os.environ['OPT_STEPS']),
-    #                 init_points=int(os.environ['OPT_INIT_STEPS']),
-    #                 bounds={'x': (0, 30), 'y': (-30, 0),'z': (-30, 0),
-    #                         'w': (-30, 0)}, plot=False)
-    opt=optimize_3d(steps=int(os.environ['OPT_STEPS']),
+    opt=optimize_4d(steps=int(os.environ['OPT_STEPS']),
                     init_points=int(os.environ['OPT_INIT_STEPS']),
-                    bounds={'x': (0, 30), 'y': (-30, 0), 'w': (-30,
-                                                               0)}, plot=False)
+                    bounds={'x': (0, 10), 'y': (-30, 0),'z': (-30, 0),
+                            'w': (-30, 0)}, plot=False)
+    # opt=optimize_3d(steps=int(os.environ['OPT_STEPS']),
+    #                 init_points=int(os.environ['OPT_INIT_STEPS']),
+    #                 bounds={'x': (0, 30), 'y': (-30, 0), 'w': (-30,
+    #                                                            0)}, plot=False)
 
     # opt = optimize_2d(steps=10, init_points=10,
     #                   bounds={'x': (0, 1), 'y': (-0.2, 1)}, load=True)

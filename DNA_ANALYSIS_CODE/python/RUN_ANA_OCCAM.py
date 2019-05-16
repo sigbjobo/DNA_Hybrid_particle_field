@@ -32,7 +32,7 @@ def ana_sim(fn, start=10):
         meangrooves = ANA.minor_major(rp)*0.1
       
         #FITNESS OF FRAME
-        zi = np.sqrt(0.5*((meangrooves[0]-1.18)**2+(meangrooves[1]-1.71)**2)+rmsd**2)
+        zi = rmsd**2 # np.sqrt(0.5*((meangrooves[0]-1.18)**2+(meangrooves[1]-1.71)**2)+rmsd**2)
         z.append(zi)
 
         #READ NEW FRAME
@@ -53,7 +53,7 @@ def func_para():
     folds = ANA.list_sim_fold()
 
     #ANALYZE CURRENT SIMULATION
-    z,z_std = ana_sim('%s/sim.xyz'%(folds[-1]))
+    z,z_std = ana_sim('%s/sim.xyz'%(folds[-1]),start=39)
 
     #STORE FITNESS
     fp = open('opt.dat','a')

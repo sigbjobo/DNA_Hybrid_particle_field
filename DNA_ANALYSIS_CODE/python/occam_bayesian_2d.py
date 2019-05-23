@@ -243,14 +243,24 @@ def optimize_3d(path=None, steps=None, init_points=None, bounds=None,
     return opt
 
 
+def f(x,y,z,w):
+        os.environ['NW']    = "%f"%(x)
+        os.environ['NN']    = "%f"%(y)
+        os.environ['PW']    = "%f"%(z)
+        os.environ['PP']    = "%f"%(w)
+       
+        res = F.func_para()**2
+        return res
+
+from skopt import gp_minimize
 if __name__ == '__main__':
-
-    
-
-    opt=optimize_4d(steps=int(os.environ['OPT_STEPS']),
-                    init_points=int(os.environ['OPT_INIT_STEPS']),
-                    bounds={'x': (0, 10), 'y': (-30, 0),'z': (-30, 0),
-                            'w': (-30, 0)}, plot=False)
+    bounds=[(0, 10), (-30, 0), (-30, 0), (-30,0)]
+    gp_minimize(f,bounds,n_calls=int(os.environ['OPT_STEPS']),random_state=int(os.environ['OPT_INIT_STEPS']))
+ 
+    # opt=optimize_4d(steps=int(os.environ['OPT_STEPS']),
+    #                 init_points= int(os.environ['OPT_INIT_STEPS']),
+    #                 bounds={'x': (0, 10), 'y': (-30, 0),'z': (-30, 0),
+    #                         'w': (-30, 0)}, plot=False)
     # opt=optimize_3d(steps=int(os.environ['OPT_STEPS']),
     #                 init_points=int(os.environ['OPT_INIT_STEPS']),
     #                 bounds={'x': (0, 30), 'y': (-30, 0), 'w': (-30,

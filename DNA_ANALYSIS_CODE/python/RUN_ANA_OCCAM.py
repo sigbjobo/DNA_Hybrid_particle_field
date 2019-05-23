@@ -53,11 +53,11 @@ def func_para():
     folds = ANA.list_sim_fold()
 
     #ANALYZE CURRENT SIMULATION
-    z,z_std = ana_sim('%s/sim.xyz'%(folds[-1]),start=39)
+    z, z_std = ana_sim('%s/sim.xyz'%(folds[-1]),start=int(os.environ["START_FRAME"]))
 
     #STORE FITNESS
     fp = open('opt.dat','a')
-    fp.write("%s %s %s %s %f %f\n"%(os.environ['NW'], os.environ['NN'], os.environ['PW'], os.environ['PP'], -z, z_std))
+    fp.write("%s %s %s %s %f %f\n"%(os.environ['NW'], os.environ['NN'], os.environ['PW'], os.environ['PP'], z, z_std))
     fp.close()
 
     #RETURN FITNESS

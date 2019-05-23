@@ -2,7 +2,7 @@
  
 kphi=$1
 n=48
-PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 
 #EQUILIBIRUM TORSIONAL ANGLES
 names[1]=P-S-P-S
@@ -30,10 +30,13 @@ mkdir FF
 
 for i in $(seq 1 10) 
 do
+    {
     echo ${kphi}, ${names[$i]}, ${phi0[$i]}
     python ${PYTHON_PATH}/make_pot.py $n ${kphi} ${phi0[$i]} ${names[$i]}_pot.dat 
     python ${PYTHON_PATH}/make_coef.py ${names[$i]}_pot.dat ${names[$i]} ${names[$i]}_1_pot_after.dat 
     mv ${names[$i]}_PROP.dat FF/
+    }&
 done
+wait
 rm *_pot.dat *_pot_after.dat
 

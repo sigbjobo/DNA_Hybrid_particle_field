@@ -2,20 +2,20 @@
 #SBATCH --job-name=DNA_HINCKLEY
 #SBATCH --account=nn4654k
 #SBATCH --time=0-3:00:00
-##SBATCH --mem-per-cpu=2000M
+#SBATCH --mem-per-cpu=2000M
 #SBATCH --partition=normal
-#SBATCH --nodes=6 --ntasks-per-node=32
+#SBATCH --ntasks=192
 ##SBATCH --qos=devel
 NPROC=192
 # Set up node file for namd run :
 module purge
 module load intel/2018b
-module load FFTW/3.3.8-intel-2018b
+module load FFTW/3.3.7-intel-2018a
 module load Python/3.6.4-intel-2018a
 
-SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-INPUT_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
-SCRATCH_DIRECTORY="/cluster/work/jobs/${SLURM_JOB_ID}"
+SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+INPUT_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
+SCRATCH_DIRECTORY="/global/work/${USER}/${SLURM_JOBID}.stallo-adm.uit.no"
 SLURM_SUBMIT_DIR=$(pwd)
 
 rm ${SLURM_SUBMIT_DIR}/sim -rf

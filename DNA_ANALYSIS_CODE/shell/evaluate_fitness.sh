@@ -38,9 +38,7 @@ sed -i "/trj_print:/{n;s/.*/$NTRAJ/}" fort.1
 sed -i '/out_print:/{n;s/.*/10000/}' fort.1
 
 #Temperature
-dt=$(python -c "print(-300./float(${NTRAJ}))")
-sed -i "/target_temperature:/{n;s/.*/300     ${dt}/}" fort.1
-
+sed -i "/target_temperature:/{n;s/.*/300     -${dt}/}" fort.1
 
 #SET STRENGTH OF TORSIONAL POTENTIAL
 bash ${SHELL_PATH}/setup_FF.sh ${kphi}

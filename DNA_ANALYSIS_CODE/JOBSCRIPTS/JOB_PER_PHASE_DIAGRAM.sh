@@ -2,7 +2,7 @@
 #SBATCH --job-name=SINGLE_PD
 #SBATCH --account=nn4654k
 #SBATCH --time=1-6:0:0
-#SBATCH --nodes=6 --ntasks-per-node=32
+#SBATCH --ntasks=192
 ##SBATCH --qos=devel
 
 #MANDATORY SETTINGS
@@ -24,17 +24,17 @@ export PW=-3.6
 export dna_seq=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 #DIRECTORIES
-export SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-export INPUT_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
-export PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
-export OCCAM_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
-SCRATCH_DIRECTORY="/cluster/work/jobs/${SLURM_JOB_ID}"
+export SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+export INPUT_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
+export PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+export OCCAM_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
+SCRATCH_DIRECTORY="/global/work/${USER}/${SLURM_JOBID}.stallo-adm.uit.no"
 SLURM_SUBMIT_DIR=$(pwd)
 
 #LOAD MODULES
 module purge
 module load intel/2018b
-module load FFTW/3.3.8-intel-2018b
+module load FFTW/3.3.7-intel-2018a
 module load Python/3.6.4-intel-2018a
 
 

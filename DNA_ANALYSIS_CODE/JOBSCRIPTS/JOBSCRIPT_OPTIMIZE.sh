@@ -1,19 +1,19 @@
 #!/bin/bash
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
-#SBATCH --time=0-1:0:0
-#SBATCH --ntasks=2
-#SBATCH --qos=devel
+#SBATCH --time=2-0:0:0
+#SBATCH --ntasks=100
+##SBATCH --qos=devel
 
 #MANDATORY SETTINGS
-export NPROC=2 #192
+export NPROC=100 #192
 export COMPILE=0
 export NSOLUTE=2
 
 #SETTINGS SPECIFIC TO BAYSIAN OPTIMIZATION
-export NSTEPS=500 #0
-export NTRAJ=25
-export OPT_INIT_STEPS=5 
+export NSTEPS=1000000 #0
+export NTRAJ=10000
+export OPT_INIT_STEPS=10 
 export OPT_STEPS=50
 export kphi=5
 export NW=10
@@ -22,11 +22,11 @@ export PP=0
 #export PW=-7.2
 export PW=0
 export dt=0 #$(python -c "print(300./(float(${NSTEPS})+2))")
-export NOISE=0.01
+export NOISE=0.1
 
 
 # ANALYZE FRAMES FROM START_STEP
-START_STEP=100
+START_STEP=300000
 export START_FRAME=$(python -c "print(1+int(float(${START_STEP})/(float(${NTRAJ}))))")
 
 #DIRECTORIES
@@ -41,7 +41,7 @@ SLURM_SUBMIT_DIR=$(pwd)
 module purge
 module load intel/2018b
 module load FFTW/3.3.7-intel-2018a
-module load Python/3.6.4-intel-2018a
+module load Python/3.7.0-intel-2018b
 
 
 folder=sim_${kphi}
@@ -56,7 +56,7 @@ mkdir ${folder}
 cd ${folder}
 
 #RUN OPTIMIZATION
-python  ${PYTHON_PATH}/SKOPT_BAYES.py
+python -u  ${PYTHON_PATH}/SKOPT_BAYES.py
 
 #SAVE DATA
 cp -r ${SCRATCH_DIRECTORY}/${folder} ${SLURM_SUBMIT_DIR}/${folder}

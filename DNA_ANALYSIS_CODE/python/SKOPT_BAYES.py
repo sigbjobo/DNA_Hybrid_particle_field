@@ -6,6 +6,7 @@ sys.path.append(os.environ['SHELL_PATH'])
 sys.path.append(os.environ['PYTHON_PATH'])
 import RUN_ANA_OCCAM as F
 
+from skopt import dump
 from skopt import gp_minimize
 from skopt import callbacks
 from skopt.callbacks import CheckpointSaver
@@ -27,9 +28,9 @@ def f2(x):
 	os.environ['NN']    = "%f"%(x[0])
 	os.environ['PW']    = "%f"%(x[1])
 	print(x)
-	res = F.func_para()**2
+#	res = F.func_para()**2
 
-#	res = (x[0]+1.)**2 +(x[1]+10.)**2
+	res = (x[0]+1.)**2 +(x[1]+10.)**2
 	print(x,res)
 	return res
 
@@ -50,17 +51,23 @@ if __name__ == '__main__':
     
 
 
-    nstart =int(os.environ['OPT_INIT_STEPS'])
-#    xstart = [float(os.environ['NN']),float(os.environ['PW'])]
-
-#    if(nstart==0):
-#	    nstart=None
+    nstart = int(os.environ['OPT_INIT_STEPS'])
+    ncalls = int(os.environ['OPT_STEPS'])
+    noise  = float(os.environ['NOISE'])**2 
+    xstart = [float(os.environ['NN']),float(os.environ['PW'])]
+    
+    print('Starting optimization....')
+    print('Number of intial steps: %d'%(nstart))
+    print('Number of optimization steps: %d'%(ncalls))
+    print('Noise used: %f'%(noise))
+ 
     # RUN OPTIMIZATION
-    gp_minimize(f2, 
-		bounds2,#		x0=xstart, 
-		n_calls=int(os.environ['OPT_STEPS']), 
+    res=gp_minimize(f2, 
+		bounds2,
+		n_calls=ncalls, 
 		n_random_starts=nstart,
 		callback=[checkpoint_callback],
-		noise=float(os.environ['NOISE'])**2
+		noise=noise
 		)
-
+    dump(res, 'final.pkl',store_objective=False)
+    print(res)

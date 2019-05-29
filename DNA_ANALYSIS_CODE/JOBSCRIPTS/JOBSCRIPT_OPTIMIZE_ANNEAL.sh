@@ -1,22 +1,22 @@
 #!/bin/bash
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
-#SBATCH --time=1-0:0:0
-#SBATCH --ntasks=100
-##SBATCH --qos=devel
+#SBATCH --time=0-1:0:0
+#SBATCH --ntasks=1
+#SBATCH --qos=devel
 
 #MANDATORY SETTINGS
-export NPROC=100 #192
+export NPROC=1 #192
 export COMPILE=0
 export NSOLUTE=2
 
 #SETTINGS SPECIFIC TO BAYSIAN OPTIMIZATION
-export NSTEPS=200000 #0
-export NTRAJ=2500
-export OPT_INIT_STEPS=0 
-export OPT_STEPS=50
+export NSTEPS=2000 #0
+export NTRAJ=25
+export OPT_INIT_STEPS=10
+export OPT_STEPS=20
 export kphi=5
-export NW=0
+export NW=10
 export NN=0
 export PP=0
 #export PW=-7.2
@@ -24,7 +24,7 @@ export PW=0
 export dt=$(python -c "print(300./(float(${NSTEPS})+2))")
 
 # ANALYZE FRAMES FROM START_STEP
-START_STEP=195000
+START_STEP=1950
 export START_FRAME=$(python -c "print(1+int(float(${START_STEP})/(float(${NTRAJ}))))")
 
 export NOISE=0.001
@@ -41,7 +41,7 @@ SLURM_SUBMIT_DIR=$(pwd)
 module purge
 module load intel/2018b
 module load FFTW/3.3.7-intel-2018a
-module load Python/3.6.4-intel-2018a
+module load Python/3.7.0-intel-2018b
 
 
 folder=sim_${kphi}_anneal

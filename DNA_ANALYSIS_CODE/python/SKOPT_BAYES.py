@@ -27,11 +27,21 @@ import numpy as np
 def f2(x):
 	os.environ['NN']    = "%f"%(x[0])
 	os.environ['PW']    = "%f"%(x[1])
+	os.environ['PW']    = "%f"%(x[1])
+
 	print(x)
 #	res = F.func_para()**2
 
 	res = (x[0]+1.)**2 +(x[1]+10.)**2
 	print(x,res)
+	return res
+def f3(x):
+        os.environ['NW']    = "%f"%(x[0])
+	os.environ['NN']    = "%f"%(x[1])
+	os.environ['PW']    = "%f"%(x[2])
+#	os.environ['PP']    = "%f"%(x[3])
+       
+	res = F.func_para()**2
 	return res
 
 
@@ -45,9 +55,16 @@ if __name__ == '__main__':
 	    (-30.0, 0.0),
 	    (-30.0, 0.0), 
 	    (-30.0, 0.0)]
+    bounds3=[(0.0, 10.0),
+	    (-30.0, 0.0),
+	    (-30.0, 0.0)]
 
     bounds2=[(-30.0, 0.0), 
 	     (-30.0, 0.0)]
+
+    # bounds3=[(0.0, 10.0)
+    # 	     (-30.0, 0.0), 
+    # 	     (-30.0, 0.0)]
     
 
 
@@ -62,12 +79,12 @@ if __name__ == '__main__':
     print('Noise used: %f'%(noise))
  
     # RUN OPTIMIZATION
-    res=gp_minimize(f2, 
-		bounds2,
+    res=gp_minimize(f3, 
+		bounds3,
 		n_calls=ncalls, 
 		n_random_starts=nstart,
-		callback=[checkpoint_callback],
-		noise=noise
-		)
+		callback=[checkpoint_callback])
+#		noise=noise
+
     dump(res, 'final.pkl',store_objective=False)
     print(res)

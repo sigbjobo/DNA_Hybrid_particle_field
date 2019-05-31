@@ -2,11 +2,11 @@
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
 #SBATCH --time=2-0:0:0
-#SBATCH --ntasks=100
+#SBATCH --ntasks=80
 ##SBATCH --qos=devel
 
 #MANDATORY SETTINGS
-export NPROC=100 #192
+export NPROC=80 #192
 export COMPILE=0
 export NSOLUTE=2
 
@@ -14,15 +14,15 @@ export NSOLUTE=2
 export NSTEPS=1000000 #0
 export NTRAJ=10000
 export OPT_INIT_STEPS=10 
-export OPT_STEPS=50
-export kphi=5
+export OPT_STEPS=60
+export kphi=8
 export NW=10
 export NN=0
 export PP=0
 #export PW=-7.2
 export PW=0
 export dt=0 #$(python -c "print(300./(float(${NSTEPS})+2))")
-export NOISE=0.1
+#export NOISE=0.1
 
 
 # ANALYZE FRAMES FROM START_STEP

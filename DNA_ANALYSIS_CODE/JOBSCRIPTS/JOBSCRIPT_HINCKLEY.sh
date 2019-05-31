@@ -6,16 +6,16 @@
 #SBATCH --partition=normal
 #SBATCH --ntasks=192
 ##SBATCH --qos=devel
-NPROC=192
+NPROCS=${SLURM_NTASKS}
 # Set up node file for namd run :
 module purge
-module load intel/2018b
-module load FFTW/3.3.7-intel-2018a
-module load Python/3.6.4-intel-2018a
+module load intel/2019.1
+module load FFTW
+module load python3/3.7.0
 
-SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-INPUT_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
-SCRATCH_DIRECTORY="/global/work/${USER}/${SLURM_JOBID}.stallo-adm.uit.no"
+SHELL_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+INPUT_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
+SCRATCH_DIRECTORY=""
 SLURM_SUBMIT_DIR=$(pwd)
 
 rm ${SLURM_SUBMIT_DIR}/sim -rf

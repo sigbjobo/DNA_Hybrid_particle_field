@@ -1,20 +1,19 @@
 #!/bin/bash
 #SBATCH --job-name=DS_PER
 #SBATCH --account=nn4654k
-#SBATCH --time=2-0:0:0
+#SBATCH --time=3-2:0:0
 #SBATCH --ntasks=192
 
 set -e
 
 
 #MANDATORY SETTINGS
-export NPROC=192 #192
+NPROCS=${SLURM_NTASKS}
 export COMPILE=0
 export NSOLUTE=2
 
 export kphi=$1
-export CSALT=150
-export EPSILON=$2
+
 
  
 #SETTINGS SPECIFIC TO BAYSIAN OPTIMIZATION
@@ -28,31 +27,31 @@ export dna_seq=CCGCCAGCGGCGTTATTACATTTAATTCTTAAGTATTATAAGTAATATGGCCGCTGCGCC
 export rev_dna_seq=GGCGCAGCGGCCATATTACTTATAATACTTAAGAATTAAATGTAATAACGCCGCTGGCGG
 
 #DIRECTORIES
-export SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-export INPUT_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
-export PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
-export OCCAM_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
-SCRATCH_DIRECTORY="/global/work/${USER}/${SLURM_JOBID}.stallo-adm.uit.no"
+export SHELL_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+export INPUT_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
+export PYTHON_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+export OCCAM_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
+SCRATCH_DIRECTORY=""
 SLURM_SUBMIT_DIR=$(pwd)
 
 #LOAD MODULES
 module purge
-module load intel/2018b
-module load FFTW/3.3.7-intel-2018a
-module load Python/3.6.4-intel-2018a
+module load intel/2019.1
+module load FFTW
+module load python3/3.7.0
 
 #PREPARE SIMULATION DIRECTORY
 mkdir -p ${SCRATCH_DIRECTORY}
 cd ${SCRATCH_DIRECTORY}
 
-folder=SIM_${kphi}_${EPSILON}
+folder=SIM_${kphi}
 mkdir ${folder}
 cd ${folder}
  
 #MAKE SYSTEM
 cp -r ${INPUT_PATH}/PARA/* .
 
-bash ${SHELL_PATH}/double_ds.sh ${dna_seq} ${rev_dna_seq} 20 ${CSALT}
+bash ${SHELL_PATH}/double_ds.sh ${dna_seq} ${rev_dna_seq} 20 150
 
 python ${PYTHON_PATH}/set_chi.py fort.3
 
@@ -69,27 +68,6 @@ sed -i '/SCF_lattice_update:/{n;s/.*/50/}' fort.1
 sed -i "/trj_print:/{n;s/.*/$NTRAJ/}" fort.1
 sed -i '/out_print:/{n;s/.*/10000/}' fort.1
 sed -i '/target_temperature:/{n;s/.*/1000     0.000/}' fort.1
-sed -i "/dielectric_constant:/{n;s/.*/$EPSILON/}" fort.1
-
-
 
 # SET STRENGTH OF TORSIONAL POTENTIAL                                        
 bash ${SHELL_PATH}/setup_FF.sh ${kphi}
-
-
-#PREPARE DATA-COLLECTION RUN
-sed -i '/target_temperature:/{n;s/.*/300     0.000/}' fort.1
-
-#RUN SIMULATION
-bash ${SHELL_PATH}/run_para.sh
-
-#SAVE DATA
-cp -r ${SCRATCH_DIRECTORY}/${folder} ${SLURM_SUBMIT_DIR}/${folder}
-
-
-exit 0
-
-
-
-#######
-

@@ -6,7 +6,7 @@
 ##SBATCH --qos=devel
 
 #MANDATORY SETTINGS
-export NPROC=80 #192
+NPROCS=${SLURM_NTASKS}
 export COMPILE=0
 export NSOLUTE=2
 
@@ -30,18 +30,18 @@ START_STEP=300000
 export START_FRAME=$(python -c "print(1+int(float(${START_STEP})/(float(${NTRAJ}))))")
 
 #DIRECTORIES
-export SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-export INPUT_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
-export PYTHON_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
-export OCCAM_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
-SCRATCH_DIRECTORY="/global/work/${USER}/${SLURM_JOBID}.stallo-adm.uit.no"
+export SHELL_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+export INPUT_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
+export PYTHON_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+export OCCAM_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
+SCRATCH_DIRECTORY=""
 SLURM_SUBMIT_DIR=$(pwd)
 
 #LOAD MODULES
 module purge
-module load intel/2018b
-module load FFTW/3.3.7-intel-2018a
-module load Python/3.7.0-intel-2018b
+module load intel/2019.1
+module load FFTW
+module load python3/3.7.0
 
 
 folder=sim_${kphi}

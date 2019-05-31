@@ -7,22 +7,22 @@
 #SBATCH --ntasks=192
 # Set up node file for namd run :
 module purge
-module load intel/2018b
-module load FFTW/3.3.7-intel-2018a
-module load Python/3.6.4-intel-2018a
+module load intel/2019.1
+module load FFTW
+module load python3/3.7.0
 
 #SET K_PHI
 export k_phi=$1
-export NPROC=192
+NPROCS=${SLURM_NTASKS}
 export NSTEPS=100000
 export NTRAJ=10000
 export alpha=10
 export beta=-10
 export dna_seq=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-INPUT_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
-SCRATCH_DIRECTORY="/global/work/${USER}/${SLURM_JOBID}.stallo-adm.uit.no"
+SHELL_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+INPUT_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
+SCRATCH_DIRECTORY=""
 SLURM_SUBMIT_DIR=$(pwd)
 
 folder=SIM_${kphi}

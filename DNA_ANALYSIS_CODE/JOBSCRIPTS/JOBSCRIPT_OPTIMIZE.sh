@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
-#SBATCH --time=0-1:0:0
-#SBATCH --nodes=3 --ntasks-per-node=16
+#SBATCH --time=3-1:0:0
+#SBATCH --nodes=4 --ntasks-per-node=16
 #SBATCH --mem-per-cpu=1G
-#SBATCH --qos=devel
+##SBATCH --qos=devel
 
 #MANDATORY SETTINGS
 export NPROC=${SLURM_NTASKS}

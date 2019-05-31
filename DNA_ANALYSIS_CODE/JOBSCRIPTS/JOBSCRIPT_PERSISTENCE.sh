@@ -4,7 +4,7 @@
 #SBATCH --time=0-0:20:00
 #SBATCH --mem-per-cpu=2000M
 #SBATCH --partition=normal
-#SBATCH --ntasks=192
+#SBATCH --nodes=3 --ntasks-per-node=16
 ##SBATCH --qos=devel
 NPROCS=${SLURM_NTASKS}
 # Set up node file for namd run :
@@ -15,7 +15,7 @@ module load python3/3.7.0
 
 SHELL_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
 INPUT_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
-SCRATCH_DIRECTORY=""
+SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
 
 rm ${SLURM_SUBMIT_DIR}/sim -r
@@ -32,7 +32,7 @@ dna_seq=ATGCAATGCTACATATTCGCTTTTTGCGAATATGTAGCATTGCAT
 bash ${SHELL_PATH}/single_ss.sh ${dna_seq} 15 100
 
 L=$(head  fort.5 -n 2 | tail -n 1 | awk '{print $1}')
-M=$(python -c "print(int($L / 0.8))")
+M=$(python3 -c "print(int($L / 0.8))")
 sed -i "s/MM/$M/g" fort.3
 sed -i "s/alpha/${alpha}/g" fort.3
 sed -i "s/beta/${beta}/g" fort.3

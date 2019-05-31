@@ -12,7 +12,7 @@ while read fi
 do
     a=($(echo "$fi" | tr '/' '\n'))
     cd $fi
-    python ${PYTHON_PATH}/persistence.py fort.8
+    python3 ${PYTHON_PATH}/persistence.py fort.8
 
     TRJ_PRINT=$(awk '/trj_print:/{getline; print}' fort.1)
 #    echo "${TRJ_PRINT}"
@@ -21,8 +21,8 @@ do
     cat end_end.dat | awk  '{printf("%.2f\n"),  $1*20000*0.03*0.001 }' >>pos.dat
     cat end_end.dat | awk  '{printf("%.2f\n"),  $2 }' >>end.dat
 
-    a2=$(python -c "print('$a'.split('_')[1])")
-    a3=$(python -c "print('$a'.split('_')[2])")
+    a2=$(python3 -c "print('$a'.split('_')[1])")
+    a3=$(python3 -c "print('$a'.split('_')[2])")
     test -z $a3 && echo "" || a2="$a2 $a3";
     test -z $a3 && echo "" || a2fn="$a2_$a3";
     

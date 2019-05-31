@@ -42,7 +42,7 @@ bash ${SHELL_PATH}/prep_iopc2.sh
 ${OCCAM_PATH}/IOPC_input/iopc
 
 #MAKE A NEW FORT.9 FILE 
-python ${PYTHON_PATH}/remake_fort9.py
+python3 ${PYTHON_PATH}/remake_fort9.py
 
 #REMOVE START FILES FOR PARALLEL VERSION
 rm -f fort.[1-9][0-9][0-9]

@@ -2,7 +2,7 @@
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
 #SBATCH --time=0-1:0:0
-#SBATCH --ntasks=1
+#SBATCH --nodes=3 --ntasks-per-node=16
 #SBATCH --qos=devel
 
 #MANDATORY SETTINGS
@@ -21,11 +21,11 @@ export NN=0
 export PP=0
 #export PW=-7.2
 export PW=0
-export dt=$(python -c "print(300./(float(${NSTEPS})+2))")
+export dt=$(python3 -c "print(300./(float(${NSTEPS})+2))")
 
 # ANALYZE FRAMES FROM START_STEP
 START_STEP=1950
-export START_FRAME=$(python -c "print(1+int(float(${START_STEP})/(float(${NTRAJ}))))")
+export START_FRAME=$(python3 -c "print(1+int(float(${START_STEP})/(float(${NTRAJ}))))")
 
 export NOISE=0.001
 
@@ -34,7 +34,7 @@ export SHELL_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANAL
 export INPUT_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
 export PYTHON_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 export OCCAM_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
-SCRATCH_DIRECTORY=""
+SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
 
 #LOAD MODULES
@@ -55,7 +55,7 @@ mkdir ${folder}
 cd ${folder}
 
 #RUN OPTIMIZATION
-python  ${PYTHON_PATH}/SKOPT_BAYES.py
+python3  ${PYTHON_PATH}/SKOPT_BAYES.py
 
 #SAVE DATA
 cp -r ${SCRATCH_DIRECTORY}/${folder} ${SLURM_SUBMIT_DIR}/${folder}

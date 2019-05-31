@@ -2,7 +2,7 @@
 #SBATCH --job-name=DS_PER
 #SBATCH --account=nn4654k
 #SBATCH --time=3-2:0:0
-#SBATCH --ntasks=192
+#SBATCH --nodes=3 --ntasks-per-node=16
 
 set -e
 
@@ -32,7 +32,7 @@ export SHELL_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANAL
 export INPUT_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
 export PYTHON_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
 export OCCAM_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
-SCRATCH_DIRECTORY=""
+SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
 
 #LOAD MODULES
@@ -54,10 +54,10 @@ cp -r ${INPUT_PATH}/PARA/* .
 
 bash ${SHELL_PATH}/double_ds.sh ${dna_seq} ${rev_dna_seq} 20 ${CSALT}
 
-python ${PYTHON_PATH}/set_chi.py fort.3
+python3 ${PYTHON_PATH}/set_chi.py fort.3
 
 L=$(head  fort.5 -n 2 | tail -n 1 | awk '{print $1}')
-M=$(python -c "print(int($L / 0.67))")
+M=$(python3 -c "print(int($L / 0.67))")
 sed -i "s/MM/$M/g" fort.3
 
 #Set number of atoms                                                                                                      

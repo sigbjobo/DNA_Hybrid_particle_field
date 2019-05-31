@@ -7,7 +7,7 @@ INPUT_PATH="${A}/DNA_ANALYSIS_CODE/INPUT_FILES"
 OCCAM_PATH="${A}/../occam_dna_parallel/"
 OCCAM_PATH_SERIAL="${A}/../occam_dna/"
 EXTRA_PATH="/home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
-SCRATCH_DIRECTORY=$SCRATCH 
+SCRATCH_DIRECTORY="\${SCRATCH}"
 
 
 #FIX SHELL SCRIPTS
@@ -22,7 +22,7 @@ sed -i 's|SHELL_PATH=.*|SHELL_PATH="'"$SHELL_PATH"'"|g' ${JOB_PATH}/*.sh
 sed -i 's|INPUT_PATH=.*|INPUT_PATH="'"$INPUT_PATH"'"|g' ${JOB_PATH}/*.sh
 sed -i 's|OCCAM_PATH=.*|OCCAM_PATH="'"$OCCAM_PATH"'"|g' ${JOB_PATH}/*.sh
 sed -i 's|SCRATCH_DIRECTORY=.*|SCRATCH_DIRECTORY="'"$SCRATCH_DIRECTORY"'"|g' ${JOB_PATH}/*.sh
-sed -i '/\NPROC=/c\\NPROCS=${SLURM_NTASKS}' ${JOB_PATH}/*.sh
+#sed -i '/\NPROC=/c\\export NPROC=${SLURM_NTASKS}' ${JOB_PATH}/*.sh
 
 
 
@@ -53,7 +53,8 @@ if [ $(pwd | grep /usit/abel | wc | awk '{print $1}') -gt 0 ]
 then
     sed -i '/module load FFTW*/c\module load FFTW' ${JOB_PATH}/*.sh
     sed -i '/module load intel*/c\module load intel/2019.1' ${JOB_PATH}/*.sh
-    sed -i '/\#SBATCH --nodes=/c\\#SBATCH --ntasks=192' ${JOB_PATH}/*.sh
+    sed -i '/\#SBATCH --ntasks=/c\\#SBATCH --nodes=3 --ntasks-per-node=16' ${JOB_PATH}/*.sh
+    sed -i '/\#SBATCH --nodes=/c\\#SBATCH --nodes=3 --ntasks-per-node=16' ${JOB_PATH}/*.sh
     sed -i '/module load Python*/c\module load python3/3.7.0' ${JOB_PATH}/*.sh
     sed -i '/module load python*/c\module load python3/3.7.0' ${JOB_PATH}/*.sh 
 fi

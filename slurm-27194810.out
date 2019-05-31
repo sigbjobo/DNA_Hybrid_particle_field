@@ -1,0 +1,320 @@
+NUMBER OF PROCESSORS USED: 10
+/usit/abel/u1/sigbjobo/.local/lib/python3.7/site-packages/sklearn/externals/joblib/__init__.py:15: DeprecationWarning: sklearn.externals.joblib is deprecated in 0.21 and will be removed in 0.23. Please import this functionality directly from joblib, which can be installed with: pip install joblib. If this warning is raised when loading pickled models, you may need to re-serialize those models with scikit-learn 0.21+.
+  warnings.warn(msg, category=DeprecationWarning)
+Starting optimization....
+Number of intial steps: 10
+Number of optimization steps: 60
+CHI_NW: 3.49
+CHI_AT: -8.53
+CHI_GC: -8.53
+CHI_PW: -21.31
+CHI_PP: 0.00
+8, P-S-P-S, -154.8
+8, S-P-S-A, 54.8
+8, T-S-P-S, -44.8
+8, S-P-S-G, 53.9
+8, S-P-S-C, 57.0
+8, A-S-P-S, -32.80
+8, S-P-S-T, 58.0
+8, C-S-P-S, -34.1
+8, S-P-S-P, -179.2
+8, G-S-P-S, -29.11
+ ========================================
+        * * * I. O. P. C. * * *          
+  Input Program for Parallel Occam Code  
+  ver. 1.7                               
+ ========================================
+ 
+ > insert [1] for input program
+ > insert [2] for output program
+ > insert [3] for help
+ > Insert the total number of molecules: 
+ > Insert the total number of particles: 
+ > Insert the total number of molecule A: 
+ > Insert the number of particles in molecule A: 
+ > Insert the total number of molecule B: 
+ > Insert the number of particles in molecule B: 
+ > Insert the total number of molecule C: 
+ > Insert the number of particles in molecule C: 
+ > Insert the total number of molecule D: 
+ > Insert the number of particles in molecule D: 
+ > Velocity read [1] yes, [2] no: 
+ > Insert the number of CPU: 
+forrtl: severe (24): end-of-file during read, unit 6, file /work/jobs/27194810.d/sim_8/sim_001/input.txt
+Image              PC                Routine            Line        Source             
+iopc               000000000040F54B  Unknown               Unknown  Unknown
+iopc               000000000042D59B  Unknown               Unknown  Unknown
+iopc               000000000042BE05  Unknown               Unknown  Unknown
+iopc               000000000040A964  Unknown               Unknown  Unknown
+iopc               0000000000402F4F  Unknown               Unknown  Unknown
+iopc               0000000000402972  Unknown               Unknown  Unknown
+libc-2.12.so       00007F1618745D20  __libc_start_main     Unknown  Unknown
+iopc               0000000000402869  Unknown               Unknown  Unknown
+srun: error: Invalid numeric value "occamcgmpi" for number of tasks.
+ ========================================
+        * * * I. O. P. C. * * *          
+  Input Program for Parallel Occam Code  
+  ver. 1.7                               
+ ========================================
+ 
+ > insert [1] for input program
+ > insert [2] for output program
+ > insert [3] for help
+  * * * Writing Parallel Trajectory * * * 
+ -----------------------------------------
+ 
+ > Insert the number of CPU: 
+ > Insert the initial steps: 
+ > Insert the time step dt:
+ > Insert the number of configurations:   
+forrtl: severe (24): end-of-file during read, unit 6, file /work/jobs/27194810.d/sim_8/sim_001/input.txt
+Image              PC                Routine            Line        Source             
+iopc               000000000040F54B  Unknown               Unknown  Unknown
+iopc               000000000042BDE8  Unknown               Unknown  Unknown
+iopc               000000000040C799  Unknown               Unknown  Unknown
+iopc               0000000000402CBB  Unknown               Unknown  Unknown
+iopc               0000000000402972  Unknown               Unknown  Unknown
+libc-2.12.so       00007FE11AB7ED20  __libc_start_main     Unknown  Unknown
+iopc               0000000000402869  Unknown               Unknown  Unknown
+/usit/abel/u1/sigbjobo/.local/lib/python3.7/site-packages/numpy/core/fromnumeric.py:3118: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/usit/abel/u1/sigbjobo/.local/lib/python3.7/site-packages/numpy/core/_methods.py:85: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+/usit/abel/u1/sigbjobo/.local/lib/python3.7/site-packages/numpy/core/_methods.py:140: RuntimeWarning: Degrees of freedom <= 0 for slice
+  keepdims=keepdims)
+/usit/abel/u1/sigbjobo/.local/lib/python3.7/site-packages/numpy/core/_methods.py:110: RuntimeWarning: invalid value encountered in true_divide
+  arrmean, rcount, out=arrmean, casting='unsafe', subok=False)
+/usit/abel/u1/sigbjobo/.local/lib/python3.7/site-packages/numpy/core/_methods.py:132: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+CHI_NW: 1.32
+CHI_AT: -3.16
+CHI_GC: -3.16
+CHI_PW: -3.62
+CHI_PP: 0.00
+8, P-S-P-S, -154.8
+8, S-P-S-A, 54.8
+8, S-P-S-C, 57.0
+8, T-S-P-S, -44.8
+8, C-S-P-S, -34.1
+8, S-P-S-G, 53.9
+8, S-P-S-T, 58.0
+8, A-S-P-S, -32.80
+8, S-P-S-P, -179.2
+8, G-S-P-S, -29.11
+ ========================================
+        * * * I. O. P. C. * * *          
+  Input Program for Parallel Occam Code  
+  ver. 1.7                               
+ ========================================
+ 
+ > insert [1] for input program
+ > insert [2] for output program
+ > insert [3] for help
+ > Insert the total number of molecules: 
+ > Insert the total number of particles: 
+ > Insert the total number of molecule A: 
+ > Insert the number of particles in molecule A: 
+ > Insert the total number of molecule B: 
+ > Insert the number of particles in molecule B: 
+ > Insert the total number of molecule C: 
+ > Insert the number of particles in molecule C: 
+ > Insert the total number of molecule D: 
+ > Insert the number of particles in molecule D: 
+ > Velocity read [1] yes, [2] no: 
+ > Insert the number of CPU: 
+forrtl: severe (24): end-of-file during read, unit 6, file /work/jobs/27194810.d/sim_8/sim_002/input.txt
+Image              PC                Routine            Line        Source             
+iopc               000000000040F54B  Unknown               Unknown  Unknown
+iopc               000000000042D59B  Unknown               Unknown  Unknown
+iopc               000000000042BE05  Unknown               Unknown  Unknown
+iopc               000000000040A964  Unknown               Unknown  Unknown
+iopc               0000000000402F4F  Unknown               Unknown  Unknown
+iopc               0000000000402972  Unknown               Unknown  Unknown
+libc-2.12.so       00007F2C7EF8FD20  __libc_start_main     Unknown  Unknown
+iopc               0000000000402869  Unknown               Unknown  Unknown
+srun: error: Invalid numeric value "occamcgmpi" for number of tasks.
+ ========================================
+        * * * I. O. P. C. * * *          
+  Input Program for Parallel Occam Code  
+  ver. 1.7                               
+ ========================================
+ 
+ > insert [1] for input program
+ > insert [2] for output program
+ > insert [3] for help
+  * * * Writing Parallel Trajectory * * * 
+ -----------------------------------------
+ 
+ > Insert the number of CPU: 
+ > Insert the initial steps: 
+ > Insert the time step dt:
+ > Insert the number of configurations:   
+forrtl: severe (24): end-of-file during read, unit 6, file /work/jobs/27194810.d/sim_8/sim_002/input.txt
+Image              PC                Routine            Line        Source             
+iopc               000000000040F54B  Unknown               Unknown  Unknown
+iopc               000000000042BDE8  Unknown               Unknown  Unknown
+iopc               000000000040C799  Unknown               Unknown  Unknown
+iopc               0000000000402CBB  Unknown               Unknown  Unknown
+iopc               0000000000402972  Unknown               Unknown  Unknown
+libc-2.12.so       00007F9256451D20  __libc_start_main     Unknown  Unknown
+iopc               0000000000402869  Unknown               Unknown  Unknown
+CHI_NW: 6.45
+CHI_AT: -22.38
+CHI_GC: -22.38
+CHI_PW: -7.34
+CHI_PP: 0.00
+8, P-S-P-S, -154.8
+8, S-P-S-A, 54.8
+8, T-S-P-S, -44.8
+8, S-P-S-C, 57.0
+8, S-P-S-G, 53.9
+8, A-S-P-S, -32.80
+8, S-P-S-T, 58.0
+8, C-S-P-S, -34.1
+8, S-P-S-P, -179.2
+8, G-S-P-S, -29.11
+ ========================================
+        * * * I. O. P. C. * * *          
+  Input Program for Parallel Occam Code  
+  ver. 1.7                               
+ ========================================
+ 
+ > insert [1] for input program
+ > insert [2] for output program
+ > insert [3] for help
+ > Insert the total number of molecules: 
+ > Insert the total number of particles: 
+ > Insert the total number of molecule A: 
+ > Insert the number of particles in molecule A: 
+ > Insert the total number of molecule B: 
+ > Insert the number of particles in molecule B: 
+ > Insert the total number of molecule C: 
+ > Insert the number of particles in molecule C: 
+ > Insert the total number of molecule D: 
+ > Insert the number of particles in molecule D: 
+ > Velocity read [1] yes, [2] no: 
+ > Insert the number of CPU: 
+forrtl: severe (24): end-of-file during read, unit 6, file /work/jobs/27194810.d/sim_8/sim_003/input.txt
+Image              PC                Routine            Line        Source             
+iopc               000000000040F54B  Unknown               Unknown  Unknown
+iopc               000000000042D59B  Unknown               Unknown  Unknown
+iopc               000000000042BE05  Unknown               Unknown  Unknown
+iopc               000000000040A964  Unknown               Unknown  Unknown
+iopc               0000000000402F4F  Unknown               Unknown  Unknown
+iopc               0000000000402972  Unknown               Unknown  Unknown
+libc-2.12.so       00007F0D915BFD20  __libc_start_main     Unknown  Unknown
+iopc               0000000000402869  Unknown               Unknown  Unknown
+srun: error: Invalid numeric value "occamcgmpi" for number of tasks.
+ ========================================
+        * * * I. O. P. C. * * *          
+  Input Program for Parallel Occam Code  
+  ver. 1.7                               
+ ========================================
+ 
+ > insert [1] for input program
+ > insert [2] for output program
+ > insert [3] for help
+  * * * Writing Parallel Trajectory * * * 
+ -----------------------------------------
+ 
+ > Insert the number of CPU: 
+ > Insert the initial steps: 
+ > Insert the time step dt:
+ > Insert the number of configurations:   
+forrtl: severe (24): end-of-file during read, unit 6, file /work/jobs/27194810.d/sim_8/sim_003/input.txt
+Image              PC                Routine            Line        Source             
+iopc               000000000040F54B  Unknown               Unknown  Unknown
+iopc               000000000042BDE8  Unknown               Unknown  Unknown
+iopc               000000000040C799  Unknown               Unknown  Unknown
+iopc               0000000000402CBB  Unknown               Unknown  Unknown
+iopc               0000000000402972  Unknown               Unknown  Unknown
+libc-2.12.so       00007F6F63B31D20  __libc_start_main     Unknown  Unknown
+iopc               0000000000402869  Unknown               Unknown  Unknown
+CHI_NW: 6.21
+CHI_AT: -17.06
+CHI_GC: -17.06
+CHI_PW: -22.98
+CHI_PP: 0.00
+8, P-S-P-S, -154.8
+8, S-P-S-A, 54.8
+8, T-S-P-S, -44.8
+8, S-P-S-T, 58.0
+8, S-P-S-G, 53.9
+8, S-P-S-C, 57.0
+8, A-S-P-S, -32.80
+8, S-P-S-P, -179.2
+8, C-S-P-S, -34.1
+8, G-S-P-S, -29.11
+ ========================================
+        * * * I. O. P. C. * * *          
+  Input Program for Parallel Occam Code  
+  ver. 1.7                               
+ ========================================
+ 
+ > insert [1] for input program
+ > insert [2] for output program
+ > insert [3] for help
+ > Insert the total number of molecules: 
+ > Insert the total number of particles: 
+ > Insert the total number of molecule A: 
+ > Insert the number of particles in molecule A: 
+ > Insert the total number of molecule B: 
+ > Insert the number of particles in molecule B: 
+ > Insert the total number of molecule C: 
+ > Insert the number of particles in molecule C: 
+ > Insert the total number of molecule D: 
+ > Insert the number of particles in molecule D: 
+ > Velocity read [1] yes, [2] no: 
+ > Insert the number of CPU: 
+forrtl: severe (24): end-of-file during read, unit 6, file /work/jobs/27194810.d/sim_8/sim_004/input.txt
+Image              PC                Routine            Line        Source             
+iopc               000000000040F54B  Unknown               Unknown  Unknown
+iopc               000000000042D59B  Unknown               Unknown  Unknown
+iopc               000000000042BE05  Unknown               Unknown  Unknown
+iopc               000000000040A964  Unknown               Unknown  Unknown
+iopc               0000000000402F4F  Unknown               Unknown  Unknown
+iopc               0000000000402972  Unknown               Unknown  Unknown
+libc-2.12.so       00007FCCA41FAD20  __libc_start_main     Unknown  Unknown
+iopc               0000000000402869  Unknown               Unknown  Unknown
+srun: error: Invalid numeric value "occamcgmpi" for number of tasks.
+ ========================================
+        * * * I. O. P. C. * * *          
+  Input Program for Parallel Occam Code  
+  ver. 1.7                               
+ ========================================
+ 
+ > insert [1] for input program
+ > insert [2] for output program
+ > insert [3] for help
+  * * * Writing Parallel Trajectory * * * 
+ -----------------------------------------
+ 
+ > Insert the number of CPU: 
+ > Insert the initial steps: 
+ > Insert the time step dt:
+ > Insert the number of configurations:   
+forrtl: severe (24): end-of-file during read, unit 6, file /work/jobs/27194810.d/sim_8/sim_004/input.txt
+Image              PC                Routine            Line        Source             
+iopc               000000000040F54B  Unknown               Unknown  Unknown
+iopc               000000000042BDE8  Unknown               Unknown  Unknown
+iopc               000000000040C799  Unknown               Unknown  Unknown
+iopc               0000000000402CBB  Unknown               Unknown  Unknown
+iopc               0000000000402972  Unknown               Unknown  Unknown
+libc-2.12.so       00007FDF19EE5D20  __libc_start_main     Unknown  Unknown
+iopc               0000000000402869  Unknown               Unknown  Unknown
+CHI_NW: 9.83
+CHI_AT: -27.94
+CHI_GC: -27.94
+CHI_PW: -25.07
+CHI_PP: 0.00
+8, P-S-P-S, -154.8
+8, S-P-S-A, 54.8
+8, T-S-P-S, -44.8
+8, A-S-P-S, -32.80
+8, G-S-P-S, -29.11
+8, S-P-S-G, 53.9
+8, S-P-S-T, 58.0
+8, C-S-P-S, -34.1
+8, S-P-S-C, 57.0
+8, S-P-S-P, -179.2
+slurmstepd: error: *** JOB 27194810 ON c15-4 CANCELLED AT 2019-05-31T13:36:49 ***

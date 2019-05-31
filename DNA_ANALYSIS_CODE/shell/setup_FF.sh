@@ -32,8 +32,8 @@ for i in $(seq 1 10)
 do
     {
     echo ${kphi}, ${names[$i]}, ${phi0[$i]}
-    python ${PYTHON_PATH}/make_pot.py $n ${kphi} ${phi0[$i]} ${names[$i]}_pot.dat 
-    python ${PYTHON_PATH}/make_coef.py ${names[$i]}_pot.dat ${names[$i]} ${names[$i]}_1_pot_after.dat 
+    python3 ${PYTHON_PATH}/make_pot.py $n ${kphi} ${phi0[$i]} ${names[$i]}_pot.dat 
+    python3 ${PYTHON_PATH}/make_coef.py ${names[$i]}_pot.dat ${names[$i]} ${names[$i]}_1_pot_after.dat 
     mv ${names[$i]}_PROP.dat FF/
     }&
 done

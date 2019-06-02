@@ -2,9 +2,16 @@
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
 #SBATCH --time=3-1:0:0
-#SBATCH --nodes=4 --ntasks-per-node=16
-#SBATCH --mem-per-cpu=1G
+#SBATCH --nodes=8 --ntasks-per-node=16 --mem-per-cpu=2G
+
 ##SBATCH --qos=devel
+set -o errexit # exit on errors
+
+#LOAD MODULES
+module purge
+module load intel/2019.1
+module load FFTW
+module load python3/3.7.0
 
 #MANDATORY SETTINGS
 export NPROC=${SLURM_NTASKS}
@@ -38,12 +45,6 @@ export PYTHON_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANA
 export OCCAM_PATH="/usit/abel/u1/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
 SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
-
-#LOAD MODULES
-module purge
-module load intel/2019.1
-module load FFTW
-module load python3/3.7.0
 
 
 folder=sim_${kphi}

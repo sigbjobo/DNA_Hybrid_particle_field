@@ -4,14 +4,14 @@
 #SBATCH --time=0-0:20:00
 #SBATCH --mem-per-cpu=2000M
 #SBATCH --partition=normal
-#SBATCH --nodes=3 --ntasks-per-node=16
+#SBATCH --ntasks=192
 ##SBATCH --qos=devel
 NPROCS=${SLURM_NTASKS}
 # Set up node file for namd run :
 module purge
-module load intel/2019.1
+module load intel/2018b
 module load 
-module load python3/3.7.0
+module load Python/3.7.0-intel-2018b
 
 SHELL_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
 INPUT_PATH="/home/sigbjobo/Projects/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"

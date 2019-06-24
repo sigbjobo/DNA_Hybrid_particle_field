@@ -42,6 +42,12 @@ def f3(x):
     os.environ['PW']    = "%f"%(x[2])
 
     res = F.func_para()**2
+
+    #Turn of compilation
+    os.environ['COMPILE']    = "%d"%(0)
+
+
+
     return res
 
 

@@ -2,7 +2,7 @@
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
 #SBATCH --time=0-1:0:0
-#SBATCH --nodes=3 --ntasks-per-node=16
+#SBATCH --ntasks=192
 #SBATCH --qos=devel
 
 #MANDATORY SETTINGS
@@ -39,9 +39,9 @@ SLURM_SUBMIT_DIR=$(pwd)
 
 #LOAD MODULES
 module purge
-module load intel/2019.1
-module load FFTW
-module load python3/3.7.0
+module load intel/2018b
+module load FFTW/3.3.7-intel-2018a
+module load Python/3.7.0-intel-2018b
 
 
 folder=sim_${kphi}_anneal

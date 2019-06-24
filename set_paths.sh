@@ -40,7 +40,7 @@ then
     sed -i '/module load Python*/c\module load Python/3.7.0-intel-2018b' ${JOB_PATH}/*.sh 
     sed -i '/module load python*/c\module load Python/3.7.0-intel-2018b' ${JOB_PATH}/*.sh 
 fi
-if [ $(pwd | grep global | wc | awk '{print $1}') -gt 0 ] 
+if [ $(pwd | grep /home/sigbjobo | wc | awk '{print $1}') -gt 0 ] 
 then
     sed -i '/module load FFTW*/c\module load FFTW/3.3.7-intel-2018a' ${JOB_PATH}/*.sh
     sed -i '/module load intel*/c\module load intel/2018b' ${JOB_PATH}/*.sh

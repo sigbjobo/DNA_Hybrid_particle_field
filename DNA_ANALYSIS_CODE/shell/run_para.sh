@@ -33,7 +33,7 @@ ${OCCAM_PATH}/IOPC_input/iopc
 rm -f fort.10 fort.7
 
 #Run OCCAM in parallel 
-srun --mpi=pmi2 -n ${NPROC} occamcgmpi
+srun --mpi=pmi2 -K -n  ${NPROC} occamcgmpi
 
 #PREPARE IOPC BACK
 bash ${SHELL_PATH}/prep_iopc2.sh

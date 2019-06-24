@@ -2,27 +2,28 @@
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
 #SBATCH --time=2-0:0:0
-#SBATCH --ntasks=100
-##SBATCH --nodes=5 --ntasks-per-node=20 --mem-per-cpu=2G
+##SBATCH --ntasks=100
+#SBATCH --nodes=5 --ntasks-per-node=20
+##SBATCH --ntasks=120
 
 ##SBATCH --qos=devel
 set -o errexit # exit on errors
 
 #LOAD MODULES
 module purge
-module load intel/2019.1
-module load FFTW
-module load python3/3.7.0
+module load intel/2018b
+module load FFTW/3.3.7-intel-2018a
+module load Python/3.7.0-intel-2018b
 
 #MANDATORY SETTINGS
 export NPROC=${SLURM_NTASKS}
 echo "NUMBER OF PROCESSORS USED: $NPROC"
-export COMPILE=0
+export COMPILE=1
 export NSOLUTE=2
 
 #SETTINGS SPECIFIC TO BAYSIAN OPTIMIZATION
-export NSTEPS=1000000 #0
-export NTRAJ=10000
+export NSTEPS=4000000 #0
+export NTRAJ=5000
 export OPT_INIT_STEPS=10 
 export OPT_STEPS=60
 export kphi=8
@@ -36,7 +37,7 @@ export dt=0 #$(python3 -c "print(300./(float(${NSTEPS})+2))")
 
 
 # ANALYZE FRAMES FROM START_STEP
-START_STEP=300000
+START_STEP=$(python3 -c "print(int(0.1*${NSTEPS}))")
 export START_FRAME=$(python3 -c "print(1+int(float(${START_STEP})/(float(${NTRAJ}))))")
 
 #DIRECTORIES
@@ -48,7 +49,7 @@ SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
 
 
-folder=sim_${kphi}
+folder=sim_${kphi}_2
 
 #REMOVE OLD SIMULATIONS
 rm ${SLURM_SUBMIT_DIR}/${folder} -rf

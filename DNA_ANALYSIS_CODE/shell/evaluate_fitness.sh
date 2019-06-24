@@ -50,6 +50,7 @@ bash ${SHELL_PATH}/run_para.sh
 python3 ${PYTHON_PATH}/center.py fort.8
 mv fort_center.xyz sim.xyz
 
+
 cd ..
 
 

@@ -36,9 +36,9 @@ if [ $(pwd | grep cluster | wc | awk '{print $1}') -gt 0 ]
 then
     sed -i '/module load FFTW*/c\module load FFTW/3.3.8-intel-2018b' ${JOB_PATH}/*.sh
     sed -i '/module load intel*/c\module load intel/2018b' ${JOB_PATH}/*.sh
-    sed -i '/\#SBATCH --ntasks=/c\\#SBATCH --nodes=6 --ntasks-per-node=32' ${JOB_PATH}/*.sh
-    sed -i '/module load Python*/c\module load Python/3.7.0-intel-2018b' ${JOB_PATH}/*.sh 
-    sed -i '/module load python*/c\module load Python/3.7.0-intel-2018b' ${JOB_PATH}/*.sh 
+    sed -i '/\#SBATCH --ntasks=/c\\#SBATCH --nodes=4 --ntasks-per-node=40' ${JOB_PATH}/*.sh
+    sed -i '/module load Python*/c\module load Python/3.6.6-intel-2018b' ${JOB_PATH}/*.sh 
+    sed -i '/module load python*/c\module load Python/3.6.6-intel-2018b' ${JOB_PATH}/*.sh 
 fi
 if [ $(pwd | grep /home/sigbjobo | wc | awk '{print $1}') -gt 0 ] 
 then

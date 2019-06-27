@@ -25,6 +25,7 @@ plot "PLOT_DATA/EE_5_.dat"  u 1:($2*0.1) w l lw 2 t '5',\
      "PLOT_DATA/EE_8_.dat"  u 1:($2*0.1) w l lw 2 t '8',\
      "PLOT_DATA/EE_9_.dat"  u 1:($2*0.1) w l lw 2 t '9',\
      "PLOT_DATA/EE_10_.dat" u 1:($2*0.1) w l lw 2 t '10'
+#plot      "PLOT_DATA/EE_10_.dat" u 1:($2*0.1) w l lw 2 t ''
 
 
 
@@ -72,12 +73,13 @@ set xtics 5
 # 5
 set output "CORR-DS.tex"
 
-plot "PLOT_DATA/CORR_5_.dat"  u ($1*0.34):2 w p lw 2 t '5',\
-     "PLOT_DATA/CORR_6_.dat"  u ($1*0.34):2 w p lw 2 t '6',\
-     "PLOT_DATA/CORR_7_.dat"  u ($1*0.34):2 w p lw 2 t '7',\
-     "PLOT_DATA/CORR_8_.dat"  u ($1*0.34):2 w p lw 2 t '8',\
-     "PLOT_DATA/CORR_9_.dat"  u ($1*0.34):2 w p lw 2 t '9',\
-     "PLOT_DATA/CORR_10_.dat" u ($1*0.34):2 w p lw 2 t '10'
+# plot "PLOT_DATA/CORR_5_.dat"  u ($1*0.34):2 w p lw 2 t '5',\
+#      "PLOT_DATA/CORR_6_.dat"  u ($1*0.34):2 w p lw 2 t '6',\
+#      "PLOT_DATA/CORR_7_.dat"  u ($1*0.34):2 w p lw 2 t '7',\
+#      "PLOT_DATA/CORR_8_.dat"  u ($1*0.34):2 w p lw 2 t '8',\
+#      "PLOT_DATA/CORR_9_.dat"  u ($1*0.34):2 w p lw 2 t '9',\
+#      "PLOT_DATA/CORR_10_.dat" u ($1*0.34):2 w p lw 2 t '10'
+plot   "PLOT_DATA/CORR_10_.dat" u ($1*0.34):2 w p lw 2 t ''
 
 
 set output "LP-DS.tex"

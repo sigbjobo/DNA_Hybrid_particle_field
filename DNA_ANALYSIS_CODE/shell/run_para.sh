@@ -32,8 +32,15 @@ bash ${SHELL_PATH}/prep_iopc1.sh
 ${OCCAM_PATH}/IOPC_input/iopc
 rm -f fort.10 fort.7
 
+
 #Run OCCAM in parallel 
+start=`date +%s`
+mpirun -n ${NPROC} occamcgmpi
 srun --mpi=pmi2 -K -n  ${NPROC} occamcgmpi
+end=`date +%s`
+t1=$((end-start))
+echo "SIMULATION-TIME: $t1 SECONDS"
+
 
 #PREPARE IOPC BACK
 bash ${SHELL_PATH}/prep_iopc2.sh
@@ -47,3 +54,6 @@ python3 ${PYTHON_PATH}/remake_fort9.py
 #REMOVE START FILES FOR PARALLEL VERSION
 rm -f fort.[1-9][0-9][0-9]
 rm -f fort.[2-9][0-9]
+end2=`date +%s`
+t2=$((end2-end))
+echo "IOPC-TIME: $t2 SECONDS"

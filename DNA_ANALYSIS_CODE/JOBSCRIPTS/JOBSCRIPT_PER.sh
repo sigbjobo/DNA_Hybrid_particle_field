@@ -2,7 +2,9 @@
 #SBATCH --job-name=PER_SINGLE
 #SBATCH --account=nn4654k
 #SBATCH --time=3-0:00:0
-#SBATCH --nodes=4 --ntasks-per-node=40
+##SBATCH --ntasks=180
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=40
 #SBATCH --mem-per-cpu=2G
 
 set -o errexit # exit on errors
@@ -24,8 +26,8 @@ export NSOLUTE=1
 
 
 #SIMULATION SETTINGS
-export NSTEPS=5000000 #0
-export NTRAJ=5000
+export NSTEPS=50000000 #0
+export NTRAJ=20000
 TEMP=293.15
 export kphi=8
 export NW=6.28
@@ -54,13 +56,14 @@ cd ${SCRATCH_DIRECTORY}
 mkdir ${folder}
 cd ${folder}
 
+#COPY INPUT
+cp -r ${INPUT_PATH}/PARA/* .
+python3 ${PYTHON_PATH}/set_chi.py fort.3 
+
 #MAKE FORT.5
 bash ${SHELL_PATH}/single_ss.sh ${dna_seq} 20 100
  
 
-#COPY INPUT
-cp -r ${INPUT_PATH}/PARA/* .
-python3 ${PYTHON_PATH}/set_chi.py fort.3 
 
 L=$(head  fort.5 -n 2 | tail -n 1 | awk '{print $1}')
 M=$(python3 -c "print(int($L / 0.67))")

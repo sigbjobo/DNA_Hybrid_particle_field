@@ -36,7 +36,7 @@ sed -i '/pot_calc_freq:/{n;s/.*/500/}' fort.1
 sed -i '/SCF_lattice_update:/{n;s/.*/50/}' fort.1
 sed -i "/trj_print:/{n;s/.*/$NTRAJ/}" fort.1
 sed -i '/out_print:/{n;s/.*/10000/}' fort.1
-
+ 
 #Temperature
 sed -i "/target_temperature:/{n;s/.*/300     -${dt}/}" fort.1
 

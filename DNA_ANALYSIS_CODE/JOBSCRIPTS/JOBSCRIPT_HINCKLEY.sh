@@ -1,69 +1,99 @@
 #!/bin/bash
-#SBATCH --job-name=DNA_HINCKLEY
+#SBATCH --job-name=PER_SINGLE
 #SBATCH --account=nn4654k
-#SBATCH --time=0-3:00:00
-#SBATCH --mem-per-cpu=2000M
-#SBATCH --partition=normal
-#SBATCH --ntasks=192
-##SBATCH --qos=devel
-NPROCS=${SLURM_NTASKS}
-# Set up node file for namd run :
-module purge
-module load intel/2018b
-module load FFTW/3.3.7-intel-2018a
-module load Python/3.7.0-intel-2018b
+#SBATCH --time=3-0:00:0
+##SBATCH --ntasks=180
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=40
+#SBATCH --mem-per-cpu=2G
 
-SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-INPUT_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
+set -o errexit # exit on errors
+
+#LOAD MODULES
+#module purge
+#module load intel/2019a
+#module load intel/2018b 
+export LMOD_DISABLE_SAME_NAME_AUTOSWAP=no
+module load intel/2018b 
+module load FFTW/3.3.8-intel-2019a
+module load Python/3.6.6-intel-2018b
+
+#MANDATORY SETTINGS
+export NPROC=${SLURM_NTASKS}
+echo "NUMBER OF PROCESSORS USED: $NPROC"
+export COMPILE=0
+export NSOLUTE=1
+
+
+#SIMULATION SETTINGS
+export NSTEPS=34000000 #0
+export NTRAJ=5000
+TEMP=293.15
+export kphi=8
+export NW=6.28
+export NN=-23.59
+export PP=0
+export PW=-6.08
+dna_seq=ATGCAATGCTACATATTCGCTTTTTGCGAATATGTAGCATTGCAT
+
+export k_phi=8
+
+#DIRECTORIES
+export SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+export INPUT_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/INPUT_FILES"
+export PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
+export OCCAM_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
 SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
 
-rm ${SLURM_SUBMIT_DIR}/sim -rf
-mkdir ${SLURM_SUBMIT_DIR}/sim
-cd ${SLURM_SUBMIT_DIR}/sim
-cp ${INPUT_PATH}/PARA/* .
-k_phi=7
-alpha=10
-beta=-10
+folder=sim
 
-dna_seq=ATGCAATGCTACATATTCGCTTTTTGCGAATATGTAGCATTGCAT
+#REMOVE OLD SIMULATIONS
+rm ${SLURM_SUBMIT_DIR}/${folder} -rf
 
-#Set dna sequence
+#PREPARE ${FOLDER}ULATION DIRECTORY
+mkdir -p ${SCRATCH_DIRECTORY}
+cd ${SCRATCH_DIRECTORY}
+mkdir ${folder}
+cd ${folder}
+
+#COPY INPUT
+cp -r ${INPUT_PATH}/PARA/* .
+python3 ${PYTHON_PATH}/set_chi.py fort.3 
+
+#MAKE FORT.5
 bash ${SHELL_PATH}/single_ss.sh ${dna_seq} 15 100
+ 
+
 
 L=$(head  fort.5 -n 2 | tail -n 1 | awk '{print $1}')
-M=$(python3 -c "print(int($L / 0.675))")
+M=$(python3 -c "print(int($L / 0.67))")
 sed -i "s/MM/$M/g" fort.3
-sed -i "s/alpha/${alpha}/g" fort.3
-sed -i "s/beta/${beta}/g" fort.3
 
-#Changing fort.1
+#Set number of atoms
 N=$(tail fort.5 -n 1 | awk '{print $1}')
 sed -i "s/NATOMS/$N/g" fort.1
-sed -i '/number_of_steps:/{n;s/.*/34000000/}' fort.1
-sed -i '/pot_calc_freq:/{n;s/.*/1000/}' fort.1
-sed -i '/SCF_lattice_update:/{n;s/.*/100/}' fort.1
-sed -i '/trj_print:/{n;s/.*/5000/}' fort.1
+sed -i "/number_of_steps:/{n;s/.*/$NSTEPS/}" fort.1
+sed -i '/pot_calc_freq:/{n;s/.*/500/}' fort.1
+sed -i '/SCF_lattice_update:/{n;s/.*/50/}' fort.1
+sed -i "/trj_print:/{n;s/.*/$NTRAJ/}" fort.1
 sed -i '/out_print:/{n;s/.*/10000/}' fort.1
 
+#Temperature
+sed -i "/target_temperature:/{n;s/.*/${TEMP}     0/}" fort.1
 
-#bash ${SHELL_PATH}/run_sim.sh $k_phi
-cd ${SLURM_SUBMIT_DIR}/
+#SET STRENGTH OF TORSIONAL POTENTIAL
+bash ${SHELL_PATH}/setup_FF.sh ${kphi}
 
-mkdir -p ${SCRATCH_DIRECTORY}
-
-cp -r ${SLURM_SUBMIT_DIR}/sim ${SCRATCH_DIRECTORY}/
-cd ${SCRATCH_DIRECTORY}/sim
-bash ${SHELL_PATH}/setup_FF.sh ${k_phi}
-bash ${SHELL_PATH}/run_para.sh ${NPROC}
-cp -r ${SCRATCH_DIRECTORY}/sim/{fort.7,fort.8,fort.9} ${SLURM_SUBMIT_DIR}/sim
-mkdir -p /cluster/projects/nn4654k/sigbjobo/${SLURM_JOB_ID}
-cp -r ${SCRATCH_DIRECTORY}/sim /cluster/projects/nn4654k/sigbjobo/${SLURM_JOB_ID}/
-
-rm -rf ${SCRATCH_DIRECTORY}
+#RUN SIMULATION IN PARALLEL
+bash ${SHELL_PATH}/run_para.sh 
 
 
+#SAVE DATA
+cp -r ${SCRATCH_DIRECTORY}/${folder} ${SLURM_SUBMIT_DIR}/${folder}
 
+wait
+ 
 exit 0
 
 

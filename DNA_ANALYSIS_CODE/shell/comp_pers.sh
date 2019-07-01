@@ -43,6 +43,8 @@ do
     
     mv contact.dat ../PLOT_DATA/contact_"${a2fn}".dat
     paste -d '\t' {pos.dat,end.dat}     >> ../PLOT_DATA/${a2}_end.dat
+
+    mv CORR_MEAN.dat ../PLOT_DATA/CORR_MEAN_"${a2fn}".dat
     cd ../
 done < fold.dat
 

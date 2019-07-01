@@ -19,19 +19,20 @@ do
     echo "#time">pos.dat
     echo "${fi}">end.dat
     cat end_end.dat | awk  '{printf("%.2f\n"),  $1*20000*0.03*0.001 }' >>pos.dat
-    cat end_end.dat | awk  '{printf("%.2f\n"),  $2 }' >>end.dat
+    cat end_end.dat | awk  '{printf("%.2f\n"),  $2 }' >> end.dat
 
     a2=$(python3 -c "print('$a'.split('_')[1])")
-    a3=$(python3 -c "print('$a'.split('_')[2])")
-    test -z $a3 && echo "" || a2="$a2 $a3";
-    test -z $a3 && echo "" || a2fn="$a2_$a3";
+    a2fn=$a2
+    #   a3=$(python3 -c "print('$a'.split('_')[2])")
+ #   test -z $a3 && echo "" || a2="$a2 $a3";
+ #   test -z $a3 && echo "" || a2fn="$a2_$a3";
     
 
     
     mv end_end.dat end_end.xvg
     mv RG.dat RG.xvg
     b=$(gmx analyze -f end_end.xvg -dist -bw 2.5 -b 800 | grep SS1 | awk '{printf("%.2f %.2f\n"),$2 ,$3}')
-        echo "$a2 $b">> ../PLOT_DATA/ee_mean.dat
+    echo "$a2 $b">> ../PLOT_DATA/ee_mean.dat
 
     grep -v "@\|#" distr.xvg > ../PLOT_DATA/"${a2fn}"_ee_dist.xvg
     

@@ -11,9 +11,9 @@ CSALT=$1
 set -o errexit # exit on errors
 
 #LOAD MODULES
-module purge
-module load intel/2019a
-module load intel/2018b 
+# module purge
+# module load intel/2019a
+# module load intel/2018b 
 export LMOD_DISABLE_SAME_NAME_AUTOSWAP=no
 module load intel/2018b 
 module load FFTW/3.3.8-intel-2019a
@@ -63,7 +63,7 @@ cp -r ${INPUT_PATH}/PARA/* .
 python3 ${PYTHON_PATH}/set_chi.py fort.3 
 
 #MAKE FORT.5
-bash ${SHELL_PATH}/double_ds.sh ${dna_seq} 20 $CSALT
+bash ${SHELL_PATH}/double_ds.sh ${dna_seq} ${rev_dna_seq} 20 $CSALT
  
 
 

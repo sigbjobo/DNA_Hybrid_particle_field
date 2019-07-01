@@ -12,7 +12,7 @@ while read fi
 do
     a=($(echo "$fi" | tr '/' '\n'))
     cd $fi
-    python3 ${PYTHON_PATH}/persistence.py fort.8
+    python3 ${PYTHON_PATH}/persistence.py fort.8 200 1
 
     TRJ_PRINT=$(awk '/trj_print:/{getline; print}' fort.1)
 #    echo "${TRJ_PRINT}"

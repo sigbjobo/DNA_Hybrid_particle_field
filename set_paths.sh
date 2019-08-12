@@ -1,14 +1,14 @@
 #Sets path for scripts
 A=$(pwd)
-SHELL_PATH="${A}/DNA_ANALYSIS_CODE/shell"
-JOB_PATH="${A}/DNA_ANALYSIS_CODE/JOBSCRIPTS/"
-PYTHON_PATH="${A}/DNA_ANALYSIS_CODE/python"
-INPUT_PATH="${A}/DNA_ANALYSIS_CODE/INPUT_FILES"
+SHELL_PATH="${A}/OCCAM_AUX/shell"
+JOB_PATH="${A}/OCCAM_AUX/JOBSCRIPTS/"
+PYTHON_PATH="${A}/OCCAM_AUX/python"
+INPUT_PATH="${A}/OCCAM_AUX/INPUT_FILES"
 OCCAM_PATH="${A}/../occam_dna_parallel/"
 OCCAM_PRESSURE_PATH="${A}/../occam_pressure_parallel/"
 
 OCCAM_PATH_SERIAL="${A}/../occam_dna/"
-EXTRA_PATH="/home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
+EXTRA_PATH="/home/sigbjobo/Stallo/Projects/HPF/PLOT/python"
 SCRATCH_DIRECTORY="\${SCRATCH}"
 
 

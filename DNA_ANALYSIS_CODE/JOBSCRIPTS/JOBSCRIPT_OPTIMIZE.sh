@@ -2,7 +2,8 @@
 #SBATCH --job-name=OPTIMIZE_DNA
 #SBATCH --account=nn4654k
 #SBATCH --time=3-0:00:0
-#SBATCH --nodes=4 --ntasks-per-node=40
+##SBATCH --nodes=4 --ntasks-per-node=40
+#SBATCH --ntasks=190
 #SBATCH --mem-per-cpu=2G
 ##SBATCH --qos=devel
 set -o errexit # exit on errors
@@ -29,6 +30,7 @@ export NTRAJ=5000
 export OPT_INIT_STEPS=10 
 export OPT_STEPS=100
 export kphi=8
+export EPS=$1
 export NW=10
 export NN=0
 export PP=0
@@ -51,7 +53,7 @@ SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
 
 
-folder=sim_${kphi}_2
+folder=sim_${kphi}_$EPS
 
 #REMOVE OLD SIMULATIONS
 rm ${SLURM_SUBMIT_DIR}/${folder} -rf

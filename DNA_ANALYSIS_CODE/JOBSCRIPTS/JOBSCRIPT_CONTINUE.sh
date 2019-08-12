@@ -38,6 +38,7 @@ cd ${SCRATCH_DIRECTORY}
 
 #reorder old files
 cp -r ${SLURM_SUBMIT_DIR}/* .
+[ -f sim.xyz ] && mv sim.xyz fort.8
 mv fort.8 sim.xyz
 cp fort.5 old.5
 mv fort.9 fort.5

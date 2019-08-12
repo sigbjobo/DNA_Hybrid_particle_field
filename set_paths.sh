@@ -5,6 +5,8 @@ JOB_PATH="${A}/DNA_ANALYSIS_CODE/JOBSCRIPTS/"
 PYTHON_PATH="${A}/DNA_ANALYSIS_CODE/python"
 INPUT_PATH="${A}/DNA_ANALYSIS_CODE/INPUT_FILES"
 OCCAM_PATH="${A}/../occam_dna_parallel/"
+OCCAM_PRESSURE_PATH="${A}/../occam_pressure_parallel/"
+
 OCCAM_PATH_SERIAL="${A}/../occam_dna/"
 EXTRA_PATH="/home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
 SCRATCH_DIRECTORY="\${SCRATCH}"
@@ -14,13 +16,14 @@ SCRATCH_DIRECTORY="\${SCRATCH}"
 sed -i 's|PYTHON_PATH=.*|PYTHON_PATH="'"$PYTHON_PATH"'"|g' ${SHELL_PATH}/*.sh
 sed -i 's|SHELL_PATH=.*|SHELL_PATH="'"$SHELL_PATH"'"|g' ${SHELL_PATH}/*.sh
 sed -i 's|INPUT_PATH=.*|INPUT_PATH="'"$INPUT_PATH"'"|g' ${SHELL_PATH}/*.sh
-sed -i 's|OCCAM_PATH=.*|OCCAM_PATH="'"$OCCAM_PATH"'"|g' ${SHELL_PATH}/*.sh
+
 
 #FIX JOB SCRIPTS
 sed -i 's|PYTHON_PATH=.*|PYTHON_PATH="'"$PYTHON_PATH"'"|g' ${JOB_PATH}/*.sh
 sed -i 's|SHELL_PATH=.*|SHELL_PATH="'"$SHELL_PATH"'"|g' ${JOB_PATH}/*.sh
 sed -i 's|INPUT_PATH=.*|INPUT_PATH="'"$INPUT_PATH"'"|g' ${JOB_PATH}/*.sh
 sed -i 's|OCCAM_PATH=.*|OCCAM_PATH="'"$OCCAM_PATH"'"|g' ${JOB_PATH}/*.sh
+sed -i 's|OCCAM_PRESSURE_PATH=.*|OCCAM_PRESSURE_PATH="'"$OCCAM_PRESSURE_PATH"'"|g' ${JOB_PATH}/*.sh
 sed -i 's|SCRATCH_DIRECTORY=.*|SCRATCH_DIRECTORY="'"$SCRATCH_DIRECTORY"'"|g' ${JOB_PATH}/*.sh
 #sed -i '/\NPROC=/c\\export NPROC=${SLURM_NTASKS}' ${JOB_PATH}/*.sh
 

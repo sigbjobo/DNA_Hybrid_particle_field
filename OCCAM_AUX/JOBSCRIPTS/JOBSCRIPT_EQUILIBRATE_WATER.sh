@@ -48,7 +48,8 @@ function_name () {
     cd $folder
     cp ../INPUT/* .
     
-    a=$(python -c "print((69.24 + 345.39*float('$komp') + 15.56*float('$komp')**0.61)**0.5)")
+#    a=$(python -c "print((69.24 + 345.39*float('$komp') + 15.56*float('$komp')**0.61)**0.5)")
+    a=$(python -c "print(15.02*float('$komp')**0.86 +8.296)")
     echo $komp $a
  
     sed -i "/* compressibility/{n;s/.*/${komp}/}" fort.3
@@ -66,7 +67,7 @@ function_name () {
 #pcouple=("2" "5" "20" "100" "200")
 #komp=("0.1" "0.05" "0.03")
 komp=( "0.03" "0.05" "0.10")
-p=("20" "2" )
+p=("20" )
 r=( "8.33" )
 
 rm -rf SIM_* INPUT

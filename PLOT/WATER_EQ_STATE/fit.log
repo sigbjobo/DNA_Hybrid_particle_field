@@ -1,0 +1,278 @@
+
+
+*******************************************************************************
+Wed Aug 14 11:31:03 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/a_kappa.dat' u 1:4
+        format = x:z
+BREAK: No data to fit
+
+*******************************************************************************
+Wed Aug 14 11:31:35 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/a_kappa.dat' u 1:2
+        format = x:z
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: kompT(x)
+	kompT(x) = a*x**b +c
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b             c            
+   0 8.6660205476e+02   0.00e+00  2.32e-01    1.000000e+00   5.000000e-01   1.000000e-05
+  97 5.4030791333e-05  -1.26e-05  2.32e-02    1.501696e+01   8.576896e-01   8.295957e+00
+
+After 97 iterations the fit converged.
+final sum of squares of residuals : 5.40308e-05
+rel. change during last iteration : -1.26468e-10
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00277825
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.71868e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 15.017           +/- 0.155        (1.032%)
+b               = 0.85769          +/- 0.005427     (0.6328%)
+c               = 8.29596          +/- 0.006331     (0.07631%)
+
+correlation matrix of the fit parameters:
+                a      b      c      
+a               1.000 
+b               0.989  1.000 
+c               0.889  0.944  1.000 
+
+
+*******************************************************************************
+Wed Aug 14 11:33:00 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/a_kappa.dat' u 1:2
+        format = x:z
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: kompT(x)
+	kompT(x) = a*x**b +c
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b             c            
+   0 8.6660205476e+02   0.00e+00  2.32e-01    1.000000e+00   5.000000e-01   1.000000e-05
+  97 5.4030791333e-05  -1.26e-05  2.32e-02    1.501696e+01   8.576896e-01   8.295957e+00
+
+After 97 iterations the fit converged.
+final sum of squares of residuals : 5.40308e-05
+rel. change during last iteration : -1.26468e-10
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00277825
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.71868e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 15.017           +/- 0.155        (1.032%)
+b               = 0.85769          +/- 0.005427     (0.6328%)
+c               = 8.29596          +/- 0.006331     (0.07631%)
+
+correlation matrix of the fit parameters:
+                a      b      c      
+a               1.000 
+b               0.989  1.000 
+c               0.889  0.944  1.000 
+
+
+*******************************************************************************
+Wed Aug 14 11:33:58 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/a_kappa.dat' u 1:2
+        format = x:z
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: kompT(x)
+	kompT(x) = a*x**b +c
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b             c            
+   0 8.6660205476e+02   0.00e+00  2.32e-01    1.000000e+00   5.000000e-01   1.000000e-05
+  97 5.4030791333e-05  -1.26e-05  2.32e-02    1.501696e+01   8.576896e-01   8.295957e+00
+
+After 97 iterations the fit converged.
+final sum of squares of residuals : 5.40308e-05
+rel. change during last iteration : -1.26468e-10
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00277825
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.71868e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 15.017           +/- 0.155        (1.032%)
+b               = 0.85769          +/- 0.005427     (0.6328%)
+c               = 8.29596          +/- 0.006331     (0.07631%)
+
+correlation matrix of the fit parameters:
+                a      b      c      
+a               1.000 
+b               0.989  1.000 
+c               0.889  0.944  1.000 
+
+
+*******************************************************************************
+Wed Aug 14 11:34:36 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/a_kappa.dat' u 1:2
+        format = x:z
+        x range restricted to [0.0500000 : 0.105000]
+        #datapoints = 6
+        residuals are weighted equally (unit weight)
+
+function used for fitting: kompT(x)
+	kompT(x) = a*x**b +c
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b             c            
+   0 5.5895222351e+02   0.00e+00  2.58e-01    1.000000e+00   5.000000e-01   1.000000e-05
+  66 2.9073808135e-03  -3.55e-02  2.58e-06    1.415021e+01   1.359055e-01   1.891943e-05
+
+After 66 iterations the fit converged.
+final sum of squares of residuals : 0.00290738
+rel. change during last iteration : -3.55458e-07
+
+degrees of freedom    (FIT_NDF)                        : 3
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0311308
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.000969127
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 14.1502          +/- 26.29        (185.8%)
+b               = 0.135906         +/- 0.3941       (290%)
+c               = 1.89194e-05      +/- 28.63        (1.513e+08%)
+
+correlation matrix of the fit parameters:
+                a      b      c      
+a               1.000 
+b              -1.000  1.000 
+c              -1.000  1.000  1.000 
+
+
+*******************************************************************************
+Wed Aug 14 11:35:09 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/a_kappa.dat' u 1:2
+        format = x:z
+        x range restricted to [0.00500000 : 0.105000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: kompT(x)
+	kompT(x) = a*x**b +c
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b             c            
+   0 8.6660205476e+02   0.00e+00  2.32e-01    1.000000e+00   5.000000e-01   1.000000e-05
+  97 5.4030791333e-05  -1.26e-05  2.32e-02    1.501696e+01   8.576896e-01   8.295957e+00
+
+After 97 iterations the fit converged.
+final sum of squares of residuals : 5.40308e-05
+rel. change during last iteration : -1.26468e-10
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00277825
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.71868e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 15.017           +/- 0.155        (1.032%)
+b               = 0.85769          +/- 0.005427     (0.6328%)
+c               = 8.29596          +/- 0.006331     (0.07631%)
+
+correlation matrix of the fit parameters:
+                a      b      c      
+a               1.000 
+b               0.989  1.000 
+c               0.889  0.944  1.000 
+
+
+*******************************************************************************
+Wed Aug 14 11:35:31 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/a_kappa.dat' u 1:2
+        format = x:z
+        x range restricted to [0.00500000 : 0.105000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: kompT(x)
+	kompT(x) = a*x**b +c
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b             c            
+   0 8.6660205476e+02   0.00e+00  2.32e-01    1.000000e+00   5.000000e-01   1.000000e-05
+  97 5.4030791333e-05  -1.26e-05  2.32e-02    1.501696e+01   8.576896e-01   8.295957e+00
+
+After 97 iterations the fit converged.
+final sum of squares of residuals : 5.40308e-05
+rel. change during last iteration : -1.26468e-10
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00277825
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.71868e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 15.017           +/- 0.155        (1.032%)
+b               = 0.85769          +/- 0.005427     (0.6328%)
+c               = 8.29596          +/- 0.006331     (0.07631%)
+
+correlation matrix of the fit parameters:
+                a      b      c      
+a               1.000 
+b               0.989  1.000 
+c               0.889  0.944  1.000 
+
+
+*******************************************************************************
+Wed Aug 14 11:38:25 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/a_kappa.dat' u 1:2
+        format = x:z
+        x range restricted to [0.00500000 : 0.105000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: kompT(x)
+	kompT(x) = a*x**b +c
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b             c            
+   0 8.6660205476e+02   0.00e+00  2.32e-01    1.000000e+00   5.000000e-01   1.000000e-05
+  97 5.4030791333e-05  -1.26e-05  2.32e-02    1.501696e+01   8.576896e-01   8.295957e+00
+
+After 97 iterations the fit converged.
+final sum of squares of residuals : 5.40308e-05
+rel. change during last iteration : -1.26468e-10
+
+degrees of freedom    (FIT_NDF)                        : 7
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00277825
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.71868e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 15.017           +/- 0.155        (1.032%)
+b               = 0.85769          +/- 0.005427     (0.6328%)
+c               = 8.29596          +/- 0.006331     (0.07631%)
+
+correlation matrix of the fit parameters:
+                a      b      c      
+a               1.000 
+b               0.989  1.000 
+c               0.889  0.944  1.000 

@@ -34,3 +34,7 @@ compile_plot persistence
 compile_plot benchmark
 compile_plot optimize
 compile_plot hairpin
+compile_plot WATER
+compile_plot MEMBRANE
+
+

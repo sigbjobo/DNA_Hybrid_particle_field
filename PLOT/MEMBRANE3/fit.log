@@ -1,0 +1,156 @@
+
+
+*******************************************************************************
+Wed Aug 14 16:34:42 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/presszz_mean.dat' u (-$1):($2/1E5)
+        format = x:z
+        x range restricted to [-1.00000 : 16.0000]
+        #datapoints = 11
+        residuals are weighted equally (unit weight)
+
+function used for fitting: Pzz(x)
+	Pzz(x) =a1+b1*x +c1*x**2
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a1            b1            c1           
+   0 3.0750831879e+11   0.00e+00  9.74e+04   -1.000000e+02   1.000000e+00   1.800000e+03
+   8 2.8514159069e+00  -1.81e-01  9.74e-04    1.772272e+03   2.701128e+01  -6.149971e-01
+
+After 8 iterations the fit converged.
+final sum of squares of residuals : 2.85142
+rel. change during last iteration : -1.80891e-06
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.597015
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.356427
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a1              = 1772.27          +/- 0.4859       (0.02742%)
+b1              = 27.0113          +/- 0.1385       (0.5127%)
+c1              = -0.614997        +/- 0.008894     (1.446%)
+
+correlation matrix of the fit parameters:
+                a1     b1     c1     
+a1              1.000 
+b1             -0.845  1.000 
+c1              0.682 -0.950  1.000 
+
+
+*******************************************************************************
+Wed Aug 14 16:34:42 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/pressxx_mean.dat' u (-$1):($2/1E5)
+        format = x:z
+        x range restricted to [-1.00000 : 16.0000]
+        #datapoints = 11
+        residuals are weighted equally (unit weight)
+
+function used for fitting: Pxx(x)
+	Pxx(x) =a2+b2*x +c2*x**2
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a2            b2            c2           
+   0 3.6018606009e+07   0.00e+00  5.43e+01    1.000000e+00   1.000000e+00   1.000000e+00
+   6 2.7365518018e+00  -7.91e-06  5.43e-05    1.820008e+03   1.124068e+01  -2.205031e-01
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 2.73655
+rel. change during last iteration : -7.91082e-11
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.584867
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.342069
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a2              = 1820.01          +/- 0.4761       (0.02616%)
+b2              = 11.2407          +/- 0.1357       (1.207%)
+c2              = -0.220503        +/- 0.008713     (3.951%)
+
+correlation matrix of the fit parameters:
+                a2     b2     c2     
+a2              1.000 
+b2             -0.845  1.000 
+c2              0.682 -0.950  1.000 
+
+
+*******************************************************************************
+Wed Aug 14 16:34:42 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/press_mean.dat'   u  (-$1):($2/1E5)
+        format = x:z
+        x range restricted to [-1.00000 : 16.0000]
+        #datapoints = 11
+        residuals are weighted equally (unit weight)
+
+function used for fitting: P(x)
+	P(x) = a3+b3*x +c3*x**2
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a3            b3            c3           
+   0 1.0102514818e+07   0.00e+00  1.17e+03    1.800000e+03   1.000000e+01  -1.000000e+01
+   5 1.8901764283e+00  -7.22e-02  1.17e-02    1.803767e+03   1.660951e+01  -3.591738e-01
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 1.89018
+rel. change during last iteration : -7.21664e-07
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.486078
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.236272
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a3              = 1803.77          +/- 0.3956       (0.02193%)
+b3              = 16.6095          +/- 0.1128       (0.6789%)
+c3              = -0.359174        +/- 0.007241     (2.016%)
+
+correlation matrix of the fit parameters:
+                a3     b3     c3     
+a3              1.000 
+b3             -0.845  1.000 
+c3              0.682 -0.950  1.000 
+
+
+*******************************************************************************
+Wed Aug 14 16:34:42 2019
+
+
+FIT:    data read from 'PRESSURE_DATA/klm_a.dat' u (-$1):2
+        format = x:z
+        x range restricted to [-1.00000 : 16.0000]
+        #datapoints = 11
+        residuals are weighted equally (unit weight)
+
+function used for fitting: kompT(x)
+	kompT(x) = a4+b4*x +c4*x**2
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a4            b4            c4           
+   0 1.9525801518e+07   0.00e+00  1.17e+03    1.800000e+03   1.000000e+01  -1.000000e+01
+   6 1.1389085449e-05  -1.96e-06  1.17e-03    9.509977e+00   4.338931e-02  -9.664031e-04
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 1.13891e-05
+rel. change during last iteration : -1.9581e-11
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00119316
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.42364e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a4              = 9.50998          +/- 0.0009712    (0.01021%)
+b4              = 0.0433893        +/- 0.0002768    (0.6379%)
+c4              = -0.000966403     +/- 1.777e-05    (1.839%)
+
+correlation matrix of the fit parameters:
+                a4     b4     c4     
+a4              1.000 
+b4             -0.845  1.000 
+c4              0.682 -0.950  1.000 

@@ -11,10 +11,51 @@ set terminal epslatex size 3.4,2.3 font ",10" standalone header '\usepackage{siu
 
 
 # PLOT PRESSURE AS FUNCTION OF KAPPA 
-set output "kappa_P.tex"
+set output "p_kappa_water.tex"
+set xtics 0.02
+set xrange [0.005:0.105]
 set ylabel '$P/\si{bar}$'
 set xlabel '$\kappa/\si{kJ^{-1}.mol}$'
-plot 'PRESSURE_DATA/press_mean.dat' u ($1):($2/1E5) w l lw 2 t '$\kappa=0.01$',\
+plot 'PRESSURE_DATA/press_mean.dat' u ($1):($2/1E5) w l lw 2 t ''
+ 
+# PLOT PRESSURE AS FUNCTION OF KAPPA 
+set ytics 0.25
+set output "a_kappa_water.tex"
+set ylabel '$a/\si{nm^{-3}}$'
+set xlabel '$\kappa/\si{kJ^{-1}.mol}$'
+kompT(x) = a*x**b +c
+c=0.00001
+b=0.5
+fit kompT(x) 'PRESSURE_DATA/a_kappa.dat' u 1:2  via a, b, c
+title_f(a,b,c) = sprintf('\footnotesize %.2f$\kappa^{%.2f}$+%.3f', a, b,c)
+plot 'PRESSURE_DATA/a_kappa.dat' u 1:2 w p lw 2 t '',\
+     "PRESSURE_DATA/a_kappa.dat" u 1:(kompT($1)) w l lw 2 t title_f(a,b,c)
+
+# PLOT DENSITY  AS FUNCTION OF KAPPA 
+set ytics 50
+set xtics 500
+set output "dens_kappa_equil.tex"
+set ylabel '$\rho/\si{kg.m^{-3}}$'
+set xlabel '$t/\si{ps}$'
+set yrange [975:1125]
+set xrange [0:2000]
+plot 'PRESSURE_DATA_EQUIL/dens.dat' u ($1*0.03):2 w l lw 2 t '$\kappa=0.03$',\
+     'PRESSURE_DATA_EQUIL/dens.dat' u ($3*0.03):4 w l lw 2 t '$\kappa=0.05$',\
+     'PRESSURE_DATA_EQUIL/dens.dat' u ($5*0.03):6 w l lw 2 t '$\kappa=0.10$'
+
+set output "press_kappa_equil.tex"
+set ylabel '$P/\si{bar}$'
+set xlabel '$t/\si{ps}$'
+set yrange [-50:600]
+set xrange [0:2000]
+set ytics  100
+plot 'PRESSURE_DATA_EQUIL/press.dat' u ($1*0.03):($2*1E-5) w l lw 2 t '$\kappa=0.03$',\
+     'PRESSURE_DATA_EQUIL/press.dat' u ($3*0.03):($4*1E-5) w l lw 2 t '$\kappa=0.05$',\
+     'PRESSURE_DATA_EQUIL/press.dat' u ($5*0.03):($6*1E-5) w l lw 2 t '$\kappa=0.10$'
+
+
+
+
 
 
 #      'density/phi_0.03.dat' u ($1/8.33):($2*8.33) w l lw 2 t '$\kappa=0.03$',\

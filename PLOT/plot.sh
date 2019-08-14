@@ -34,3 +34,4 @@ compile_plot persistence
 compile_plot benchmark
 compile_plot optimize
 compile_plot hairpin
+compile_plot water_eq_state

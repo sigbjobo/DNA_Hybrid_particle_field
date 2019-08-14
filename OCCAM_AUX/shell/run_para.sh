@@ -27,7 +27,7 @@ rm -f fort.[1-9][0-9]
 rm -f fort.7 fort.2  fort.8 
 
 cp ${OCCAM_PATH}/occamcgmpi ${CURRENT_DIREC}/
-cp ${OCCAM_PATH}/IOPC_input2/iopc ${CURRENT_DIREC}/
+cp ${OCCAM_PATH}/IOPC_input/iopc ${CURRENT_DIREC}/
 
 #PREPARE IOPC FORWARD
 cp fort.5 fort.10
@@ -61,7 +61,7 @@ python3 ${PYTHON_PATH}/remake_fort9.py
 rm -f fort.[1-9][0-9][0-9][0-9]
 rm -f fort.[1-9][0-9][0-9]
 rm -f fort.[2-9][0-9]
-
+rm -f fort.15 
 
 
 end2=`date +%s`

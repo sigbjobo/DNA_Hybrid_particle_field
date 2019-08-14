@@ -13,7 +13,7 @@ fp_out=open('fort.9','w')
 fort15_lines = open('fort.15')
 
 #FILES CONTAINING THE FINAL CONFIGUARTION
-final_configs = glob.glob('./fort.[4-5][0-9][0-9]')
+final_configs = glob.glob('./fort.[4-5][0-9][0-9][0-9]')
 
 #MAKE INDEX LIST FOR ATOMS in fort.5
 index=[]
@@ -49,5 +49,3 @@ for l in fort9_lines:
     fp_out.write('%s\n'%(' '.join(ls)))
 
 fp_out.close()
-
-

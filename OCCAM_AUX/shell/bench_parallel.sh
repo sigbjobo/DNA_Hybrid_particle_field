@@ -15,7 +15,7 @@ set -o errexit # exit on errors
 module load intel/2018b
 module load OpenMPI/2.0.1-iccifort-2017.1.132-GCC-5.4.0-2.26
 module load FFTW/3.3.7-intel-2018a
-SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
+SHELL_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/shell"
 OCCAM_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/../occam_dna_parallel/"
 
 

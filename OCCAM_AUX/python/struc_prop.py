@@ -2,9 +2,9 @@ import sys
 import numpy as np
 from scipy.optimize import minimize
 #Setting paths                                                                                                            
-SHELL_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/shell"
-PYTHON_PATH="/cluster/home/sigbjobo/DNA/DNA_Hybrid_particle_field/DNA_ANALYSIS_CODE/python"
-EXTRA_PATH="/home/sigbjobo/Stallo/Projects/DNA/DNA_Hybrid_particle_field/DNA_CODE_PLOT/DNA_ANALYSIS_CODE/python"
+SHELL_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/shell"
+PYTHON_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/python"
+EXTRA_PATH="/home/sigbjobo/Stallo/Projects/HPF/PLOT/python"
 sys.path.append(SHELL_PATH)
 sys.path.append(PYTHON_PATH)
 sys.path.append(EXTRA_PATH)

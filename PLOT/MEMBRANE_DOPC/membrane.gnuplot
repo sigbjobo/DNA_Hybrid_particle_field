@@ -27,19 +27,20 @@ b3=10
 c3=-10
 
 
-fit Pzz(x) 'PRESSURE_DATA/presszz_mean.dat' u (-$1):($2/1E5)  via a1, b1, c1
-fit Pxx(x) 'PRESSURE_DATA/pressxx_mean.dat' u (-$1):($2/1E5)  via a2, b2, c2
-fit P(x)   'PRESSURE_DATA/press_mean.dat'   u  (-$1):($2/1E5)  via a3, b3, c3
-title_p(a3,b3,c3)   = sprintf('\tiny{ $P=$%.1f +%.2f$K_{\text ST}$%.3f$K_{\text ST}^2$}', a3, b3,c3)
-title_pxx(a2,b2,c2) = sprintf('\tiny{ $P_{xx}=$%.1f +%.2f$K_{\text ST}$%.3f$K_{\text ST}^2$}', a2, b2,c2)
-title_pzz(a1,b1,c1) = sprintf('\tiny{ $P_{zz}=$%.1f +%.2f$K_{\text ST}$%.3f$K_{\text ST}^2$}', a1, b1,c1)
+# fit Pzz(x) 'PRESSURE_DATA/presszz_mean.dat' u (-$1):($2/1E5)  via a1, b1, c1
+# fit Pxx(x) 'PRESSURE_DATA/pressxx_mean.dat' u (-$1):($2/1E5)  via a2, b2, c2
+# fit P(x)   'PRESSURE_DATA/press_mean.dat'   u  (-$1):($2/1E5)  via a3, b3, c3
+# title_p(a3,b3,c3)   = sprintf('\tiny{ $P=$%.1f +%.2f$K_{\text ST}$%.3f$K_{\text ST}^2$}', a3, b3,c3)
+# title_pxx(a2,b2,c2) = sprintf('\tiny{ $P_{xx}=$%.1f +%.2f$K_{\text ST}$%.3f$K_{\text ST}^2$}', a2, b2,c2)
+# title_pzz(a1,b1,c1) = sprintf('\tiny{ $P_{zz}=$%.1f +%.2f$K_{\text ST}$%.3f$K_#{\
+#text ST}^2$}', a1, b1,c1)
 
-plot 'PRESSURE_DATA/press_mean.dat' u (-$1):($2/1E5) w p lw 2 lc 1 t '',\
-     '< sort -nk1 PRESSURE_DATA/press_mean.dat' u   (-$1):(P(-$1)) w l lw 2 lc 1 t title_p(a3,b3,c3),\
-     'PRESSURE_DATA/pressxx_mean.dat' u (-$1):($2/1E5) w p lw 2 lc 2 t '',\
-     '< sort -nk1 PRESSURE_DATA/pressxx_mean.dat' u   (-$1):(Pxx(-$1)) w l lw 2 lc 2 t title_pxx(a2,b2,c2),\
-     'PRESSURE_DATA/presszz_mean.dat' u (-$1):($2/1E5) w p lw 2 lc 3 t '',\
-     '< sort -nk1 PRESSURE_DATA/presszz_mean.dat' u   (-$1):(Pzz(-$1)) w l lw 2 lc 3 t title_pzz(a1,b1,c1)
+plot 'PRESSURE_DATA/press_mean.dat' u (-$1):($2/1E5) w p lw 2 lc 1 t ''
+     # '< sort -nk1 PRESSURE_DATA/press_mean.dat' u   (-$1):(P(-$1)) w l lw 2 lc 1 t title_p(a3,b3,c3),\
+     # 'PRESSURE_DATA/pressxx_mean.dat' u (-$1):($2/1E5) w p lw 2 lc 2 t '',\
+     # '< sort -nk1 PRESSURE_DATA/pressxx_mean.dat' u   (-$1):(Pxx(-$1)) w l lw 2 lc 2 t title_pxx(a2,b2,c2),\
+     # 'PRESSURE_DATA/presszz_mean.dat' u (-$1):($2/1E5) w p lw 2 lc 3 t '',\
+     # '< sort -nk1 PRESSURE_DATA/presszz_mean.dat' u   (-$1):(Pzz(-$1)) w l lw 2 lc 3 t title_pzz(a1,b1,c1)
 
 
 # CROSSING AT klm=-5.46

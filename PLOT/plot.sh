@@ -35,3 +35,5 @@ compile_plot benchmark
 compile_plot optimize
 compile_plot hairpin
 compile_plot water_eq_state
+#compile_plot MEM_DOPC
+compile_plot MEM_DSPC

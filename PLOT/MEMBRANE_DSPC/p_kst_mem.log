@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.10.4)  14 AUG 2019 15:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.10.4)  15 AUG 2019 15:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -532,11 +532,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \gptboxwidth=\skip57
 \gptboxtext=\box50
 Package epstopdf Info: Source file: <p_kst_mem-inc.eps>
-(epstopdf)                    date: 2019-08-14 15:58:28
-(epstopdf)                    size: 19707 bytes
+(epstopdf)                    date: 2019-08-15 15:40:24
+(epstopdf)                    size: 19715 bytes
 (epstopdf)             Output file: <p_kst_mem-inc-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-08-14 15:19:24
-(epstopdf)                    size: 3823 bytes
+(epstopdf)                    date: 2019-08-15 15:40:04
+(epstopdf)                    size: 3832 bytes
 (epstopdf)             Command: <repstopdf --outfile=p_kst_mem-inc-eps-converte
 d-to.pdf p_kst_mem-inc.eps>
 (epstopdf)             \includegraphics on input line 172.
@@ -544,8 +544,8 @@ runsystem(repstopdf --outfile=p_kst_mem-inc-eps-converted-to.pdf p_kst_mem-inc.
 eps)...executed safely (allowed).
 
 Package epstopdf Info: Result file: <p_kst_mem-inc-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-08-14 15:59:02
-(epstopdf)                    size: 3823 bytes.
+(epstopdf)                    date: 2019-08-15 15:40:25
+(epstopdf)                    size: 3831 bytes.
 
 
 pdfTeX warning: pdflatex (file ./p_kst_mem-inc-eps-converted-to.pdf): PDF inclu
@@ -569,18 +569,15 @@ Here is how much of TeX's memory you used:
  39i,16n,34p,10376b,621s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/c
 m-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/publi
-c/cm-super/sfrm0500.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.
-pfb>
-Output written on p_kst_mem.pdf (1 page, 90702 bytes).
+mi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fo
+nts/type1/public/cm-super/sfrm0700.pfb>
+Output written on p_kst_mem.pdf (1 page, 47252 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
- 34 compressed objects within 1 object stream
+ 36 PDF objects out of 1000 (max. 8388607)
+ 25 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

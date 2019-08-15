@@ -3,7 +3,7 @@
 #SBATCH --account=nn4654k
 #SBATCH --time=0-12:00:0
 ##SBATCH --nodes=1
-#SBATCH --ntasks=5
+#SBATCH --ntasks=40
 #SBATCH --mem-per-cpu=2G
 ##SBATCH --error=sim.err
 #rm sim.err
@@ -30,63 +30,65 @@ SLURM_SUBMIT_DIR=$(pwd)
 export NPROC=${SLURM_NTASKS}
 echo "NUMBER OF PROCESSORS USED: $NPROC"
 
+rm  -rf SIM_*
+
+
+tens=$(cat tensionless_para.dat)
+klm=$(python -c "print('%.2f'%(float('$tens'.split()[0])))")
+a=$(python -c "print('%.2f'%(float('$tens'.split()[1])))")
+
+cd ${SCRATCH_DIRECTORY}
+
+
+#REMOVE OLD SIMULATIONS
 
 function_name () { 
-    # Folder
-
+    
     #pcouple
-    pcouple=$1
+    p=$1
 
     #kompressibility
-    komp=$2
+    k=$2
 
-   
-    RHO0=$3
+    klm=$3
     
-    folder=SIM_${komp}_${pcouple}
+    folder=SIM_${p}_${k}_${klm}
     mkdir $folder
     cd $folder
-    cp ../INPUT/* .
+    cp -r ${INPUT_PATH}/MEM_DOPC/* .
     
-#    a=$(python -c "print((69.24 + 345.39*float('$komp') + 15.56*float('$komp')**0.61)**0.5)")
-    a=$(python -c "print(15.02*float('$komp')**0.86 +8.296)")
-    echo $komp $a
+    #Set compressibility
  
-    sed -i "/* compressibility/{n;s/.*/${komp}/}" fort.3
-    sed -i "/* rho0:/{n;s/.*/${RHO0}/}" fort.3
     sed -i "/eq_state_dens:/{n;s/.*/${a}/}" fort.1
-    sed -i "/pressure_coupling:/{n;s/.*/${pcouple}/}" fort.1
-    bash ${SHELL_PATH}/run_para.sh
-    
-    cd ..
-   
+    sed -i "/pressure_coupling:/{n;s/.*/${p}/}" fort.1
+    sed -i "/ensemble:/{n;s/.*/NPT/}" fort.1
+    sed -i "/semi_iso:/{n;s/.*/1/}" fort.1
 
+    sed -i -e "s/KLM/${klm}/g" fort.3
+    sed -i "/* compressibility/{n;s/.*/${k}/}" fort.3
+    bash ${SHELL_PATH}/run_para.sh
+   
+    python ${PYTHON_PATH}/COMP_PRESSURE_PROFILES.py 1
+    cd ..    
 }
 
 
-#pcouple=("2" "5" "20" "100" "200")
-#komp=("0.1" "0.05" "0.03")
-komp=( "0.03" "0.05" "0.10")
-p=("20" )
-r=( "8.33" )
+KLM=("$klm")
 
-rm -rf SIM_* INPUT
-cd ${SCRATCH}
-mkdir INPUT
-cd INPUT
-cp ${INPUT_PATH}/WATER/* .
-python ${PYTHON_PATH}/water_box.py 9.688 9.163	    
-cd ..
-for k in "${komp[@]}";do
-    for pi in "${p[@]}";do
-	function_name $pi $k $r 
+komp=( "0.05" )
+pcouple=( "20" )
+ 
+for p in "${pcouple[@]}";do
+    for k in "${komp[@]}";do
+	for klm in "${KLM[@]}";do
+	    function_name $p $k ${klm} 
+	done
     done
-done
-
+done 
 cp -r SIM_* ${SLURM_SUBMIT_DIR}/
-
-cd ${SLURM_SUBMIT_DIR}/
+cd  ${SLURM_SUBMIT_DIR}/
 bash ${SHELL_PATH}/comp_pressure_stats.sh
+
 wait
 echo "DONE"
 

@@ -86,7 +86,7 @@ for k in "${komp[@]}";do
 done
 
 bash ${SHELL_PATH}/comp_pressure_stats.sh
-python ${PYTHON_PATH}/find_a_para_water.py press_mean.dat
+python ${PYTHON_PATH}/find_a_para_water.py pressavg_mean.dat
 cp  -r SIM_* PRESSURE_DATA ${SLURM_SUBMIT_DIR}/
 wait
 echo "DONE"

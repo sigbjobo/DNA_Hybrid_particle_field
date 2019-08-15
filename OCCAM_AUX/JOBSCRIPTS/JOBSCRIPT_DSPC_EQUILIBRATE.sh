@@ -2,9 +2,9 @@
 #SBATCH --job-name=PER_SINGLE
 #SBATCH --account=nn4654k
 #SBATCH --time=0-12:00:0
-##SBATCH --nodes=1
-#SBATCH --ntasks=40
-#SBATCH --mem-per-cpu=2G
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=40
+#SBATCH --mem-per-cpu=4G
 ##SBATCH --error=sim.err
 #rm sim.err
 
@@ -62,6 +62,11 @@ function_name () {
     sed -i "/pressure_coupling:/{n;s/.*/${p}/}" fort.1
     sed -i "/ensemble:/{n;s/.*/NPT/}" fort.1
     sed -i "/semi_iso:/{n;s/.*/1/}" fort.1
+    sed -i "/press_print:/{n;s/.*/20000/}" fort.1
+    sed -i "/trj_print:/{n;s/.*/10000/}" fort.1
+    sed -i "/out_print:/{n;s/.*/5000/}" fort.1
+    sed -i "/number_of_steps:/{n;s/.*/10000000/}" fort.1
+	
 
     sed -i -e "s/KLM/${klm}/g" fort.3
     sed -i "/* compressibility/{n;s/.*/${k}/}" fort.3
@@ -83,7 +88,7 @@ for p in "${pcouple[@]}";do
 	done
     done
 done 
-cp -r SIM_* ${SLURM_SUBMIT_DIR}/
+mv * ${SLURM_SUBMIT_DIR}/
 cd  ${SLURM_SUBMIT_DIR}/
 bash ${SHELL_PATH}/comp_pressure_stats.sh
 

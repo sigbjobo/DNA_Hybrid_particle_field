@@ -8,7 +8,7 @@ set terminal epslatex size 3.4,2.3 font ",10" standalone header '\usepackage{siu
 
 
 # PLOT PRESSURE AS FUNCTION OF KAPPA 
-set output "p_kst_mem.tex"
+set output "p_kst_memdspc.tex"
 set xtics 2
 set xrange [-1:16]
 set ylabel '$P/\si{bar}$'
@@ -51,7 +51,8 @@ plot 'PRESSURE_DATA/pressavg_mean.dat' u (-$1):($2/1E5) w p lw 2 lc 1 t '',\
 
 # PLOT PRESSURE AS FUNCTION OF KAPPA 
 set ytics 0.25
-set output "a_kst_mem.tex"
+set yrange [9:10]
+set output "a_kst_memdspc.tex"
 set ylabel '$a/\si{nm^{-3}}$'
 set xlabel '$K_{\text{ST}}/\si{kJ^{-1}.mol}$'
 kompT(x) = a4+b4*x +c4*x**2
@@ -72,7 +73,7 @@ plot 'PRESSURE_DATA/klm_a.dat' u (-$1):2 w p lw 2 lc 1 t '' ,\
 # NPT
 
 
-set output "L_NPT.tex"
+set output "L_NPTdspc.tex"
 set xlabel '$t/\si{ps}$'
 set ylabel '$L/\si{nm}$'
 set xtics 500
@@ -85,7 +86,7 @@ plot "PRESSURE_DATA_EQ/lx.dat" u ($1*0.03):2 w l t'$L_{xx,yy}$',\
      "PRESSURE_DATA_EQ/lz.dat" u ($1*0.03):2 w l t'$L_{zz}$'
 
 
-set output "P_NPT.tex"
+set output "P_NPTdspc.tex"
 set xlabel '$t/\si{ps}$'
 set ylabel '$P/\si{bar}$'
 set xtics 500

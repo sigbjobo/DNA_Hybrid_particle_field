@@ -79,11 +79,11 @@ set ylabel '$L/\si{nm}$'
 set xtics 500
 set ytics 0.25
 
-set xrange [0:3000]
+set xrange [0:300]
 set yrange [12.9:14.1]
 set key center right
-plot "PRESSURE_DATA_EQ/lx.dat" u ($1*0.03):2 w l t'$L_{xx,yy}$',\
-     "PRESSURE_DATA_EQ/lz.dat" u ($1*0.03):2 w l t'$L_{zz}$'
+plot "PRESSURE_DATA_EQ/lx.dat" u ($1*0.03*1E-3):2 w l t'$L_{xx,yy}$',\
+     "PRESSURE_DATA_EQ/lz.dat" u ($1*0.03*1E-3):2 w l t'$L_{zz}$'
 
 
 
@@ -93,12 +93,12 @@ set ylabel '$P/\si{bar}$'
 set xtics 500
 set ytics 7.5
 set key top right
-set xrange [0:3000]
+set xrange [0:300]
 set yrange [-30:35]
 
-plot "PRESSURE_DATA_EQ/pressavg.dat" u ($1*0.03):($2/1E5) w l t'$P$',\
-     "PRESSURE_DATA_EQ/pressxxavg.dat" u ($1*0.03):($2/1E5) w l t'$P_{L}$',\
-     "PRESSURE_DATA_EQ/presszzavg.dat" u ($1*0.03):($2/1E5) w l t'$P_{N}$'
+plot "PRESSURE_DATA_EQ/pressavg.dat" u ($1*0.03*1E-3):($2/1E5) w l t'$P$',\
+     "PRESSURE_DATA_EQ/pressxxavg.dat" u ($1*0.03*1E-3):($2/1E5) w l t'$P_{L}$',\
+     "PRESSURE_DATA_EQ/presszzavg.dat" u ($1*0.03*1E-3):($2/1E5) w l t'$P_{N}$'
 
 
 
@@ -109,11 +109,11 @@ set ylabel '$a/\si{nm^2}$'
 set xtics 500
 set ytics 0.05
 
-set xrange [0:3000]
+set xrange [0:300]
 set yrange [0.6:0.75]
 set key top right
-plot "../MEMBRANE_DOPC/PRESSURE_DATA_EQ/lx.dat" u ($1*0.03):(2*$2**2/468) w l t 'DOPC',\
-     "../MEMBRANE_DSPC/PRESSURE_DATA_EQ/lx.dat" u ($1*0.03):(2*$2**2/528) w l t 'DSPC',\
+plot "../MEMBRANE_DOPC/PRESSURE_DATA_EQ/lx.dat" u ($1*0.03*1E-3):(2*$2**2/468) w l t 'DOPC',\
+     "../MEMBRANE_DSPC/PRESSURE_DATA_EQ/lx.dat" u ($1*0.03*1E-3):(2*$2**2/528) w l t 'DSPC',\
     
 # SURFACE TENSION
 set output "mem_tension_kst.tex"

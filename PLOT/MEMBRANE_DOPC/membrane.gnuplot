@@ -101,6 +101,8 @@ plot "PRESSURE_DATA_EQ/pressavg.dat" u ($1*0.03):($2/1E5) w l t'$P$',\
      "PRESSURE_DATA_EQ/presszzavg.dat" u ($1*0.03):($2/1E5) w l t'$P_{N}$'
 
 
+
+# AREA PER LIPID
 set output "lipid_area_NPT.tex"
 set xlabel '$t/\si{ps}$'
 set ylabel '$a/\si{nm^2}$'
@@ -110,6 +112,49 @@ set ytics 0.05
 set xrange [0:3000]
 set yrange [0.6:0.75]
 set key top right
-plot "../MEMBRANE_DOPC/PRESSURE_DATA_EQ/lx.dat" u ($1*0.03):(2*$2**2/468) w l t'DOPC',\
-     "../MEMBRANE_DSPC/PRESSURE_DATA_EQ/lx.dat" u ($1*0.03):(2*$2**2/528) w l t'DSPC',\
+plot "../MEMBRANE_DOPC/PRESSURE_DATA_EQ/lx.dat" u ($1*0.03):(2*$2**2/468) w l t 'DOPC',\
+     "../MEMBRANE_DSPC/PRESSURE_DATA_EQ/lx.dat" u ($1*0.03):(2*$2**2/528) w l t 'DSPC',\
     
+# SURFACE TENSION
+set output "mem_tension_kst.tex"
+set xrange [-1:16]
+set yrange [-150:200]
+set ylabel '$\gamma/\si{mJ.m^{-2}}$'
+set xlabel '$K_{\text ST}/\si{kJ^{-1}.mol}$'
+set xtics 2
+set ytics 50
+set key  left
+
+Pzz(x) =a1+b1*x +c1*x**2
+c1=1800
+b1=1
+a1=-100
+
+fit Pzz(x)'< paste ../MEMBRANE_DOPC/PRESSURE_DATA/presszzavg_mean.dat ../MEMBRANE_DOPC/PRESSURE_DATA/pressxxavg_mean.dat' u (-$1):(1000*($2-$5)*14E-9) via a1, b1, c1
+fit Pxx(x)'< paste ../MEMBRANE_DSPC/PRESSURE_DATA/presszzavg_mean.dat ../MEMBRANE_DSPC/PRESSURE_DATA/pressxxavg_mean.dat' u (-$1):(1000*($2-$5)*14E-9) via a2, b2, c2
+set xzeroaxis
+
+plot '< paste ../MEMBRANE_DOPC/PRESSURE_DATA/presszzavg_mean.dat ../MEMBRANE_DOPC/PRESSURE_DATA/pressxxavg_mean.dat' u (-$1):(1000*($2-$5)*14E-9) w p lc 1 t '',\
+     '< sort -nk1 ../MEMBRANE_DOPC/PRESSURE_DATA/presszzavg_mean.dat' u (-$1):(Pzz(-$1)) w l lc 1 t 'DOPC',\
+     '< paste ../MEMBRANE_DSPC/PRESSURE_DATA/presszzavg_mean.dat ../MEMBRANE_DSPC/PRESSURE_DATA/pressxxavg_mean.dat' u (-$1):(1000*($2-$5)*14E-9) w p lc 2 t '',\
+     '< sort -nk1 ../MEMBRANE_DOPC/PRESSURE_DATA/presszzavg_mean.dat ' u (-$1):(Pxx(-$1)) w l lc 2 t 'DSPC'
+
+# a-combined
+set ytics 0.25
+set yrange [9.25:10]
+set output "a_kst_mem.tex"
+set ylabel '$a/\si{nm^{-3}}$'
+set xlabel '$K_{\text{ST}}/\si{kJ^{-1}.mol}$'
+
+fit kompT(x) 'PRESSURE_DATA/klm_a.dat' u (-$1):2  via a4, b4, c4
+a5=a4
+b5=b4
+c5=c4
+Pxx(x) = a5+b5*x +c5*x**2
+
+fit Pxx(x)  '../MEMBRANE_DSPC/PRESSURE_DATA/klm_a.dat' u (-$1):2  via a5, b5, c5
+
+plot 'PRESSURE_DATA/klm_a.dat' u (-$1):2 w p lw 2 lc 1 t '' ,\
+     '< sort -nk1 PRESSURE_DATA/klm_a.dat' u (-$1):(kompT(-$1)) w l lw 2 lc 1 t'DOPC',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA/klm_a.dat' u (-$1):2 w p lw 2 lc 2 t '' ,\
+     '< sort -nk1 ../MEMBRANE_DSPC/PRESSURE_DATA/klm_a.dat' u (-$1):(Pxx(-$1)) w l lw 2 lc 2 t'DSPC'

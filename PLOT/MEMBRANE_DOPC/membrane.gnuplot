@@ -166,7 +166,7 @@ set terminal epslatex size 2.5,1.5 font ",10" standalone header '\usepackage{siu
 
 
 set ylabel 'P/\si{bar}'
-set xlabel 'z/\si{nm}'
+set xlabel '$z/$\si{nm}'
 
 set xrange [0:14]
 set yrange [-1000:1000]
@@ -175,29 +175,50 @@ set key spacing 0.75
 set key samplen 0.5
 set key at -2.5,800
 set output 'scf_press_dspc.tex'
-plot '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):($2/1E5) w l t '\tiny$P_0$',\
-     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):(0.5*($3+$4)/1E5) w l t '\tiny$P_{1,\si L}$',\
-     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):($5/1E5) w l t '\tiny$P_{1,\si N}$',\
+plot '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):($2/1E5) w l lw 2 t '\tiny$P_0$',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):(0.5*($3+$4)/1E5) w l lw 2 t '\tiny$P_{1,\si L}$',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):($5/1E5) w l lw 2 t '\tiny$P_{1,\si N}$',\
 
 set output 'bond_press_dspc.tex'
-plot '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/bond_press.dat' u ($1*14):(0.5*($2+$3)/1E5) w l t '\tiny$P_{\si{bnd,L}}$',\
-     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/bond_press.dat' u ($1*14):($4/1E5) w l t '\tiny$P_{\si{bnd,N}}$'
+plot '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/bond_press.dat' u ($1*14):(0.5*($2+$3)/1E5) w l lw 2 t '\tiny$P_{\si{bnd,L}}$',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/bond_press.dat' u ($1*14):($4/1E5) w l lw 2 t '\tiny$P_{\si{bnd,N}}$'
 set output 'ang_press_dspc.tex'
-plot '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/angle_press.dat' u ($1*14):(0.5*($2+$3)/1E5) w l t '\tiny$P_{\si{ang,L}}$',\
-     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/angle_press.dat' u ($1*14):($4/1E5) w l t '\tiny$P_{\si{ang,N}}$'
+plot '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/angle_press.dat' u ($1*14):(0.5*($2+$3)/1E5) w l lw 2 t '\tiny$P_{\si{ang,L}}$',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/angle_press.dat' u ($1*14):($4/1E5) w l lw 2 t '\tiny$P_{\si{ang,N}}$'
 
 set output 'scf_press_dopc.tex'
-plot '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):($2/1E5) w l t '\tiny$P_0$',\
-     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):(0.5*($3+$4)/1E5) w l t '\tiny$P_{1,\si L}$',\
-     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):($5/1E5) w l t '\tiny$P_{1,\si N}$',\
+plot '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):($2/1E5) w l lw 2 t '\tiny$P_0$',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):(0.5*($3+$4)/1E5) w l lw 2 t '\tiny$P_{1,\si L}$',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/scf_press.dat' u ($1*14):($5/1E5) w l lw 2 t '\tiny$P_{1,\si N}$',\
 
 set output 'bond_press_dopc.tex'
-plot '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/bond_press.dat' u ($1*14):(0.5*($2+$3)/1E5) w l t '\tiny$P_{\si{bnd,L}}$',\
-     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/bond_press.dat' u ($1*14):($4/1E5) w l t '\tiny$P_{\si{bnd,N}}$'
+plot '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/bond_press.dat' u ($1*14):(0.5*($2+$3)/1E5) w l lw 2 t '\tiny$P_{\si{bnd,L}}$',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/bond_press.dat' u ($1*14):($4/1E5) w l lw 2 t '\tiny$P_{\si{bnd,N}}$'
 set output 'ang_press_dopc.tex'
-plot '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/angle_press.dat' u ($1*14):(0.5*($2+$3)/1E5) w l t '\tiny$P_{\si{ang,L}}$',\
-     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/angle_press.dat' u ($1*14):($4/1E5) w l t '\tiny$P_{\si{ang,N}}$'
+plot '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/angle_press.dat' u ($1*14):(0.5*($2+$3)/1E5) w l lw 2 t '\tiny$P_{\si{ang,L}}$',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/angle_press.dat' u ($1*14):($4/1E5) w l lw 2 t '\tiny$P_{\si{ang,N}}$'
 
 
+
+set ylabel '$\phi$/\si{nm^{-3}}'
+set xlabel '$z/$\si{nm}'
+
+set xrange [0:14]
+set yrange [0:12]
+set ytics 200
+
+set output 'density_dopc.tex'
+set key at 0,8
+plot '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($2) w l lw 2 t '\tiny N',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($3) w l lw 2 t '\tiny P',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($4) w l lw 2 t '\tiny G',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($5+$6) w l lw 2 t '\tiny C',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($7) w l lw 2 t '\tiny W',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA/density_0.dat' u ($1*14):($2) w l lw 2 dt 3  lc 1 t '',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA/density_0.dat' u ($1*14):($3) w l lw 2 dt 3  lc 2 t '',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA/density_0.dat' u ($1*14):($4) w l lw 2 dt 3  lc 3 t '',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA/density_0.dat' u ($1*14):($5+$6) w l lw 2 dt 3  lc 4 t '',\
+     '../MEMBRANE_DOPC/PRESSURE_DATA/density_0.dat' u ($1*14):($7) w l lw 2 dt 3  lc 5 t ''
+     						 
 
 

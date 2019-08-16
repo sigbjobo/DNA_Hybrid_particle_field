@@ -74,9 +74,9 @@ plot 'PRESSURE_DATA/klm_a.dat' u (-$1):2 w p lw 2 lc 1 t '' ,\
 
 
 set output "L_NPTdopc.tex"
-set xlabel '$t/\si{ps}$'
+set xlabel '$t/\si{ns}$'
 set ylabel '$L/\si{nm}$'
-set xtics 500
+set xtics 50
 set ytics 0.25
 
 set xrange [0:300]
@@ -88,9 +88,9 @@ plot "PRESSURE_DATA_EQ/lx.dat" u ($1*0.03*1E-3):2 w l t'$L_{xx,yy}$',\
 
 
 set output "P_NPTdopc.tex"
-set xlabel '$t/\si{ps}$'
+set xlabel '$t/\si{ns}$'
 set ylabel '$P/\si{bar}$'
-set xtics 500
+set xtics 50
 set ytics 7.5
 set key top right
 set xrange [0:300]
@@ -104,9 +104,9 @@ plot "PRESSURE_DATA_EQ/pressavg.dat" u ($1*0.03*1E-3):($2/1E5) w l t'$P$',\
 
 # AREA PER LIPID
 set output "lipid_area_NPT.tex"
-set xlabel '$t/\si{ps}$'
-set ylabel '$a/\si{nm^2}$'
-set xtics 500
+set xlabel '$t/\si{ns}$'
+set ylabel '$A_{\si{l}}/\si{nm^2}$'
+set xtics 50
 set ytics 0.05
 
 set xrange [0:300]

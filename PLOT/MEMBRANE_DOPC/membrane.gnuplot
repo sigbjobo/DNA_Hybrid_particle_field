@@ -219,6 +219,19 @@ plot '../MEMBRANE_DOPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($2) w l lw 2 t '
      '../MEMBRANE_DOPC/PRESSURE_DATA/density_0.dat' u ($1*14):($4) w l lw 2 dt 3  lc 3 t '',\
      '../MEMBRANE_DOPC/PRESSURE_DATA/density_0.dat' u ($1*14):($5+$6) w l lw 2 dt 3  lc 4 t '',\
      '../MEMBRANE_DOPC/PRESSURE_DATA/density_0.dat' u ($1*14):($7) w l lw 2 dt 3  lc 5 t ''
-     						 
+
+set output 'density_dspc.tex'
+set key at 0,8
+plot '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($2) w l lw 2 t '\tiny N',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($3) w l lw 2 t '\tiny P',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($4) w l lw 2 t '\tiny G',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($5+$6) w l lw 2 t '\tiny C',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($7) w l lw 2 t '\tiny W',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA/density_0.dat' u ($1*14):($2) w l lw 2 dt 3  lc 1 t '',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA/density_0.dat' u ($1*14):($3) w l lw 2 dt 3  lc 2 t '',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA/density_0.dat' u ($1*14):($4) w l lw 2 dt 3  lc 3 t '',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA/density_0.dat' u ($1*14):($5+$6) w l lw 2 dt 3  lc 4 t '',\
+     '../MEMBRANE_DSPC/PRESSURE_DATA/density_0.dat' u ($1*14):($7) w l lw 2 dt 3  lc 5 t ''
+
 
 

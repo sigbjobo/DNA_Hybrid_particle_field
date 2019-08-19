@@ -13,8 +13,8 @@ set -o errexit # exit on errors
 export LMOD_DISABLE_SAME_NAME_AUTOSWAP=no
 module load intel/2018b
 
-module load FFTW/3.3.7-intel-2018a
-module load Python/3.7.0-intel-2018b
+module load FFTW/3.3.8-intel-2018b
+module load Python/3.6.6-intel-2018b
 
 #MANDATORY SETTINGS
 export NPROC=${SLURM_NTASKS}
@@ -43,10 +43,10 @@ START_STEP=$(python3 -c "print(int(0.1*${NSTEPS}))")
 export START_FRAME=$(python3 -c "print(1+int(float(${START_STEP})/(float(${NTRAJ}))))")
 
 #DIRECTORIES
-export SHELL_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/shell"
-export INPUT_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/INPUT_FILES"
-export PYTHON_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/python"
-export OCCAM_PATH="/cluster/home/sigbjobo/DNA/HPF/../occam_dna_parallel/"
+export SHELL_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/shell"
+export INPUT_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/INPUT_FILES"
+export PYTHON_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/python"
+export OCCAM_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/../occam_pressure_parallel/"
 SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
 

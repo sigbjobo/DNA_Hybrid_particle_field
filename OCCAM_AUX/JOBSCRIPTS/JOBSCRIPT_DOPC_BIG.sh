@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --job-name=PER_SINGLE
 #SBATCH --account=nn4654k
-#SBATCH --time=7-0:00:0
+#SBATCH --time=2-0:00:0
 ##SBATCH --nodes=2
-#SBATCH --ntasks=40
-#SBATCH --mem-per-cpu=4G
-##SBATCH --error=sim.err
+#SBATCH --ntasks=80
+#SBATCH --mem-per-cpu=2G
+#SBATCH --error=sim.err
 #rm sim.err
 
 #set -o errexit # exit on errors
@@ -14,15 +14,15 @@
 # module purge
 
 export LMOD_DISABLE_SAME_NAME_AUTOSWAP=no
-module load intel/2018b 
-module load FFTW/3.3.8-intel-2019a
+module load intel/2018b
+module load FFTW/3.3.8-intel-2018b
 module load Python/3.6.6-intel-2018b
 
 #DIRECTORIES
-export SHELL_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/shell"
-export INPUT_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/INPUT_FILES"
-export PYTHON_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/python"
-export OCCAM_PATH="/cluster/home/sigbjobo/DNA/HPF/../occam_pressure_parallel"
+export SHELL_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/shell"
+export INPUT_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/INPUT_FILES"
+export PYTHON_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/python"
+export OCCAM_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/../occam_pressure_parallel/"
 SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
 
@@ -67,20 +67,22 @@ function_name () {
     sed -i "/pressure_coupling:/{n;s/.*/${p}/}" fort.1
     sed -i "/ensemble:/{n;s/.*/NVT_Andersen/}" fort.1
     sed -i "/semi_iso:/{n;s/.*/1/}" fort.1
-    sed -i "/press_print:/{n;s/.*/1000000/}" fort.1
+    sed -i "/press_print:/{n;s/.*/0/}" fort.1
     sed -i "/trj_print:/{n;s/.*/10000/}" fort.1
     sed -i "/out_print:/{n;s/.*/100/}" fort.1
     sed -i "/number_of_steps:/{n;s/.*/1000/}" fort.1
     sed -i "/atoms:/{n;s/.*/${NATOM}/}" fort.1
-	
+    
     
     sed -i -e "s/KLM/${klm}/g" fort.3
     sed -i "/* compressibility/{n;s/.*/${k}/}" fort.3
+    $PYTHON_PATH/fix_fort3.py
+    
     bash ${SHELL_PATH}/run_para.sh
 
     mv fort.9 fort.5
     sed -i "/ensemble:/{n;s/.*/NPT/}" fort.1
-    sed -i "/trj_print:/{n;s/.*/50000/}" fort.1
+    sed -i "/trj_print:/{n;s/.*/20000/}" fort.1
     sed -i "/out_print:/{n;s/.*/10000/}" fort.1
     sed -i "/number_of_steps:/{n;s/.*/10000000/}" fort.1
     bash ${SHELL_PATH}/run_para.sh

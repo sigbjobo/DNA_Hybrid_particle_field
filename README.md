@@ -5,3 +5,13 @@ bash plot.sh
 
 Set path by:
 bash set_paths.sh
+
+For Convinience add also the following commands to .bashrc
+
+A=$(pwd)
+export SHELL_PATH="${A}/OCCAM_AUX/shell"
+export JOB_PATH="${A}/OCCAM_AUX/JOBSCRIPTS/"
+export PYTHON_PATH="${A}/OCCAM_AUX/python"
+export INPUT_PATH="${A}/OCCAM_AUX/INPUT_FILES"
+export OCCAM_PATH="${A}/../occam_pressure_parallel/"
+

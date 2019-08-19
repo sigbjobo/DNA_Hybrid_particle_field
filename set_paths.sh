@@ -38,6 +38,9 @@ sed -i 's|OCCAM_PRESSURE_PATH=.*|OCCAM_PRESSURE_PATH="'"$OCCAM_PRESSURE_PATH"'"|
 
 name_computer=$(uname -n)
 
+#FIX SOME COMMON THINGS
+sed -i  "/\bmodule load mpt\b/d" test  ${JOB_PATH}/*.sh
+
 
 # Stallo
 if [ "$name_computer" == "stallo-1.local" ] 
@@ -52,12 +55,14 @@ fi
 # Fram
 if [ "$name_computer" == "login-1-2.fram.sigma2.no" ]
 then
-      echo 'Fixing jobscripts to fit Fram'
-      sed -i '/module load FFTW*/c\module load FFTW/3.3.8-intel-2018b'      ${JOB_PATH}/*.sh
-      sed -i '/module load intel*/c\module load intel/2018b'                ${JOB_PATH}/*.sh
-      sed -i '/module load Python*/c\module load Python/3.6.6-intel-2018b'  ${JOB_PATH}/*.sh 
-      sed -i '/module load python*/c\module load Python/3.6.6-intel-2018b'  ${JOB_PATH}/*.sh 
-      sed -i '/\#SBATCH --ntasks-per-node=/c\\#SBATCH --ntasks-per-node=40' ${JOB_PATH}/*.sh
+      
+    echo 'Fixing jobscripts to fit Fram'
+    
+    sed -i '/module load FFTW*/c\module load FFTW/3.3.8-intel-2018b'      ${JOB_PATH}/*.sh
+    sed -i '/module load intel*/c\module load intel/2018b'                ${JOB_PATH}/*.sh
+    sed -i '/module load Python*/c\module load Python/3.6.6-intel-2018b'  ${JOB_PATH}/*.sh 
+    sed -i '/module load python*/c\module load Python/3.6.6-intel-2018b'  ${JOB_PATH}/*.sh 
+    sed -i '/\#SBATCH --ntasks-per-node=/c\\#SBATCH --ntasks-per-node=40' ${JOB_PATH}/*.sh
 fi
 
 # Saga
@@ -67,6 +72,17 @@ fi
 # module load Python/3.6.6-intel-2018b
 
 # Vilje
+if [ "$name_computer" == "service0" ]
+then
+    echo 'Fixing jobscripts to fit Vilje'
+    sed -i '/module purge/a module load mpt/2.14'               ${JOB_PATH}/*.sh
+    sed -i '/module load FFTW*/c\module load fftw/3.3.5'        ${JOB_PATH}/*.sh
+    sed -i '/module load fftw*/c\module load fftw/3.3.5'        ${JOB_PATH}/*.sh
+    sed -i '/module load intel*/c\module load intelcomp/17.0.0' ${JOB_PATH}/*.sh
+    sed -i '/module load Python*/c\module load python/3.6.3'    ${JOB_PATH}/*.sh 
+    sed -i '/module load python*/c\module load python/3.6.3'    ${JOB_PATH}/*.sh 
+    
+fi
 
 #Abel
 if [ "$name_computer" == "login-0-1.local" ]
@@ -76,6 +92,7 @@ then
     sed -i '/module load intel*/c\module load intel/2019.1' ${JOB_PATH}/*.sh
     sed -i '/module load Python*/c\module load python3/3.7.0' ${JOB_PATH}/*.sh
     sed -i '/module load python*/c\module load python3/3.7.0' ${JOB_PATH}/*.sh 
+    
 fi
 
 

@@ -10,12 +10,11 @@ set -o errexit # exit on errors
 
 #LOAD MODULES
 #module purge
-module load mpt/2.14
 export LMOD_DISABLE_SAME_NAME_AUTOSWAP=no
 module load intelcomp/17.0.0
 
 module load fftw/3.3.5
-module load python/3.6.3
+module load python/3.6.6
 
 #MANDATORY SETTINGS
 export NPROC=${SLURM_NTASKS}
@@ -46,33 +45,3 @@ export START_FRAME=$(python3 -c "print(1+int(float(${START_STEP})/(float(${NTRAJ
 #DIRECTORIES
 export SHELL_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/shell"
 export INPUT_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/INPUT_FILES"
-export PYTHON_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/python"
-export OCCAM_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/../occam_pressure_parallel/"
-SCRATCH_DIRECTORY="${SCRATCH}"
-SLURM_SUBMIT_DIR=$(pwd)
-
-
-folder=sim_${kphi}_$EPS
-
-#REMOVE OLD SIMULATIONS
-rm ${SLURM_SUBMIT_DIR}/${folder} -rf
-
-#PREPARE ${FOLDER}ULATION DIRECTORY
-mkdir -p ${SCRATCH_DIRECTORY}
-cd ${SCRATCH_DIRECTORY}
-mkdir ${folder}
-cd ${folder}
-
-#RUN OPTIMIZATION
-python3 -u  ${PYTHON_PATH}/SKOPT_BAYES.py
-
-#SAVE DATA
-cp -r ${SCRATCH_DIRECTORY}/${folder} ${SLURM_SUBMIT_DIR}/${folder}
-
-
-exit 0
-
-
-
-#######
-

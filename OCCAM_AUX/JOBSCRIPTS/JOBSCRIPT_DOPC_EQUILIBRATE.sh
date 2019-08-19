@@ -2,8 +2,8 @@
 #SBATCH --job-name=PER_SINGLE
 #SBATCH --account=nn4654k
 #SBATCH --time=0-12:00:0
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=40
+##SBATCH --nodes=1
+#SBATCH --ntasks=40
 #SBATCH --mem-per-cpu=4G
 ##SBATCH --error=sim.err
 #rm sim.err
@@ -30,7 +30,7 @@ SLURM_SUBMIT_DIR=$(pwd)
 export NPROC=${SLURM_NTASKS}
 echo "NUMBER OF PROCESSORS USED: $NPROC"
 
-rm  -rf SIM_*
+#rm  -rf SIM_*
 
 
 tens=$(cat tensionless_para.dat)
@@ -65,8 +65,8 @@ function_name () {
     sed -i "/semi_iso:/{n;s/.*/1/}" fort.1
     sed -i "/press_print:/{n;s/.*/20000/}" fort.1
     sed -i "/trj_print:/{n;s/.*/10000/}" fort.1
-    sed -i "/out_print:/{n;s/.*/5000/}" fort.1
-    sed -i "/number_of_steps:/{n;s/.*/10000000/}" fort.1
+    sed -i "/out_print:/{n;s/.*/10000/}" fort.1
+    sed -i "/number_of_steps:/{n;s/.*/1000000/}" fort.1
     
     sed -i -e "s/KLM/${klm}/g" fort.3
     sed -i "/* compressibility/{n;s/.*/${k}/}" fort.3
@@ -80,7 +80,7 @@ function_name () {
 KLM=("$klm")
 
 komp=( "0.05" )
-pcouple=( "20" )
+pcouple=(  "20" "200" "2000" "20000" )
  
 for p in "${pcouple[@]}";do
     for k in "${komp[@]}";do

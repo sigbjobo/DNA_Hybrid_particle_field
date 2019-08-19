@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=PER_SINGLE
 #SBATCH --account=nn4654k
-#SBATCH --time=0-12:00:0
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=40
+#SBATCH --time=7-0:00:0
+##SBATCH --nodes=2
+#SBATCH --ntasks=40
 #SBATCH --mem-per-cpu=4G
 ##SBATCH --error=sim.err
 #rm sim.err
@@ -55,27 +55,36 @@ function_name () {
     folder=SIM_${p}_${k}_${klm}
     mkdir $folder
     cd $folder
-    cp -r ${INPUT_PATH}/MEM_DOPC_BIG/* .
+    cp -r ${INPUT_PATH}/MEM_DOPC_LARGE/* .
+
+    python ${PYTHON_PATH}/multiply_syst.py 7 7 1
     mv fort.5_2 fort.5
-    
+    NATOM=$(tail fort.5 -n 1 | awk '{print $1}') 
+
     #Set compressibility
  
     sed -i "/eq_state_dens:/{n;s/.*/${a}/}" fort.1
     sed -i "/pressure_coupling:/{n;s/.*/${p}/}" fort.1
-    sed -i "/ensemble:/{n;s/.*/NPT/}" fort.1
+    sed -i "/ensemble:/{n;s/.*/NVT_Andersen/}" fort.1
     sed -i "/semi_iso:/{n;s/.*/1/}" fort.1
-    sed -i "/press_print:/{n;s/.*/20000/}" fort.1
+    sed -i "/press_print:/{n;s/.*/1000000/}" fort.1
     sed -i "/trj_print:/{n;s/.*/10000/}" fort.1
-    sed -i "/out_print:/{n;s/.*/5000/}" fort.1
+    sed -i "/out_print:/{n;s/.*/100/}" fort.1
     sed -i "/number_of_steps:/{n;s/.*/1000/}" fort.1
-
-    tail fort.5 
+    sed -i "/atoms:/{n;s/.*/${NATOM}/}" fort.1
+	
     
     sed -i -e "s/KLM/${klm}/g" fort.3
     sed -i "/* compressibility/{n;s/.*/${k}/}" fort.3
     bash ${SHELL_PATH}/run_para.sh
-   
-    python ${PYTHON_PATH}/COMP_PRESSURE_PROFILES.py 1
+
+    mv fort.9 fort.5
+    sed -i "/ensemble:/{n;s/.*/NPT/}" fort.1
+    sed -i "/trj_print:/{n;s/.*/50000/}" fort.1
+    sed -i "/out_print:/{n;s/.*/10000/}" fort.1
+    sed -i "/number_of_steps:/{n;s/.*/10000000/}" fort.1
+    bash ${SHELL_PATH}/run_para.sh
+#    python ${PYTHON_PATH}/COMP_PRESSURE_PROFILES.py 1
     cd ..    
 }
 

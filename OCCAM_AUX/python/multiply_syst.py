@@ -52,9 +52,9 @@ for ix in range(NX):
                     ls[0]="%d"%(int(ls[0])+atom_start)
                  
                     # fix positions
-                    ls[5]="%f"%(float(ls[5].replace('D','E')) +ix*LX)
-                    ls[6]="%f"%(float(ls[6].replace('D','E')) +iy*LY)
-                    ls[7]="%f"%(float(ls[7].replace('D','E')) +iz*LZ)
+                    ls[4]="%f"%(float(ls[4].replace('D','E')) +(ix-1)*LX)
+                    ls[5]="%f"%(float(ls[5].replace('D','E')) +(iy-1)*LY)
+                    ls[6]="%f"%(float(ls[6].replace('D','E')) +(iz-1)*LZ)
 
                     # fix bonds
                     ls[10:]=[fix_bond(i,atom_start) for i in ls[10:]]

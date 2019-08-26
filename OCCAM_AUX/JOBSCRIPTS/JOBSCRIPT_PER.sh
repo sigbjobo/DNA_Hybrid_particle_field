@@ -11,13 +11,12 @@ set -o errexit # exit on errors
 
 #LOAD MODULES
 #module purge
-module load mpt/2.14
-module load intelcomp/17.0.0
-module load intelcomp/17.0.0
+module load intel/2018b
+module load intel/2018b
 export LMOD_DISABLE_SAME_NAME_AUTOSWAP=no
-module load intelcomp/17.0.0
-module load fftw/3.3.5
-module load python/3.6.3
+module load intel/2018b
+module load FFTW/3.3.8-intel-2018b
+module load Python/3.6.6-intel-2018b
 
 #MANDATORY SETTINGS
 export NPROC=${SLURM_NTASKS}
@@ -39,10 +38,10 @@ export dna_seq=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 export k_phi=8
 
 #DIRECTORIES
-export SHELL_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/shell"
-export INPUT_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/INPUT_FILES"
-export PYTHON_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/python"
-export OCCAM_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/../occam_pressure_parallel/"
+export SHELL_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/shell"
+export INPUT_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/INPUT_FILES"
+export PYTHON_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/python"
+export OCCAM_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/../occam_pressure_parallel/"
 SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
 

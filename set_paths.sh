@@ -47,6 +47,7 @@ if [ "$name_computer" == "stallo-1.local" ]
 then
     echo 'Fixing jobscripts to fit Stallo'
     sed -i '/module load FFTW*/c\module load FFTW/3.3.8-intel-2018b'     ${JOB_PATH}/*.sh
+    sed -i '/module load fftw*/c\module load FFTW/3.3.8-intel-2018b'     ${JOB_PATH}/*.sh
     sed -i '/module load intel*/c\module load intel/2018b'               ${JOB_PATH}/*.sh
     sed -i '/module load Python*/c\module load Python/3.6.6-intel-2018b' ${JOB_PATH}/*.sh 
     sed -i '/module load python*/c\module load Python/3.6.6-intel-2018b' ${JOB_PATH}/*.sh 
@@ -59,6 +60,8 @@ then
     echo 'Fixing jobscripts to fit Fram'
     
     sed -i '/module load FFTW*/c\module load FFTW/3.3.8-intel-2018b'      ${JOB_PATH}/*.sh
+    sed -i '/module load fftw*/c\module load FFTW/3.3.8-intel-2018b'      ${JOB_PATH}/*.sh
+
     sed -i '/module load intel*/c\module load intel/2018b'                ${JOB_PATH}/*.sh
     sed -i '/module load Python*/c\module load Python/3.6.6-intel-2018b'  ${JOB_PATH}/*.sh 
     sed -i '/module load python*/c\module load Python/3.6.6-intel-2018b'  ${JOB_PATH}/*.sh 
@@ -89,6 +92,7 @@ if [ "$name_computer" == "login-0-1.local" ]
 then
     echo 'Fixing jobscripts to fit Abel'
     sed -i '/module load FFTW*/c\module load FFTW' ${JOB_PATH}/*.sh
+    sed -i '/module load fftw*/c\module load FFTW' ${JOB_PATH}/*.sh
     sed -i '/module load intel*/c\module load intel/2019.1' ${JOB_PATH}/*.sh
     sed -i '/module load Python*/c\module load python3/3.7.0' ${JOB_PATH}/*.sh
     sed -i '/module load python*/c\module load python3/3.7.0' ${JOB_PATH}/*.sh 

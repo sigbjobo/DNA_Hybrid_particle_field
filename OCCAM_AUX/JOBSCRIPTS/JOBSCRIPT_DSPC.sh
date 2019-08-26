@@ -12,18 +12,17 @@
 
 #LOAD MODULES
 # module purge
-module load mpt/2.14
 
 export LMOD_DISABLE_SAME_NAME_AUTOSWAP=no
-module load intelcomp/17.0.0
-module load fftw/3.3.5
-module load python/3.6.3
+module load intel/2018b
+module load FFTW/3.3.8-intel-2018b
+module load Python/3.6.6-intel-2018b
 
 #DIRECTORIES
-export SHELL_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/shell"
-export INPUT_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/INPUT_FILES"
-export PYTHON_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/python"
-export OCCAM_PATH="/home/ntnu/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/../occam_pressure_parallel/"
+export SHELL_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/shell"
+export INPUT_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/INPUT_FILES"
+export PYTHON_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/python"
+export OCCAM_PATH="/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/../occam_pressure_parallel/"
 SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)
 
@@ -52,22 +51,29 @@ function_name () {
     mkdir $folder
     cd $folder
     cp -r ${INPUT_PATH}/MEM_DSPC/* .
-    
+    cp $SLURM_SUBMIT_DIR/fort.3 .
     #Set compressibility
     sed -i "/* compressibility/{n;s/.*/${k}/}" fort.3
     sed -i "/eq_state_dens:/{n;s/.*/${a}/}" fort.1
     sed -i "/pressure_coupling:/{n;s/.*/${p}/}" fort.1
+    sed -i "/number_of_steps:/{n;s/.*/100000/}" fort.1
+
     sed -i -e "s/KLM/${klm}/g" fort.3
+
+    python $PYTHON_PATH/fix_fort3.py
 
     bash ${SHELL_PATH}/run_para.sh
     cp fort.9 fort.5
     bash ${SHELL_PATH}/run_para.sh
     python ${PYTHON_PATH}/COMP_PRESSURE_PROFILES.py 1
     cd ..    
+
+    rm -rf ${SLURM_SUBMIT_DIR}/$folder
+    mv $folder ${SLURM_SUBMIT_DIR}/
 }
 
 
-KLM=("0" "-2"  "-4" "-5" "-6" "-7" "-8" "-9" "-10" "-12" "-15" )
+KLM=("0" "-2" "-4" "-5" "-6" "-7" "-8" "-10" )
 komp=( "0.05" )
 pcouple=( "20" )
  
@@ -78,7 +84,7 @@ for p in "${pcouple[@]}";do
 	done
     done
 done 
-cp -r SIM_* ${SLURM_SUBMIT_DIR}/
+
 cd  ${SLURM_SUBMIT_DIR}/
 bash ${SHELL_PATH}/comp_pressure_stats.sh
 cd PRESSURE_DATA/

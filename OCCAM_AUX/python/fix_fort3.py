@@ -6,7 +6,6 @@ fp.readline()
 L=[float(l) for l in fp.readline().split()]
 fp.close()
 
-print(L)
 lines=open('fort.3','r').readlines()
 i=0
 ierr=0
@@ -19,7 +18,6 @@ while(1):
         l=lines[i].split()
         if('SCF' in l):
             M=[np.around(li/0.67) for li in L]
-            print(M)
             lines[i+2]='%d %d %d\n'%(M[0],M[1],M[2])
             break
     except:
@@ -31,5 +29,5 @@ fp.close()
 if(ierr==1):
     print('ERROR: Cell vectors not found')
 else:
-    print(lines)
+    
     open('fort.3','w').writelines(lines)

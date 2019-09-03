@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH --job-name=PER_SINGLE
 #SBATCH --account=nn4654k
-#SBATCH --time=0-12:00:0
+#SBATCH --time=0-2:00:0
 ##SBATCH --nodes=2
 #SBATCH --ntasks=40
 #SBATCH --mem-per-cpu=2G
 ##SBATCH --error=sim.err
-##SBATCH --qos=devel
+#SBATCH --qos=devel
 #rm sim.err
 
 set -o errexit # exit on errors
@@ -73,9 +73,9 @@ function_name () {
     sed -i "/print_pressure:/{n;s/.*/0/}" fort.1
     sed -i "/trj_print:/{n;s/.*/20000/}" fort.1
     sed -i "/out_print:/{n;s/.*/1000/}" fort.1
-    sed -i "/number_of_steps:/{n;s/.*/10000/}" fort.1
+    sed -i "/number_of_steps:/{n;s/.*/1000/}" fort.1
     sed -i "/atoms:/{n;s/.*/${NATOM}/}" fort.1
-    
+     
     
     sed -i -e "s/KLM/${klm}/g" fort.3
     sed -i "/* compressibility/{n;s/.*/${k}/}" fort.3
@@ -83,13 +83,13 @@ function_name () {
     
     bash ${SHELL_PATH}/run_para.sh
 
-    mv fort.9 fort.5
-    sed -i "/ensemble:/{n;s/.*/NPT/}" fort.1
-    sed -i "/trj_print:/{n;s/.*/20000/}" fort.1
-    sed -i "/out_print:/{n;s/.*/1000/}" fort.1
-    sed -i "/number_of_steps:/{n;s/.*/100000/}" fort.1
-    bash ${SHELL_PATH}/run_para.sh
-    python ${PYTHON_PATH}/COMP_PRESSURE_PROFILES.py 1
+    # mv fort.9 fort.5
+    # sed -i "/ensemble:/{n;s/.*/NPT/}" fort.1
+    # sed -i "/trj_print:/{n;s/.*/20000/}" fort.1
+    # sed -i "/out_print:/{n;s/.*/1000/}" fort.1
+    # sed -i "/number_of_steps:/{n;s/.*/100000/}" fort.1
+    # bash ${SHELL_PATH}/run_para.sh
+    # python ${PYTHON_PATH}/COMP_PRESSURE_PROFILES.py 1
     cd ..    
 }
  

@@ -60,7 +60,7 @@ function_name () {
     #Set compressibility
  
     sed -i "/eq_state_dens:/{n;s/.*/${a}/}" fort.1
-    sed -i "/pressure_coupling:/{n;s/.*/${p}/}" fort.1
+     sed -i "/pressure_coupling:/{n;s/.*/${p}/}" fort.1
     sed -i "/ensemble:/{n;s/.*/NPT/}" fort.1
     sed -i "/semi_iso:/{n;s/.*/1/}" fort.1
     sed -i "/press_print:/{n;s/.*/20000/}" fort.1

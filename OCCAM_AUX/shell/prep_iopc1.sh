@@ -8,11 +8,11 @@
 # FINDING PRINT OPTIONS
 TRJ_PRINT=$(awk '/trj_print:/{getline; print}' fort.1)
 STEPS=$(awk '/number_of_steps:/{getline; print}' fort.1)
-NCONF=$(python -c "int(${STEPS}//${TRJ_PRINT}+2)")
+NCONF=$(python3 -c "int(${STEPS}//${TRJ_PRINT}+2)")
 
 rm -f input.txt
 # WRITING input.txt
 echo "1"       >> input.txt
-python ${PYTHON_PATH}/find_mol_nr.py 4 #python
+python3 ${PYTHON_PATH}/find_mol_nr.py 4 #python
 echo "1"       >> input.txt
 echo "$NPROC"  >> input.txt

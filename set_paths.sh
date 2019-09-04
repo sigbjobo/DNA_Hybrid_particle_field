@@ -88,14 +88,14 @@ then
 fi
 
 #Abel
-if [ "$name_computer" == "login-0-1.local" ]
+if [ "$name_computer" == "login-0-0.local" ]
 then
     echo 'Fixing jobscripts to fit Abel'
-    sed -i '/module load FFTW*/c\module load FFTW' ${JOB_PATH}/*.sh
-    sed -i '/module load fftw*/c\module load FFTW' ${JOB_PATH}/*.sh
-    sed -i '/module load intel*/c\module load intel/2019.1' ${JOB_PATH}/*.sh
-    sed -i '/module load Python*/c\module load python3/3.7.0' ${JOB_PATH}/*.sh
-    sed -i '/module load python*/c\module load python3/3.7.0' ${JOB_PATH}/*.sh 
+    sed -i '/module load FFTW*/c\module load fftw/3.3.4' ${JOB_PATH}/*.sh
+    sed -i '/module load fftw*/c\module load fftw/3.3.4' ${JOB_PATH}/*.sh
+    sed -i '/module load intel*/c\module load intel/2019.2' ${JOB_PATH}/*.sh
+    sed -i '/module load Python*/c\module load python3/3.5.0' ${JOB_PATH}/*.sh
+    sed -i '/module load python*/c\module load python3/3.5.0' ${JOB_PATH}/*.sh 
     
 fi
 

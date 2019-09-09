@@ -235,3 +235,15 @@ plot '../MEMBRANE_DSPC/PRESSURE_DATA_EQ/density.dat' u ($1*14):($2) w l lw 2 t '
 
 
 
+# Large membrane DOPC
+set output "lipid_area_large.tex"
+set xlabel '$t/\si{ns}$'
+set ylabel '$A_{\si{l}}/\si{nm^2}$'
+set xtics 10
+set ytics 0.002
+
+set xrange [0:30]
+set yrange [0.7175:0.7225]
+set key top right
+plot "../MEMBRANE_DOPC/PRESSURE_DATA_LARGE/lx.dat" u ($1*0.03*1E-3):(2*$2**2/(468*100)) w l t '',\
+  

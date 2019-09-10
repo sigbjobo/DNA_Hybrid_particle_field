@@ -88,7 +88,7 @@ then
 fi
 
 #Abel
-if [ "$name_computer" == "login-0-0.local" ]
+if [ "$name_computer" == "login-0-0.local" ] || [ "$name_computer" == "login-0-1.local" ]
 then
     echo 'Fixing jobscripts to fit Abel'
     sed -i '/module load FFTW*/c\module load fftw/3.3.4' ${JOB_PATH}/*.sh

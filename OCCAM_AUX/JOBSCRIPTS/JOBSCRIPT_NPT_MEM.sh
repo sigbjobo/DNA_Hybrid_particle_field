@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=MEMBRANES
 #SBATCH --account=nn4654k
-#SBATCH --time=0-4:00:0
-#SBATCH --nodes=1
+#SBATCH --time=0-6:00:0
+#SBATCH --nodes=8
 #SBATCH --ntasks-per-node=16
 #SBATCH --mem-per-cpu=2G
 ##SBATCH --qos=devel
@@ -49,18 +49,18 @@ function_name () {
     sed -i "/ensemble:/{n;s/.*/NPT/}" fort.1   
     sed -i "/pressure_coupling:/{n;s/.*/${p}/}" fort.1
    
-    sed -i "/number_of_steps:/{n;s/.*/400000/}" fort.1
+    sed -i "/number_of_steps:/{n;s/.*/1000000/}" fort.1
     sed -i "/press_print:/{n;s/.*/40000/}" fort.1
     sed -i "/trj_print:/{n;s/.*/20000/}" fort.1
-    sed -i "/out_print:/{n;s/.*/20000/}" fort.1
-    sed -i "/SCF_lattice_update:/{n;s/.*/5/}" fort.1
-    sed -i "/num_config_acc:/{n;s/.*/1/}" fort.1
+    sed -i "/out_print:/{n;s/.*/5000/}" fort.1
+    # sed -i "/SCF_lattice_update:/{n;s/.*/5/}" fort.1
+    # sed -i "/num_config_acc:/{n;s/.*/1/}" fort.1
     
     sed -i -e "s/KLM/${klm}/g" fort.3
     python3 $PYTHON_PATH/fix_fort3.py
 
-   bash ${SHELL_PATH}/run_para.sh
-   cp fort.9 fort.5
+   # bash ${SHELL_PATH}/run_para.sh
+   # cp fort.9 fort.5
     bash ${SHELL_PATH}/run_para.sh
     python3 ${PYTHON_PATH}/COMP_PRESSURE_PROFILES.py 1
     folder=SIM_${p}_${klm}
@@ -72,19 +72,19 @@ function_name () {
 
 
 # SIMULATION SPECIFICATIONS
-MEMS=("DOPC"    "DPPC" "DSPC"   "DMPC" "DPPC_BIG")
+MEMS=("DOPC"    "DPPC" "DSPC"  "DMPC" "DOPC_BIG"    "DPPC_BIG" "DSPC_BIG"  "DMPC_BIG" )
 pcouple=( "0.2" "2" "20" )
-TEMPS=("303.00" "325"  "338.00" "323.00")
+TEMPS=("303.00" "325"  "338.00" "323.00" "303.00" "325"  "338.00" "323.00")
 
 
 #LOOPS
 #Possible loop through membranes
 # for i in {0..3};do
 echo "SIMULATION ON MEMBRANE ${memi}"
-for j in {0..2};do
+# for j in {0..2};do
 
 i=$1
-#j=$2
+j=$2
 memi="${MEMS[i]}"
 pi="${pcouple[j]}"
 tempi="${TEMPS[i]}"
@@ -106,7 +106,7 @@ bash ${SHELL_PATH}/comp_pressure_stats.sh
 cd PRESSURE_DATA/
 python3 $PYTHON_PATH/area_compressibility.py $tempi > area_compress.dat
 cd ..
- done 
+# done 
 
 wait
 echo "DONE"

@@ -1,7 +1,6 @@
 #!/bin/bash -l
 
 CURRENT_DIREC=$(pwd)
-export GMON_OUT_PREFIX='gmon.out'
  
 #COMPILE OCCAM AND IOPC
 if [ "$COMPILE" == "1" ]
@@ -38,13 +37,11 @@ bash ${SHELL_PATH}/prep_iopc1.sh
 ${OCCAM_PATH}/IOPC_input/iopc
 rm -f fort.10 fort.7
 
-
 #Run OCCAM in parallel 
 start=`date +%s`
 #mpirun -n ${NPROC} occamcgmpi
 rm -f srun.err
-
-srun --mpi=pmi2 -K -ppdebug  --error=srun.err occamcgmpi 
+srun --mpi=pmi2 -K  --error=srun.err occamcgmpi 
 end=`date +%s`
 t1=$((end-start))
 echo "SIMULATION-TIME: $t1 SECONDS"
@@ -60,14 +57,12 @@ ${OCCAM_PATH}/IOPC_input/iopc
 python3 ${PYTHON_PATH}/remake_fort9.py
 
 #REMOVE START FILES FOR PARALLEL VERSION
-rm -f fort.[1-9][0-9][0-9][0-9]
-rm -f fort.[1-9][0-9][0-9]
-rm -f fort.[2-9][0-9]
-rm -f fort.15 
+# rm -f fort.[1-9][0-9][0-9][0-9]
+# rm -f fort.[1-9][0-9][0-9]
+# rm -f fort.[2-9][0-9]
+# rm -f fort.15 
 
 
 end2=`date +%s`
 t2=$((end2-end))
 echo "IOPC-TIME: $t2 SECONDS"
-gprof occamcgmpi -s gmon.out.*
-gprof occamcgmpi gmon.sum 

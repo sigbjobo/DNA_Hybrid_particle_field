@@ -69,6 +69,15 @@ then
 fi
 
 # Saga
+if [ "$name_computer" == "login-1" ] 
+then
+    echo 'Fixing jobscripts to fit SAGA'
+    sed -i '/module load FFTW*/c\module load FFTW/3.3.8-intel-2019a'     ${JOB_PATH}/*.sh
+    sed -i '/module load fftw*/c\module load FFTW/3.3.8-intel-2019a'     ${JOB_PATH}/*.sh
+    sed -i '/module load intel*/c\module load intel/2018b'               ${JOB_PATH}/*.sh
+    sed -i '/module load Python*/c\module load Python/3.6.6-intel-2018b' ${JOB_PATH}/*.sh 
+    sed -i '/module load python*/c\module load Python/3.6.6-intel-2018b' ${JOB_PATH}/*.sh 
+fi 
 
 # module load intel/2018b
 # module load FFTW/3.3.8-intel-2019a

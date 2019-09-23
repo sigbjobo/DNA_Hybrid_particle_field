@@ -69,7 +69,7 @@ then
 fi
 
 # Saga
-if [ "$name_computer" == "login-1" ] 
+if [ "$name_computer" == "login-1" ] || [ "$name_computer" == "login-2" ]
 then
     echo 'Fixing jobscripts to fit SAGA'
     sed -i '/module load FFTW*/c\module load FFTW/3.3.8-intel-2019a'     ${JOB_PATH}/*.sh

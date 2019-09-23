@@ -4,13 +4,19 @@ import sys
 print("filename: %s"%( sys.argv[1]))
 
 fp = open(sys.argv[1],'r')
-nz=60
+nz=30
+start=3
+if(len(sys.argv)>2):
+    start = int(sys.argv[2])
+if(len(sys.argv)>3):
+    nz= int(sys.argv[3])
+
 names=['N','P','G','C','D','W']
 N=np.zeros((nz,len(names)))
 l=fp.readline()
 
 r=0
-start=3
+
 end=10000000
 while (not (l=="")):
     l= l.split()
@@ -36,6 +42,16 @@ while (not (l=="")):
 fp.close()
 #N=np.divide(N,np.sum(N,axis=1)[:,None])
 N=N/((r-start)*LZ/nz*LX*LY*0.1**3)#np.mean(np.sum(N,axis=1))
+
+factor=np.mean(0.5*(N[:4,-1]+N[-4:,-1]))/8.33
+z=N[:,-1]>7.8
+if(sum(z)>0):
+    print("water density:",np.mean(N[z,-1]))
+    print('correct water:',int(14000/factor),1./factor)
+
+    print("total density:",np.mean(np.sum(N,axis=1)))
+    print("factor:",8.33/np.mean(np.sum(N,axis=1)))
+
 
 #N[iz,index]=N[iz,index]*1./((r-start)*1E-3*LX*LY*LZ/nz)
 #N[iz,index]=N[iz,index]*1./((r-start)*1E-3*LX*LY*LZ/nz)

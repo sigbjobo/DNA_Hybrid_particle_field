@@ -9,7 +9,7 @@ folder = sys.argv[1]
 px = np.loadtxt('%s/pressxxavg_mean.dat'%(folder))[:,:2]
 pz = np.loadtxt('%s/presszzavg_mean.dat'%(folder))[:,:2]
 
-gamma=(pz-px)*1000.*14E-9
+gamma=0.5*(pz-px)*1000.*14E-9
 gamma[:,0]=px[:,0]
 
 

@@ -45,6 +45,7 @@ start=`date +%s`
 rm -f srun.err
 
 srun --mpi=pmi2 -K -ppdebug  --error=srun.err occamcgmpi 
+
 end=`date +%s`
 t1=$((end-start))
 echo "SIMULATION-TIME: $t1 SECONDS"

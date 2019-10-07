@@ -35,5 +35,6 @@ compile_plot benchmark
 compile_plot optimize
 compile_plot hairpin
 compile_plot water_eq_state
-compile_plot MEMBRANE_DOPC
-compile_plot MEMBRANE_DSPC
+compile_plot membranes
+compile_plot binary_phase
+

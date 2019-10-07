@@ -16,8 +16,8 @@ set -o errexit # exit on errors
 
 export LMOD_DISABLE_SAME_NAME_AUTOSWAP=no
 module load intel/2018b
-module load FFTW/3.3.7-intel-2018a
-module load Python/3.7.0-intel-2018b
+module load FFTW/3.3.8-intel-2019a
+module load Python/3.6.6-intel-2018b
 
 #MANDATORY SETTINGS
 export NPROC=${SLURM_NTASKS}
@@ -40,9 +40,9 @@ export rev_dna_seq=GGCGCAGCGGCCATATTACTTATAATACTTAAGAATTAAATGTAATAACGCCGCTGGCGG
 export k_phi=8
 
 #DIRECTORIES
-export SHELL_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/shell"
-export INPUT_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/INPUT_FILES"
-export PYTHON_PATH="/cluster/home/sigbjobo/DNA/HPF/OCCAM_AUX/python"
+export SHELL_PATH="/cluster/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/shell"
+export INPUT_PATH="/cluster/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/INPUT_FILES"
+export PYTHON_PATH="/cluster/home/sigbjobo/DNA_PRESSURE/DNA_Hybrid_particle_field/OCCAM_AUX/python"
 export OCCAM__PRESSURE_PATH="/cluster/home/sigbjobo/DNA/HPF/../occam_pressure_parallel/"
 SCRATCH_DIRECTORY="${SCRATCH}"
 SLURM_SUBMIT_DIR=$(pwd)

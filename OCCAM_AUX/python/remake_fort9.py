@@ -5,6 +5,7 @@ import numpy as np
 #READ START FILE
 fort5_lines = open('fort.5').readlines()
 L=[float(li.replace('D','E'))  for li in fort5_lines[1].split()]
+
 #MAKE A COPY
 fort9_lines  = fort5_lines[:]
 fp_out=open('fort.9','w')
@@ -26,6 +27,9 @@ for i in range(len(fort5_lines)):
 
 for fn in final_configs:
     fp=open(fn)
+    fp.readline()
+    L=[float(li.replace('D','E'))  for li in fp.readline().split()]
+
     while(1):
         ls=fp.readline().split()
         if(len(ls)>0):
@@ -44,6 +48,8 @@ for fn in final_configs:
             break
        
     fp.close()
+
+fort9_lines[1]=' '.join(['%f'%(l) for l in L[:3]])
 for l in fort9_lines:
     ls=l.split()
     fp_out.write('%s\n'%(' '.join(ls)))

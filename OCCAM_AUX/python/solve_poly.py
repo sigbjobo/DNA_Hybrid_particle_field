@@ -15,5 +15,5 @@ def func(x):
     return model1(x)-model2(x)
 
 sol = optimize.root(func,x0=0)
-print(sol.x[0])
+print(np.min(sol.x))
 

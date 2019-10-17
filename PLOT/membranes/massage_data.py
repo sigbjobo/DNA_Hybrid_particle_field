@@ -3,8 +3,11 @@ import numpy as np
 import sys
 
 
-folder = sys.argv[1]
 
+folder = sys.argv[1]
+degree=2
+if(len(sys.argv)>2):
+    degree=int(sys.argv[2])
 # SURFACE TENSION
 px = np.loadtxt('%s/pressxxavg_mean.dat'%(folder))[:,:2]
 pz = np.loadtxt('%s/presszzavg_mean.dat'%(folder))[:,:2]
@@ -13,7 +16,7 @@ gamma=0.5*(pz-px)*1000.*14E-9
 gamma[:,0]=px[:,0]
 
 
-weights = np.polyfit(gamma[:,0],gamma[:,1],2)
+weights = np.polyfit(gamma[:,0],gamma[:,1],degree)
 model1  = np.poly1d(weights)
 kst=np.linspace(np.min(gamma[:,0]),np.max(gamma[:,0]),100)
 gammalin=np.zeros((100,2))

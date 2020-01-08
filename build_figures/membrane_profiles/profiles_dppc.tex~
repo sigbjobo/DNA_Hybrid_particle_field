@@ -1,0 +1,21 @@
+\documentclass[crop,tikz]{standalone}% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+\usepackage{color}
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
+\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\name}[1]{_{\text{#1}}}
+\usepackage{siunitx}
+\usetikzlibrary{shapes,arrows,shadings,backgrounds,calc}
+\definecolor{brown}{rgb}{0.59, 0.29, 0.0}
+\begin{document}
+\fontfamily{cmss}
+{\begin{tikzpicture}
+  \node[label={[xshift=-1.9cm,yshift=-1.25cm]\Large C}](c) at (7.99,0) {\includegraphics{dppc_el_density.pdf}};
+  \node[label={[xshift=-1.9cm,yshift=-1.25cm] \Large D},fill=white](d) at (7.99,-5) {\includegraphics{dppc_press_contributions.pdf}};
+
+  \node[label={[xshift=-1.9cm,yshift=-1.25cm]\Large A},fill=white](a) at (0,0) {\includegraphics{dppc_el_tot.pdf}};
+  \node[label={[xshift=-1.9cm,yshift=-1.25cm] \Large B},fill=white](b) at (0,-5) {\includegraphics{dppc_press_tot.pdf}};
+
+\end{tikzpicture}
+}
+\end{document}

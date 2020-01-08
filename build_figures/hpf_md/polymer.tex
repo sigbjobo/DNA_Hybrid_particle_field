@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+  \node[wat4] (wat1) at  (0,0) {};
+  \node[wat4] (wat2) at (0.5,-1) {};
+  \node[wat4] (wat3) at (0.0,-2) {};
+  \node[carbon] (carbon1) at (0.5,-3) {};
+  \node[carbon] (carbon2) at (0,-4) {};
+  \node[carbon] (carbon3) at (0.5,-5) {};
+  \SingleBond{wat1}{wat2}
+  \SingleBond{wat2}{wat3}
+  \SingleBond{carbon1}{wat3}
+  \SingleBond{carbon1}{carbon2}
+  \SingleBond{carbon2}{carbon3}
+\end{tikzpicture}

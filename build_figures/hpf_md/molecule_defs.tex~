@@ -1,0 +1,40 @@
+\newcommand{\Bond}[6]%
+% start, end, thickness, incolor, outcolor, iterations
+{ \begin{pgfonlayer}{background}
+        \colorlet{InColor}{#4}
+        \colorlet{OutColor}{#5}
+        \foreach \I in {#6,...,1}
+        {   \pgfmathsetlengthmacro{\r}{#3/#6*\I}
+            \pgfmathsetmacro{\C}{sqrt(1-\r*\r/#3/#3)*100}
+            \draw[InColor!\C!OutColor, line width=\r] (#1.center) -- (#2.center);
+        }
+    \end{pgfonlayer}
+}
+
+\newcommand{\SingleBond}[2]%
+% start, end
+{   \Bond{#1}{#2}{0.5mm}{white}{gray!50}{10}
+}
+
+\newcommand{\RedBond}[2]%
+% start, end
+{   \Bond{#1}{#2}{1mm}{orange!70}{red!75!black}{10}
+}
+
+\newcommand{\BlueBond}[2]%
+% start, end
+{   \Bond{#1}{#2}{2mm}{cyan}{blue!50!black}{10}
+}
+
+\newcommand{\GreenBond}[2]%
+% start, end
+{   \Bond{#1}{#2}{0.7071mm}{green!25}{green!25!black}{10}
+}
+
+\tikzset{oxygen/.style={circle, ball color=red, minimum size=3mm, inner sep=0}}
+\tikzset{hydrogen/.style={circle, ball color=white, minimum size=1.25mm, inner sep=0}}
+\tikzset{carbon/.style={circle, ball color=black!75, minimum size=4mm, inner sep=0}}
+\tikzset{carbona/.style={circle, ball color=black, minimum size=4mm, inner sep=0}}
+\tikzset{carbonb/.style={circle, ball color=cyan, minimum size=4mm, inner sep=0}}
+\tikzset{wat4/.style={circle, ball color=red, minimum size=4mm, inner sep=0}}
+ \tikzset{carbonb2/.style={circle, ball color=yellow, minimum size=4mm, inner sep=0}}

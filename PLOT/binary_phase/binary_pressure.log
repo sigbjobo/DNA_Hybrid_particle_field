@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.10.4)  2 OCT 2019 14:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.10.4)  9 NOV 2019 15:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -406,8 +406,7 @@ Package: l3keys2e 2016/11/21 v6760 LaTeX2e option processing using LaTeX3 keys
 Package: translator 2010/06/12 ver 1.10
 
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/translator-language-
-mappings.tex)))
-No file binary_pressure.aux.
+mappings.tex))) (./binary_pressure.aux)
 \openout1 = `binary_pressure.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
@@ -422,6 +421,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
 LaTeX Font Info:    ... okay on input line 59.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
 LaTeX Font Info:    ... okay on input line 59.
+
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count130
@@ -488,12 +488,12 @@ e
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(0.0pt, 245.718pt, 0.0pt)
-* v-part:(T,H,B)=(0.0pt, 166.12062pt, 0.0pt)
-* \paperwidth=245.718pt
-* \paperheight=166.12062pt
-* \textwidth=245.718pt
-* \textheight=166.12062pt
+* h-part:(L,W,R)=(0.0pt, 180.67499pt, 0.0pt)
+* v-part:(T,H,B)=(0.0pt, 129.98561pt, 0.0pt)
+* \paperwidth=180.67499pt
+* \paperheight=129.98561pt
+* \textwidth=180.67499pt
+* \textheight=129.98561pt
 * \oddsidemargin=-72.26999pt
 * \evensidemargin=-72.26999pt
 * \topmargin=-109.26999pt
@@ -532,47 +532,44 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \gptboxwidth=\skip57
 \gptboxtext=\box50
 Package epstopdf Info: Source file: <binary_pressure-inc.eps>
-(epstopdf)                    date: 2019-10-02 14:00:11
-(epstopdf)                    size: 18375 bytes
+(epstopdf)                    date: 2019-11-09 15:23:04
+(epstopdf)                    size: 18163 bytes
 (epstopdf)             Output file: <binary_pressure-inc-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-11-09 15:23:06
+(epstopdf)                    size: 3021 bytes
 (epstopdf)             Command: <repstopdf --outfile=binary_pressure-inc-eps-co
 nverted-to.pdf binary_pressure-inc.eps>
-(epstopdf)             \includegraphics on input line 166.
-runsystem(repstopdf --outfile=binary_pressure-inc-eps-converted-to.pdf binary_p
-ressure-inc.eps)...executed safely (allowed).
-
-Package epstopdf Info: Result file: <binary_pressure-inc-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-10-02 14:00:18
-(epstopdf)                    size: 3076 bytes.
+(epstopdf)             \includegraphics on input line 161.
+Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: pdflatex (file ./binary_pressure-inc-eps-converted-to.pdf): PDF
  inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<binary_pressure-inc-eps-converted-to.pdf, id=1, 244.915pt x 165.61874pt>
+<binary_pressure-inc-eps-converted-to.pdf, id=1, 180.675pt x 129.48375pt>
 File: binary_pressure-inc-eps-converted-to.pdf Graphic file (type pdf)
 
 <use binary_pressure-inc-eps-converted-to.pdf>
 Package pdftex.def Info: binary_pressure-inc-eps-converted-to.pdf used on input
- line 166.
-(pdftex.def)             Requested size: 244.91438pt x 165.61833pt.
+ line 161.
+(pdftex.def)             Requested size: 180.67455pt x 129.48341pt.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./binary_pressure-inc-e
 ps-converted-to.pdf>]
 (./binary_pressure.aux) ) 
 Here is how much of TeX's memory you used:
- 11723 strings out of 493013
- 247661 string characters out of 6135682
- 252607 words of memory out of 5000000
+ 11725 strings out of 493013
+ 247701 string characters out of 6135682
+ 251633 words of memory out of 5000000
  15190 multiletter control sequences out of 15000+600000
  7346 words of font info for 23 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,16n,34p,10382b,621s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,17n,37p,10382b,640s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on binary_pressure.pdf (1 page, 51536 bytes).
+Output written on binary_pressure.pdf (1 page, 50551 bytes).
 PDF statistics:
  35 PDF objects out of 1000 (max. 8388607)
  24 compressed objects within 1 object stream

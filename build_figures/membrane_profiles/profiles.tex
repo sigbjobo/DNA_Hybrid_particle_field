@@ -1,0 +1,23 @@
+\documentclass[crop,tikz]{standalone}% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+\usepackage{color}
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
+\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\name}[1]{_{\text{#1}}}
+\usepackage{siunitx}
+\usetikzlibrary{shapes,arrows,shadings,backgrounds,calc}
+\definecolor{brown}{rgb}{0.59, 0.29, 0.0}
+\begin{document}
+\begin{tikzpicture}
+      \node[label={[xshift=0.5cm,yshift=-0.5cm]\Large DMPC}](a1) at(0,0){\includegraphics[width=0.65\textwidth]{dmpc_density.pdf}};
+      \node[fill=white,left of=a1,node distance=6cm,label={[xshift=0.5cm,yshift=-0.5cm]\Large DPPC}](a2) {\includegraphics[width=0.65\textwidth]{dppc_density.pdf}};
+      \node[fill=white,left of=a2,node distance=6cm,label={[xshift=0.5cm,yshift=-0.5cm]\Large DSPC}](a3) {\includegraphics[width=0.65\textwidth]{dspc_density.pdf}};
+      \node[fill=white,left of=a3,node distance=6cm,label={[xshift=0.5cm,yshift=-0.5cm]\Large DOPC}](a4){\includegraphics[width=0.65\textwidth]{dopc_density.pdf}};
+      
+      \node[fill=white](a1) at(0,-4.5cm){\includegraphics[width=0.65\textwidth]{dmpc_press.pdf}};
+      \node[fill=white,left of=a1,node distance=6cm](a2) {\includegraphics[width=0.65\textwidth]{dppc_press.pdf}};
+      \node[fill=white,left of=a2,node distance=6cm](a3) {\includegraphics[width=0.65\textwidth]{dspc_press.pdf}};
+      \node[fill=white,left of=a3,node distance=6cm](a4){\includegraphics[width=0.65\textwidth]{dopc_press.pdf}};
+  
+\end{tikzpicture}
+\end{document}

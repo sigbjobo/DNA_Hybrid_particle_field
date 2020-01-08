@@ -1,0 +1,36 @@
+\documentclass[crop,tikz]{standalone}% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+\usepackage{color}
+\usepackage{siunitx}
+
+\begin{document}
+\fontfamily{cmss}
+{ \begin{tikzpicture}
+
+%graph
+\node(bp) at(0,0){\includegraphics[width=1\textwidth]{binary_density.pdf}};
+
+\node[anchor= south east,label={\Large$\textcolor{black}{\tilde\chi_{\text{AB}}}=\SI{-10}{kJ.mol^{-1}}$}](chi1) at(10,0){\includegraphics[width=0.275\textwidth]{binary_-10.png}};
+%\draw[brown,ultra thick] (-3,-1.8) circle (0.25cm);
+
+\node[anchor= south east,label=above:{\Large$\textcolor{black}{\tilde\chi_{\text{AB}}}=\SI{5}{kJ.mol^{-1}}$}](chi1) at(4,-0.2){\includegraphics[width=0.275\textwidth]{binary_5.png}};
+%\draw[brown,ultra thick] (-0.2,2.6) circle (0.25cm); 
+ 
+
+
+\node[anchor= south east,label=above:{\Large$\textcolor{black}{\tilde\chi_{\text{AB}}}=\SI{10}{kJ.mol^{-1}}$}](chi1) at(10,-4){\includegraphics[width=0.275\textwidth]{binary_10.png}};
+%\draw[brown,ultra thick] (0.75,2.2) circle (0.25cm); 
+
+
+
+
+%% \node[anchor= south east](chi1) at(3.5,-1.9){\includegraphics[width=0.3\textwidth]{binary_30.png}};
+%% \draw[red,ultra thick] (4,1.7) circle (0.25cm);
+
+
+
+%% \node(e) at (1,-1){\large\(P_{0,\mu}=\frac 1V \int\text d \textbf r~\frac{1}{\rho_0}\frac{\textcolor{black}{\tilde\chi_{\text{AB}}}}2\phi_{\text{A}}(\textbf r)\phi_{\text{B}}(\textbf r)\)};
+%% \draw[gray,thick,rounded corners] ([yshift=-0.0cm]e.north west) rectangle ([yshift=-0.cm]e.south east);
+\end{tikzpicture}}
+
+\end{document}

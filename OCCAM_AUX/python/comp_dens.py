@@ -4,14 +4,17 @@ import sys
 print("filename: %s"%( sys.argv[1]))
 
 fp = open(sys.argv[1],'r')
-nz=30
-start=3
+fp_z=open('Zs.dat','w')
+nz=61
+start=2
 if(len(sys.argv)>2):
     start = int(sys.argv[2])
 if(len(sys.argv)>3):
     nz= int(sys.argv[3])
+if(len(sys.argv)>4):
+    center= bool(sys.argv[4])
 
-names=['N','P','G','C','D','W']
+names=['N','P','G','C','D','W','T']
 N=np.zeros((nz,len(names)))
 l=fp.readline()
 
@@ -27,6 +30,7 @@ while (not (l=="")):
     LX=float(l[1])*10
     LY=float(l[2])*10
     LZ=float(l[3])*10
+
     if(r>end):
         break
     r=r+1
@@ -39,6 +43,9 @@ while (not (l=="")):
         if(r>start):
             N[iz,index]+=1
     l=fp.readline()
+    fp_z.write('%f\n'%(LZ))
+
+fp_z.close()
 fp.close()
 #N=np.divide(N,np.sum(N,axis=1)[:,None])
 N=N/((r-start)*LZ/nz*LX*LY*0.1**3)#np.mean(np.sum(N,axis=1))

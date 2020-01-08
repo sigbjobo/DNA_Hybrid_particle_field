@@ -1,0 +1,27 @@
+\documentclass[crop,tikz]{standalone}% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+\usepackage{color}
+\usepackage{siunitx}
+
+\begin{document}
+\fontfamily{cmss}
+{ \begin{tikzpicture}
+    \node(a) at (0,0.7){\includegraphics[width=0.2\textwidth]{waterbox.png}};    
+
+    
+    \node(b) at (6,0){\includegraphics[width=0.45\textwidth]{p_kappa_water.pdf}};    
+    \draw[->,thick] (a) -- ([xshift=-3cm]b|-  a)  node[midway,above]{$NVT$} node[midway,below]{$\textcolor{blue}{a}=0$};
+       
+    
+    \node[label={[yshift=-0.4cm,xshift=0.5cm]\textcolor{blue}{$a$} required for \SI{1}{bar}}](c) at (0,-4.5){\includegraphics[width=0.45\textwidth]{a_kappa_water.pdf}};
+
+    \draw[->,thick] ([xshift=0.5cm,yshift=0.5cm]b.south west) -- ([xshift=-0.4cm,yshift=-0.3cm]c.north east);
+
+    \node[label={[yshift=-0.4cm,xshift=0.5cm]Equilibration of density}](d) at (6.5,-4.5){\includegraphics[width=0.5\textwidth]{dens_kappa_water.pdf}};
+    \draw[->,thick] ([xshift=-3cm]c) -- ([xshift=-3cm]d|-  c)  node[midway,above]{$NPT$};
+
+
+    %% \node(e) at (0,-6){\(P_{0,\mu}=\frac 1V \int\text d \textbf r~\frac{1}{\rho_0}\frac{1}{2\kappa}\left(\phi(\textbf r)^2-\textcolor{blue}{a}^2\right)\)};
+    %% \draw[gray,thick,rounded corners] ([yshift=-0.0cm]e.north west) rectangle ([yshift=-0.cm]e.south east);
+  \end{tikzpicture}}
+\end{document}

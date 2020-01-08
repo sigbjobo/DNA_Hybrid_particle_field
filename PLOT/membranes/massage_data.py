@@ -8,6 +8,7 @@ folder = sys.argv[1]
 degree=2
 if(len(sys.argv)>2):
     degree=int(sys.argv[2])
+
 # SURFACE TENSION
 px = np.loadtxt('%s/pressxxavg_mean.dat'%(folder))[:,:2]
 pz = np.loadtxt('%s/presszzavg_mean.dat'%(folder))[:,:2]
@@ -27,12 +28,12 @@ np.savetxt('data/%s_GAMMA_FIT.dat'%(folder),gammalin)
 np.savetxt('data/%s_GAMMA.dat'%(folder),gamma)
 
 # a parameter
-alin=np.zeros((100,2))
-a = np.loadtxt('%s/klm_a.dat'%(folder))[:,:2]
-weights = np.polyfit(a[:,0],a[:,1],2)
-model1  = np.poly1d(weights)
-alin[:,1]=model1(kst)
-alin[:,0]=kst
-np.savetxt('data/%s_a_FIT.dat'%(folder),alin)
-np.savetxt('data/%s_a.dat'%(folder),a)
+# alin=np.zeros((100,2))
+# a = np.loadtxt('%s/klm_a.dat'%(folder))[:,:2]
+# weights = np.polyfit(a[:,0],a[:,1],2)
+# model1  = np.poly1d(weights)
+# alin[:,1]=model1(kst)
+# alin[:,0]=kst
+# np.savetxt('data/%s_a_FIT.dat'%(folder),alin)
+# np.savetxt('data/%s_a.dat'%(folder),a)
 

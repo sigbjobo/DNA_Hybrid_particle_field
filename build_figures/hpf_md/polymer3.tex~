@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+  \node[wat4,scale=1.5,color=red!20!white] (wat1) at  (0,0) {};
+  \node[wat4,scale=1.5,color=red!20!white] (wat2) at (0.5,-1) {};
+  \node[wat4,scale=1.5,color=red!20!white] (wat3) at (0.0,-2) {};
+  \node[carbon,scale=1.5,color=black!20!white] (carbon1) at (0.5,-3) {};
+  \node[carbon,scale=1.5,color=black!20!white] (carbon2) at (0,-4) {};
+  \node[carbon,scale=1.5,color=black!20!white] (carbon3) at (0.5,-5) {};
+  \GreenBond[opacity=0.2]{wat1}{wat2}
+  \GreenBond[opacity=0.2]{wat2}{wat3}
+  \GreenBond[opacity=0.2]{carbon1}{wat3}
+  \GreenBond[opacity=0.2]{carbon1}{carbon2}
+  \GreenBond[opacity=0.2]{carbon2}{carbon3}
+\end{tikzpicture}

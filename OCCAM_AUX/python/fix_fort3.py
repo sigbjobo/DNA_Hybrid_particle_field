@@ -7,7 +7,11 @@ import sys
 b=0.67
 if(len(sys.argv)>1):
     b=float(sys.argv[1])
-print("Desired cell length: %.3f",b)
+pair=False
+if(len(sys.argv)>2):
+    pair=bool(sys.argv[2])
+
+print("Desired cell length: %.3f"%(b))
 
 fp=open('fort.5')
 fp.readline()
@@ -25,7 +29,10 @@ while(1):
     try:
         l=lines[i].split()
         if('SCF' in l):
-            M=[np.around(li/b) for li in L]
+            if(pair):
+                M=[np.around(li/(2*b))*2+1 for li in L]
+            else:
+                M=[np.around(li/b) for li in L]
             lines[i+2]='%d %d %d\n'%(M[0],M[1],M[2])
             break
     except:

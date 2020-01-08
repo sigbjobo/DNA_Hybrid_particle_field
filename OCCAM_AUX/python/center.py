@@ -42,11 +42,11 @@ while True:
         if(sum(sum(y))==0):
             break
         if(sum(y[:,0])):
-            data[:,0] += LX/20.0
+            data[:,0] += LX/4
         if(sum(y[:,1])):
-            data[:,1] += LY/20.0
+            data[:,1] += LY/4
         if(sum(y[:,2])):
-            data[:,2] += LY/20.0
+            data[:,2] += LY/4
         data = data - np.array([LX,LY,LZ])*np.floor(data/np.array([LX,LY,LZ]))
                 
     data = data - np.array([LX,LY,LZ])*np.floor(data/np.array([LX,LY,LZ]))

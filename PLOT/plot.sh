@@ -21,7 +21,7 @@ compile_plot(){
     cd ..
 }
 
-
+mkdir PLOTS
 # COMPILE EACH DIRECTORY
 compile_plot single_pd
 compile_plot persistence_double

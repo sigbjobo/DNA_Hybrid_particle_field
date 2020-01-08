@@ -1,0 +1,19 @@
+\documentclass[crop,tikz]{standalone}% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+\usepackage{color}
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
+\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\name}[1]{_{\text{#1}}}
+\usepackage{siunitx}
+\usetikzlibrary{shapes,arrows,shadings,backgrounds,calc}
+\definecolor{brown}{rgb}{0.59, 0.29, 0.0}
+\begin{document}
+\fontfamily{cmss}
+{\begin{tikzpicture}
+
+  \node[label={[xshift=-1.9cm,yshift=-1.25cm]DMPC}](a) at (0,0) {\includegraphics{dmpc_el_tot.pdf}};
+\node[label={[xshift=-1.9cm,yshift=-1.25cm]DOPC},fill=white](b) at (0,-5) {\includegraphics{dopc_el_tot.pdf}};
+
+\end{tikzpicture}
+}
+\end{document}

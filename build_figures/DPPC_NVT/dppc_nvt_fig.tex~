@@ -1,0 +1,32 @@
+\documentclass[crop,tikz]{standalone}% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+\usepackage{color}
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
+\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\name}[1]{_{\text{#1}}}
+\usepackage{siunitx}
+
+\begin{document}
+\begin{tikzpicture}
+    \node(a)at(-1,0){
+      \begin{tikzpicture}
+        \node[label=above:{System setup}](a) at(0,0){\includegraphics[width=0.35\textwidth]{dppc_40x40.png}};
+        \draw[<->,thick] ([xshift=0cm,yshift=0.75cm]a.south west) --node[below,sloped]{\SI{40}{nm}} ([xshift=1.8cm,yshift=0cm]a.south west);
+        \draw[<->,thick] ([xshift=4.5cm,yshift=0.9cm]a.south west) --node[below,sloped]{\SI{40}{nm}} ([xshift=1.9cm,yshift=0cm]a.south west);
+      \end{tikzpicture}};
+    
+    \node (eq)at(-1,-2){Equilibration};
+    \draw[->,ultra thick] (eq.south west)--(eq.south east);
+    
+    \node(c) at(4,1){\includegraphics[width=0.4\textwidth]{dppc_0_side.png}};
+    \node[draw=black,thick,fill=white,rounded corners,fill opacity=0.7,text opacity=1]at([xshift=1.cm,yshift=1.cm]c.south west){\small$K\name{ST}=\SI{0}{}$}; 
+    
+    \node(e) at(4,-0.5){\includegraphics[width=0.4\textwidth]{dppc_6_side.png}};
+       \node[draw=black,thick,fill=white,rounded corners,fill opacity=0.7,text opacity=1]at([xshift=1.cm,yshift=1.cm]e.south west){\small$K\name{ST}=\SI{6}{}$};%kJ.mol^{-1}nm^{2}
+    \node(d) at(4,-2){\includegraphics[width=0.4\textwidth]{dppc_-2_side.png}};
+     \node[draw=black,thick,fill=white,rounded corners,fill opacity=0.7,text opacity=1]at([xshift=1.cm,yshift=1.25cm]d.south west){\small$K\name{ST}=\SI{-2}{}$}; %kJ.mol^{-1}nm^{2}
+
+     \node(d) at(2,-5.5){\includegraphics[height=2.3in]{dppc_gamma.pdf}};
+
+\end{tikzpicture}
+  \end{document}

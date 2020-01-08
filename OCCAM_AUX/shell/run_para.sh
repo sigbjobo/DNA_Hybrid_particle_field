@@ -46,7 +46,7 @@ srun --mpi=pmi2 -K  --error=srun.err occamcgmpi
 end=`date +%s`
 t1=$((end-start))
 echo "SIMULATION-TIME: $t1 SECONDS"
-
+cat fort.2
 
 #PREPARE IOPC BACK
 bash ${SHELL_PATH}/prep_iopc2.sh

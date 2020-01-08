@@ -13,7 +13,7 @@ set terminal epslatex size 3.4,2.3 font ",10" standalone header '\usepackage{siu
 # PLOT PRESSURE AS FUNCTION OF KAPPA 
 set output "p_kappa_water.tex"
 set xtics 0.02
-set xrange [0.005:0.105]
+set xrange [0.015:0.105]
 set ylabel '$P/\si{bar}$'
 set xlabel '$\kappa/\si{kJ^{-1}.mol}$'
 plot 'PRESSURE_DATA_TEMP_300/press_mean.dat' u ($1):($2/1E5) w linespoints lw 3 lc 7 t ''
@@ -25,6 +25,9 @@ set ylabel '$a/\si{nm^{-3}}$'
 set xlabel '$\kappa/\si{kJ^{-1}.mol}$'
 plot "data/PRESSURE_DATA_TEMP_300_a.dat" u 1:2 w p lw 3 lc 7 t '',\
      "data/PRESSURE_DATA_TEMP_300_a_FIT.dat" u 1:2 w l lw 3 lc 7 t '$a=8.54+18.61\kappa$'
+
+
+set terminal epslatex size 3.4,2.3 font ",10" standalone header '\usepackage{siunitx}'  
 
 set ytics 0.1
 set output "a_temp_water.tex"

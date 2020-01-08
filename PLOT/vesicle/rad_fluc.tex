@@ -1,0 +1,271 @@
+% GNUPLOT: LaTeX picture with Postscript
+\documentclass{minimal}
+% Set font size
+\makeatletter
+\def\@ptsize{0}
+\InputIfFileExists{size10.clo}{}{%
+   \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Gnuplot Error: File `size10.clo' not found! Could not set font size%
+   }{See the gnuplot documentation for explanation.%
+   }{For using a font size a file `size<fontsize>.clo' has to exist.
+        Falling back ^^Jto default fontsize 10pt.}%
+  \def\@ptsize{0}
+  \input{size10.clo}%
+}%
+\makeatother
+\renewcommand*\rmdefault{cmss}%
+% Load packages
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{color}
+\makeatletter
+% Select an appropriate default driver (from TeXLive graphics.cfg)
+\begingroup
+  \chardef\x=0 %
+  % check pdfTeX
+  \@ifundefined{pdfoutput}{}{%
+    \ifcase\pdfoutput
+    \else
+      \chardef\x=1 %
+    \fi
+  }%
+  % check VTeX
+  \@ifundefined{OpMode}{}{%
+    \chardef\x=2 %
+  }%
+\expandafter\endgroup
+\ifcase\x
+  % default case
+  \PassOptionsToPackage{dvips}{geometry}
+\or
+  % pdfTeX is running in pdf mode
+  \PassOptionsToPackage{pdftex}{geometry}
+\else
+  % VTeX is running
+  \PassOptionsToPackage{vtex}{geometry}
+\fi
+\makeatother
+% Set papersize
+\usepackage[papersize={244.80bp,165.50bp},text={244.80bp,165.50bp}]{geometry}
+% No page numbers and no paragraph indentation
+\pagestyle{empty}
+\setlength{\parindent}{0bp}%
+% Load configuration file
+\InputIfFileExists{gnuplot.cfg}{%
+  \typeout{Using configuration file gnuplot.cfg}%
+}{%
+ \typeout{No configuration file gnuplot.cfg found.}%
+}%
+\usepackage{siunitx}
+\begin{document}
+\begingroup
+  \makeatletter
+  \providecommand\color[2][]{%
+    \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Package color not loaded in conjunction with
+      terminal option `colourtext'%
+    }{See the gnuplot documentation for explanation.%
+    }{Either use 'blacktext' in gnuplot or load the package
+      color.sty in LaTeX.}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\includegraphics[2][]{%
+    \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Package graphicx or graphics not loaded%
+    }{See the gnuplot documentation for explanation.%
+    }{The gnuplot epslatex terminal needs graphicx.sty or graphics.sty.}%
+    \renewcommand\includegraphics[2][]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \@ifundefined{ifGPcolor}{%
+    \newif\ifGPcolor
+    \GPcolorfalse
+  }{}%
+  \@ifundefined{ifGPblacktext}{%
+    \newif\ifGPblacktext
+    \GPblacktexttrue
+  }{}%
+  % define a \g@addto@macro without @ in the name:
+  \let\gplgaddtomacro\g@addto@macro
+  % define empty templates for all commands taking text:
+  \gdef\gplbacktext{}%
+  \gdef\gplfronttext{}%
+  \makeatother
+  \ifGPblacktext
+    % no textcolor at all
+    \def\colorrgb#1{}%
+    \def\colorgray#1{}%
+  \else
+    % gray or color?
+    \ifGPcolor
+      \def\colorrgb#1{\color[rgb]{#1}}%
+      \def\colorgray#1{\color[gray]{#1}}%
+      \expandafter\def\csname LTw\endcsname{\color{white}}%
+      \expandafter\def\csname LTb\endcsname{\color{black}}%
+      \expandafter\def\csname LTa\endcsname{\color{black}}%
+      \expandafter\def\csname LT0\endcsname{\color[rgb]{1,0,0}}%
+      \expandafter\def\csname LT1\endcsname{\color[rgb]{0,1,0}}%
+      \expandafter\def\csname LT2\endcsname{\color[rgb]{0,0,1}}%
+      \expandafter\def\csname LT3\endcsname{\color[rgb]{1,0,1}}%
+      \expandafter\def\csname LT4\endcsname{\color[rgb]{0,1,1}}%
+      \expandafter\def\csname LT5\endcsname{\color[rgb]{1,1,0}}%
+      \expandafter\def\csname LT6\endcsname{\color[rgb]{0,0,0}}%
+      \expandafter\def\csname LT7\endcsname{\color[rgb]{1,0.3,0}}%
+      \expandafter\def\csname LT8\endcsname{\color[rgb]{0.5,0.5,0.5}}%
+    \else
+      % gray
+      \def\colorrgb#1{\color{black}}%
+      \def\colorgray#1{\color[gray]{#1}}%
+      \expandafter\def\csname LTw\endcsname{\color{white}}%
+      \expandafter\def\csname LTb\endcsname{\color{black}}%
+      \expandafter\def\csname LTa\endcsname{\color{black}}%
+      \expandafter\def\csname LT0\endcsname{\color{black}}%
+      \expandafter\def\csname LT1\endcsname{\color{black}}%
+      \expandafter\def\csname LT2\endcsname{\color{black}}%
+      \expandafter\def\csname LT3\endcsname{\color{black}}%
+      \expandafter\def\csname LT4\endcsname{\color{black}}%
+      \expandafter\def\csname LT5\endcsname{\color{black}}%
+      \expandafter\def\csname LT6\endcsname{\color{black}}%
+      \expandafter\def\csname LT7\endcsname{\color{black}}%
+      \expandafter\def\csname LT8\endcsname{\color{black}}%
+    \fi
+  \fi
+    \setlength{\unitlength}{0.0500bp}%
+    \ifx\gptboxheight\undefined%
+      \newlength{\gptboxheight}%
+      \newlength{\gptboxwidth}%
+      \newsavebox{\gptboxtext}%
+    \fi%
+    \setlength{\fboxrule}{0.5pt}%
+    \setlength{\fboxsep}{1pt}%
+\begin{picture}(4896.00,3310.00)%
+    \gplgaddtomacro\gplbacktext{%
+      \csname LTb\endcsname%
+      \put(840,640){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}0}}%
+      \put(840,664){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}0.1}}%
+      \put(840,689){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}0.2}}%
+      \put(840,713){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}0.3}}%
+      \put(840,737){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}0.4}}%
+      \put(840,761){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}0.5}}%
+      \put(840,786){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}0.6}}%
+      \put(840,810){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}0.7}}%
+      \put(840,834){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}0.8}}%
+      \put(840,859){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}0.9}}%
+      \put(840,883){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}1}}%
+      \put(840,907){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}1.1}}%
+      \put(840,931){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}1.2}}%
+      \put(840,956){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}1.3}}%
+      \put(840,980){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}1.4}}%
+      \put(840,1004){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}1.5}}%
+      \put(840,1029){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}1.6}}%
+      \put(840,1053){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}1.7}}%
+      \put(840,1077){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}1.8}}%
+      \put(840,1102){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}1.9}}%
+      \put(840,1126){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}2}}%
+      \put(840,1150){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}2.1}}%
+      \put(840,1174){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}2.2}}%
+      \put(840,1199){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}2.3}}%
+      \put(840,1223){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}2.4}}%
+      \put(840,1247){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}2.5}}%
+      \put(840,1272){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}2.6}}%
+      \put(840,1296){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}2.7}}%
+      \put(840,1320){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}2.8}}%
+      \put(840,1344){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}2.9}}%
+      \put(840,1369){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}3}}%
+      \put(840,1393){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}3.1}}%
+      \put(840,1417){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}3.2}}%
+      \put(840,1442){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}3.3}}%
+      \put(840,1466){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}3.4}}%
+      \put(840,1490){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}3.5}}%
+      \put(840,1514){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}3.6}}%
+      \put(840,1539){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}3.7}}%
+      \put(840,1563){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}3.8}}%
+      \put(840,1587){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}3.9}}%
+      \put(840,1612){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}4}}%
+      \put(840,1636){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}4.1}}%
+      \put(840,1660){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}4.2}}%
+      \put(840,1684){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}4.3}}%
+      \put(840,1709){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}4.4}}%
+      \put(840,1733){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}4.5}}%
+      \put(840,1757){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}4.6}}%
+      \put(840,1782){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}4.7}}%
+      \put(840,1806){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}4.8}}%
+      \put(840,1830){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}4.9}}%
+      \put(840,1854){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}5}}%
+      \put(840,1879){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}5.1}}%
+      \put(840,1903){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}5.2}}%
+      \put(840,1927){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}5.3}}%
+      \put(840,1952){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}5.4}}%
+      \put(840,1976){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}5.5}}%
+      \put(840,2000){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}5.6}}%
+      \put(840,2025){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}5.7}}%
+      \put(840,2049){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}5.8}}%
+      \put(840,2073){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}5.9}}%
+      \put(840,2097){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}6}}%
+      \put(840,2122){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}6.1}}%
+      \put(840,2146){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}6.2}}%
+      \put(840,2170){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}6.3}}%
+      \put(840,2195){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}6.4}}%
+      \put(840,2219){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}6.5}}%
+      \put(840,2243){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}6.6}}%
+      \put(840,2267){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}6.7}}%
+      \put(840,2292){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}6.8}}%
+      \put(840,2316){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}6.9}}%
+      \put(840,2340){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}7}}%
+      \put(840,2365){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}7.1}}%
+      \put(840,2389){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}7.2}}%
+      \put(840,2413){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}7.3}}%
+      \put(840,2437){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}7.4}}%
+      \put(840,2462){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}7.5}}%
+      \put(840,2486){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}7.6}}%
+      \put(840,2510){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}7.7}}%
+      \put(840,2535){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}7.8}}%
+      \put(840,2559){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}7.9}}%
+      \put(840,2583){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}8}}%
+      \put(840,2607){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}8.1}}%
+      \put(840,2632){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}8.2}}%
+      \put(840,2656){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}8.3}}%
+      \put(840,2680){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}8.4}}%
+      \put(840,2705){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}8.5}}%
+      \put(840,2729){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}8.6}}%
+      \put(840,2753){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}8.7}}%
+      \put(840,2778){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}8.8}}%
+      \put(840,2802){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}8.9}}%
+      \put(840,2826){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}9}}%
+      \put(840,2850){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}9.1}}%
+      \put(840,2875){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}9.2}}%
+      \put(840,2899){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}9.3}}%
+      \put(840,2923){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}9.4}}%
+      \put(840,2948){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}9.5}}%
+      \put(840,2972){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}9.6}}%
+      \put(840,2996){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}9.7}}%
+      \put(840,3020){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}9.8}}%
+      \put(840,3045){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}9.9}}%
+      \put(840,3069){\makebox(0,0)[r]{\strut{}\fontfamily{cmss}10}}%
+      \put(960,440){\makebox(0,0){\strut{}\fontfamily{cmss}0}}%
+      \put(1318,440){\makebox(0,0){\strut{}\fontfamily{cmss}0.5}}%
+      \put(1675,440){\makebox(0,0){\strut{}\fontfamily{cmss}1}}%
+      \put(2033,440){\makebox(0,0){\strut{}\fontfamily{cmss}1.5}}%
+      \put(2390,440){\makebox(0,0){\strut{}\fontfamily{cmss}2}}%
+      \put(2748,440){\makebox(0,0){\strut{}\fontfamily{cmss}2.5}}%
+      \put(3105,440){\makebox(0,0){\strut{}\fontfamily{cmss}3}}%
+      \put(3463,440){\makebox(0,0){\strut{}\fontfamily{cmss}3.5}}%
+      \put(3820,440){\makebox(0,0){\strut{}\fontfamily{cmss}4}}%
+      \put(4178,440){\makebox(0,0){\strut{}\fontfamily{cmss}4.5}}%
+      \put(4535,440){\makebox(0,0){\strut{}\fontfamily{cmss}5}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+      \csname LTb\endcsname%
+      \put(260,1854){\rotatebox{-270}{\makebox(0,0){\strut{}$R/\si{nm}$}}}%
+      \put(2747,140){\makebox(0,0){\strut{}$t/\si{\micro s}$}}%
+      \csname LTb\endcsname%
+      \put(3632,2906){\makebox(0,0)[r]{\strut{}$K_{\si{ST}}=0$}}%
+      \csname LTb\endcsname%
+      \put(3632,2706){\makebox(0,0)[r]{\strut{}$K_{\si{ST}}=6$}}%
+    }%
+    \gplbacktext
+    \put(0,0){\includegraphics{rad_fluc-inc}}%
+    \gplfronttext
+  \end{picture}%
+\endgroup
+\end{document}
